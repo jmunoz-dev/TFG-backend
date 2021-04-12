@@ -1,4 +1,4 @@
-package web.backend.gothere.repositories.interfaces;
+package web.backend.gothere.Repositories.Interfaces;
 
 import java.util.Optional;
 
