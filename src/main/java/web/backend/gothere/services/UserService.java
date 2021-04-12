@@ -1,5 +1,6 @@
 package web.backend.gothere.services;
 
+import java.lang.StackWalker.Option;
 import java.text.MessageFormat;
 import java.util.Optional;
 
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import web.backend.gothere.UserAlreadyExistException;
 import web.backend.gothere.repositories.entities.ConfirmationTokenEntity;
 import web.backend.gothere.repositories.entities.UserEntity;
 import web.backend.gothere.repositories.interfaces.UserRepository;
@@ -51,8 +54,11 @@ public class UserService implements UserDetailsService{
             throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", email));
         }
     }
-    public UserDTO signUpUser(UserDTO newUser) {
-        
+    public UserDTO signUpUser(UserDTO newUser) throws UserAlreadyExistException{
+        Optional <UserEntity> exist = UserRepository.findByEmail(newUser.getEmail());
+        if(exist.isPresent()){
+            throw new UserAlreadyExistException();
+        }
         UserEntity user = modelMapper.map(newUser, UserEntity.class);
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         final String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
