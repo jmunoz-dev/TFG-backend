@@ -1,4 +1,4 @@
-package web.backend.gothere.repositories.entities;
+package web.backend.gothere.Repositories.Entities;
 
 import java.util.Collection;
 import java.util.Collections;

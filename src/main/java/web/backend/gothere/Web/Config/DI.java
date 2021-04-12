@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import web.backend.gothere.Services.ConfirmationTokenService;
 import web.backend.gothere.Services.EmailSenderService;
+import web.backend.gothere.Services.OffersService;
 import web.backend.gothere.Services.UserService;
 
 import java.util.Properties;
@@ -14,7 +15,10 @@ import java.util.Properties;
 import org.modelmapper.ModelMapper;
 @Configuration
 public class DI {
-
+    @Bean
+    OffersService createOffersService(){
+        return new OffersService();
+    }
     @Bean
     UserService createUserService(){
         return new UserService();
