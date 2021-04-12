@@ -14,10 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import web.backend.gothere.UserAlreadyExistException;
-import web.backend.gothere.repositories.entities.ConfirmationTokenEntity;
-import web.backend.gothere.repositories.entities.UserEntity;
-import web.backend.gothere.repositories.interfaces.UserRepository;
-import web.backend.gothere.services.models.UserDTO;
+import web.backend.gothere.Repositories.Entities.ConfirmationTokenEntity;
+import web.backend.gothere.Repositories.Entities.UserEntity;
+import web.backend.gothere.Repositories.Interfaces.UserRepository;
+import web.backend.gothere.Services.Models.UserDTO;
 
 @Service
 public class UserService implements UserDetailsService{

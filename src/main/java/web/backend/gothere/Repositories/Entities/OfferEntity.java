@@ -1,4 +1,4 @@
-package web.backend.Repositories.Entities;
+package web.backend.gothere.Repositories.Entities;
 
 import java.time.LocalDate;
 

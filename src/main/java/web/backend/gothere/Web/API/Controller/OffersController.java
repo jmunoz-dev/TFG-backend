@@ -1,4 +1,4 @@
-package web.backend.Web.API.Controller;
+package web.backend.gothere.Web.API.Controller;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import web.backend.Services.OffersService;
-import web.backend.Services.Models.OfferDTO;
+import web.backend.gothere.Services.OffersService;
+import web.backend.gothere.Services.Models.OfferDTO;
 
 @RestController
 @RequestMapping("api/offers")

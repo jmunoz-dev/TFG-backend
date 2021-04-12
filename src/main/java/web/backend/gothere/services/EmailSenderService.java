@@ -1,4 +1,4 @@
-package web.backend.gothere.services;
+package web.backend.gothere.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

@@ -1,4 +1,4 @@
-package web.backend.Web.Config;
+package web.backend.gothere.Web.Config;
 
 public class InitDB {
     

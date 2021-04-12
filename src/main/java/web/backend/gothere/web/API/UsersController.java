@@ -1,11 +1,11 @@
-package web.backend.gothere.web.API;
+package web.backend.gothere.Web.API;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import web.backend.gothere.services.UserService;
-import web.backend.gothere.services.models.UserDTO;
+import web.backend.gothere.Services.UserService;
+import web.backend.gothere.Services.Models.UserDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
