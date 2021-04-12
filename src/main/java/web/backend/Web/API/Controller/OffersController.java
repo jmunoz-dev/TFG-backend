@@ -36,10 +36,10 @@ public class OffersController {
         return offersService.findbyOfferId(id);
     }
 
-    @GetMapping("/bar/{id}")
-    public OfferDTO GetBarOffersById(@PathVariable("id") Long id) throws ResponseStatusException {
-       // Esto se tiene que revisar porque es un copy/paste
-        return offersService.findbyOfferId(id);
-    }
+    // @GetMapping("/bar/{id}")
+    // public OfferDTO GetBarOffersById(@PathVariable("id") Long id) throws ResponseStatusException {
+    //    // Esto se tiene que revisar porque es un copy/paste
+    //     return offersService.findOffersByBarId(id);
+    // }
 
 }

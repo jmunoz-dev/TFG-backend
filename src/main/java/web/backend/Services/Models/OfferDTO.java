@@ -6,24 +6,40 @@ public class OfferDTO {
     private long idOffer;
     private String offerTitle;
     private String offerDescription;
+    private String offerImage;
     private double offerPrice;
     private int offerRewardsPoints;
+    private int offerMinimunPoints;
     private long offerQrCode;
     private LocalDate startDate;
     private LocalDate endDate;
-    private BarsDTO bar;
+    // private BarsDTO bar;
 
     public OfferDTO(){}
 
-    public OfferDTO(String offerTitle, String offerDescription, double offerPrice, int offerRewardsPoints, long offerQrCode, LocalDate startDate, LocalDate endDate, BarsDTO bar) {
+    // public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, long offerQrCode, LocalDate startDate, LocalDate endDate, BarsDTO bar) {
+    //     this.offerTitle = offerTitle;
+    //     this.offerDescription = offerDescription;
+    //     this.offerImage = offerImage;
+    //     this.offerPrice = offerPrice;
+    //     this.offerRewardsPoints = offerRewardsPoints;
+    //     this.offerQrCode = offerQrCode;
+    //     this.startDate = startDate;
+    //     this.endDate = endDate;
+    //     this.bar = bar;
+    // }
+
+
+    public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, long offerQrCode, LocalDate startDate, LocalDate endDate) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
+        this.offerImage = offerImage;
         this.offerPrice = offerPrice;
         this.offerRewardsPoints = offerRewardsPoints;
+        this.offerMinimunPoints = offerMinimunPoints;
         this.offerQrCode = offerQrCode;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.bar = bar;
     }
 
 
@@ -51,6 +67,14 @@ public class OfferDTO {
         this.offerDescription = offerDescription;
     }
 
+    public String getOfferImage() {
+        return this.offerImage;
+    }
+
+    public void setOfferImage(String offerImage) {
+        this.offerImage = offerImage;
+    }
+
     public double getOfferPrice() {
         return this.offerPrice;
     }
@@ -75,7 +99,6 @@ public class OfferDTO {
         this.offerQrCode = offerQrCode;
     }
 
-
     public LocalDate getStartDate() {
         return this.startDate;
     }
@@ -92,12 +115,22 @@ public class OfferDTO {
         this.endDate = endDate;
     }
 
-    public BarsDTO getBar() {
-        return this.bar;
+    // public BarsDTO getBar() {
+    //     return this.bar;
+    // }
+
+    // public void setBar(BarsDTO bar) {
+    //     this.bar = bar;
+    // }
+
+
+    public int getOfferMinimunPoints() {
+        return this.offerMinimunPoints;
     }
 
-    public void setBar(BarsDTO bar) {
-        this.bar = bar;
+    public void setOfferMinimunPoints(int offerMinimunPoints) {
+        this.offerMinimunPoints = offerMinimunPoints;
     }
+ 
     
 }

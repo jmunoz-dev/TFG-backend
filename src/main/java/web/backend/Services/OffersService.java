@@ -60,25 +60,25 @@ public class OffersService {
         }
     }
 
+    // public List<OfferDTO> findOffersByBarId(Long id) throws ResponseStatusException{
+    //     List<OfferDTO> offersList = barsRespository.findById().stream()
+    //     .map(x -> modelMappper.map(x, OfferDTO.class))
+    //     .collect(Collectors.toList());
+
+    //     if(!offersList.isEmpty()){
+    //         return offersList;
+    //     }else{
+    //         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
+    //     }
+    // }
+
 
     public void delete(Long ID) throws ResponseStatusException{
         Optional<OfferEntity> entityToDelete = offersRepository.findById(ID);
         if(entityToDelete.isPresent()){
             offersRepository.delete(entityToDelete.get());
         }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting new data");
-        }
-    }
-
-    public void deleteByOrderId(Long id) throws ResponseStatusException {
-
-        Optional<OfferEntity> entityToDelete = offersRepository.findById(id);
-        
-        if(entityToDelete.isPresent()){
-            offersRepository.deleteById(entityToDelete.get().getIdOffer());
-        }
-        else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting new data"); 
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting data");
         }
     }
 }
