@@ -1,4 +1,4 @@
-package web.backend.Services;
+package web.backend.gothere.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import web.backend.Repositories.Entities.OfferEntity;
-import web.backend.Repositories.Interfaces.OffersRepository;
-import web.backend.Services.Models.OfferDTO;
+import web.backend.gothere.Repositories.Entities.OfferEntity;
+import web.backend.gothere.Repositories.Interfaces.OffersRepository;
+import web.backend.gothere.Services.Models.OfferDTO;
 
 public class OffersService {
     @Autowired

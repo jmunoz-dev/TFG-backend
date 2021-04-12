@@ -1,4 +1,4 @@
-package web.backend.Services.Models;
+package web.backend.gothere.Services.Models;
 
 import java.time.LocalDate;
 

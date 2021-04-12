@@ -1,11 +1,11 @@
-package web.backend.gothere.services;
+package web.backend.gothere.Services;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import web.backend.gothere.repositories.entities.ConfirmationTokenEntity;
-import web.backend.gothere.repositories.interfaces.ConfirmationTokenRepository;
+import web.backend.gothere.Repositories.Entities.ConfirmationTokenEntity;
+import web.backend.gothere.Repositories.Interfaces.ConfirmationTokenRepository;
 
 public class ConfirmationTokenService {
 

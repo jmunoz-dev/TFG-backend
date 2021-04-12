@@ -1,9 +1,9 @@
-package web.backend.gothere.repositories.interfaces;
+package web.backend.gothere.Repositories.Interfaces;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import web.backend.gothere.repositories.entities.UserEntity;
+import web.backend.gothere.Repositories.Entities.UserEntity;
 
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {

@@ -1,4 +1,4 @@
-package web.backend.gothere.services.models;
+package web.backend.gothere.Services.Models;
 
 public class UserDTO {
     private  Long idUser;

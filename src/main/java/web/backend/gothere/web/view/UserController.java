@@ -1,15 +1,15 @@
-package web.backend.gothere.web.view;
+package web.backend.gothere.Web.view;
 
 import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.backend.gothere.repositories.entities.ConfirmationTokenEntity;
-import web.backend.gothere.repositories.entities.UserEntity;
-import web.backend.gothere.services.ConfirmationTokenService;
-import web.backend.gothere.services.UserService;
-import web.backend.gothere.services.models.UserDTO;
+import web.backend.gothere.Repositories.Entities.ConfirmationTokenEntity;
+import web.backend.gothere.Repositories.Entities.UserEntity;
+import web.backend.gothere.Services.ConfirmationTokenService;
+import web.backend.gothere.Services.UserService;
+import web.backend.gothere.Services.Models.UserDTO;
 
 
 @Controller
