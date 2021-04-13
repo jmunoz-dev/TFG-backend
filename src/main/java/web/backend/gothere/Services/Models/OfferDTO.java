@@ -10,7 +10,7 @@ public class OfferDTO {
     private double offerPrice;
     private int offerRewardsPoints;
     private int offerMinimunPoints;
-    private long offerQrCode;
+    private String offerQrCode;
     private LocalDate startDate;
     private LocalDate endDate;
     // private BarsDTO bar;
@@ -30,7 +30,7 @@ public class OfferDTO {
     // }
 
 
-    public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, long offerQrCode, LocalDate startDate, LocalDate endDate) {
+    public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, String offerQrCode, LocalDate startDate, LocalDate endDate) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
         this.offerImage = offerImage;
@@ -91,11 +91,11 @@ public class OfferDTO {
         this.offerRewardsPoints = offerRewardsPoints;
     }
 
-    public long getOfferQrCode() {
+    public String getOfferQrCode() {
         return this.offerQrCode;
     }
 
-    public void setOfferQrCode(long offerQrCode) {
+    public void setOfferQrCode(String offerQrCode) {
         this.offerQrCode = offerQrCode;
     }
 

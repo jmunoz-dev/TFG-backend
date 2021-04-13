@@ -38,12 +38,12 @@ public class OffersService {
         return modelMappper.map(result, OfferDTO.class);
     }
 
-    public Optional<OfferDTO> update(Long ID, OfferDTO offer){
-        Optional<OfferEntity> dataToUpdate = offersRepository.findById(ID);
+    public Optional<OfferDTO> update(Long id, OfferDTO offer){
+        Optional<OfferEntity> dataToUpdate = offersRepository.findById(id);
         if(dataToUpdate.isPresent()){
-            if(dataToUpdate.get().getIdOffer() == ID){
+            if(dataToUpdate.get().getIdOffer() == id){
                 OfferEntity entityToUpdate = modelMappper.map(offer, OfferEntity.class);
-                entityToUpdate.setIdOffer(ID);
+                entityToUpdate.setIdOffer(id);
                 OfferEntity result = offersRepository.save(entityToUpdate);
                 return Optional.of(modelMappper.map(result, OfferDTO.class));
             }
@@ -73,8 +73,8 @@ public class OffersService {
     // }
 
 
-    public void delete(Long ID) throws ResponseStatusException{
-        Optional<OfferEntity> entityToDelete = offersRepository.findById(ID);
+    public void delete(Long id) throws ResponseStatusException{
+        Optional<OfferEntity> entityToDelete = offersRepository.findById(id);
         if(entityToDelete.isPresent()){
             offersRepository.delete(entityToDelete.get());
         }else{
