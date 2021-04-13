@@ -1,5 +1,6 @@
 package web.backend.gothere.Repositories.Entities;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -26,6 +27,7 @@ public class UserEntity implements UserDetails{
     private UserRole userRole;
 	private Boolean locked;
 	private Boolean enabled;
+    private LocalDate signUpDate;
 
     public UserEntity (String email, String name, String lastName, String password ){
         this.email = email;
@@ -33,6 +35,7 @@ public class UserEntity implements UserDetails{
         this.lastName = lastName;
         this.password = password;
         this.userRole = UserRole.USER;
+        this.signUpDate= LocalDate.now();
         this.locked = false;
         this.enabled = false;
     }
@@ -115,6 +118,12 @@ public class UserEntity implements UserDetails{
     }
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+    public LocalDate getSignUpDate() {
+        return signUpDate;
+    }
+    public void setSignUpDate(LocalDate signUpDate) {
+        this.signUpDate = signUpDate;
     }
     
 }

@@ -1,5 +1,7 @@
 package web.backend.gothere.Services.Models;
 
+import java.util.Date;
+
 public class UserDTO {
     private  Long idUser;
     private String email;
@@ -9,7 +11,7 @@ public class UserDTO {
     private String userRole;
 	private Boolean locked;
 	private Boolean enabled;
-
+    private Date signUpDate;
     
     public Long getIdUser() {
         return idUser;
@@ -72,6 +74,8 @@ public class UserDTO {
     }
     public UserDTO() {
     }
-
+    public Date getSignUpDate() {
+        return signUpDate;
+    }
     
 }
