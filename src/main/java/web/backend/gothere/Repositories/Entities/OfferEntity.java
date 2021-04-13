@@ -15,14 +15,14 @@ import javax.persistence.Table;
 
 public class OfferEntity {
 
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long idOffer;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idOffer;
     private String offerTitle;
     private String offerDescription;
     private String offerImage;
     private double offerPrice;
     private int offerRewardsPoints;
     private int offerMinimunPoints;
-    private long offerQrCode;
+    private Long offerQrCode;
     private LocalDate startDate;
     private LocalDate endDate;
     // @ManyToOne
@@ -33,7 +33,7 @@ public class OfferEntity {
     public OfferEntity() {
     }
 
-    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, long offerQrCode, LocalDate startDate, LocalDate endDate) {
+    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, Long offerQrCode, LocalDate startDate, LocalDate endDate) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
         this.offerImage = offerImage;
@@ -46,7 +46,7 @@ public class OfferEntity {
     }
 
 
-    // public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, long offerQrCode, LocalDate startDate, LocalDate endDate, BarsEntity bar) {
+    // public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, Long offerQrCode, LocalDate startDate, LocalDate endDate, BarsEntity bar) {
     //     this.offerTitle = offerTitle;
     //     this.offerDescription = offerDescription;
     //     this.offerImage = offerImage;
@@ -59,11 +59,11 @@ public class OfferEntity {
     // }
     
 
-    public long getIdOffer() {
+    public Long getIdOffer() {
         return this.idOffer;
     }
 
-    public void setIdOffer(long idOffer) {
+    public void setIdOffer(Long idOffer) {
         this.idOffer = idOffer;
     }
 
@@ -107,11 +107,11 @@ public class OfferEntity {
         this.offerRewardsPoints = offerRewardsPoints;
     }
 
-    public long getOfferQrCode() {
+    public Long getOfferQrCode() {
         return this.offerQrCode;
     }
 
-    public void setOfferQrCode(long offerQrCode) {
+    public void setOfferQrCode(Long offerQrCode) {
         this.offerQrCode = offerQrCode;
     }
 
