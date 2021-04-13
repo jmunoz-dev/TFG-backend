@@ -3,14 +3,14 @@ package web.backend.gothere.Services.Models;
 import java.time.LocalDate;
 
 public class OfferDTO {
-    private long idOffer;
+    private Long idOffer;
     private String offerTitle;
     private String offerDescription;
     private String offerImage;
     private double offerPrice;
     private int offerRewardsPoints;
     private int offerMinimunPoints;
-    private long offerQrCode;
+    private Long offerQrCode;
     private LocalDate startDate;
     private LocalDate endDate;
     // private BarsDTO bar;
@@ -43,7 +43,7 @@ public class OfferDTO {
     }
 
 
-    public long getIdOffer() {
+    public Long getIdOffer() {
         return this.idOffer;
     }
 
