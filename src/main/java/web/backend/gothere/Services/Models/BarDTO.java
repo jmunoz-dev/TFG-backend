@@ -1,7 +1,6 @@
 package web.backend.gothere.Services.Models;
 
 public class BarDTO {
-    
 
     private Long idbar;
     private Long latitude;
@@ -49,6 +48,7 @@ public class BarDTO {
     public void setName(String name) {
         this.name = name;
     }
+
     //
     public String getDescription() {
         return description;
@@ -57,6 +57,7 @@ public class BarDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
     //
     public String getDirection() {
         return direction;
@@ -65,6 +66,7 @@ public class BarDTO {
     public void setDirection(String direction) {
         this.direction = direction;
     }
+
     //
     public String getPhone() {
         return phone;
@@ -73,6 +75,7 @@ public class BarDTO {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
     //
     public String getSchedule() {
         return schedule;
@@ -81,6 +84,7 @@ public class BarDTO {
     public void setSchedule(String schedule) {
         this.schedule = schedule;
     }
+
     //
     public int getCurrentCapacity() {
         return currentCapacity;
@@ -89,6 +93,7 @@ public class BarDTO {
     public void setCurrentCapacity(int currentCapacity) {
         this.currentCapacity = currentCapacity;
     }
+
     //
     public int getTotalCapacity() {
         return totalCapacity;
@@ -97,6 +102,7 @@ public class BarDTO {
     public void setTotalCapacity(int totalCapacity) {
         this.totalCapacity = totalCapacity;
     }
+
     //
     public int getAllowedCapacity() {
         return allowedCapacity;
