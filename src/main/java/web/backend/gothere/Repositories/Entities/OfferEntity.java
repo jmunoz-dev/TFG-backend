@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 public class OfferEntity {
 
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long idOffer;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idOffer;
     private String offerTitle;
     private String offerDescription;
     private String offerImage;

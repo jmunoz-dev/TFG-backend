@@ -3,7 +3,7 @@ package web.backend.gothere.Services.Models;
 import java.time.LocalDate;
 
 public class OfferDTO {
-    private long idOffer;
+    private Long idOffer;
     private String offerTitle;
     private String offerDescription;
     private String offerImage;
