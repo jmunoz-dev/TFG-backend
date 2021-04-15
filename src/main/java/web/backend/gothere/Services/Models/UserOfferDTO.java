@@ -8,7 +8,20 @@ public class UserOfferDTO {
     public OfferDTO offer;
 
     public String code;
+    
+    private boolean used;
 
+    public UserOfferDTO() {
+    }
+
+    public UserOfferDTO(Long id, UserDTO user, OfferDTO offer, String code, boolean used) {
+        this.id = id;
+        this.user = user;
+        this.offer = offer;
+        this.code = code;
+        this.used = used;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -41,14 +54,12 @@ public class UserOfferDTO {
         this.code = code;
     }
 
-    public UserOfferDTO() {
+    public boolean isUsed() {
+        return used;
     }
 
-    public UserOfferDTO(Long id, UserDTO user, OfferDTO offer, String code) {
-        this.id = id;
-        this.user = user;
-        this.offer = offer;
-        this.code = code;
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 
   
