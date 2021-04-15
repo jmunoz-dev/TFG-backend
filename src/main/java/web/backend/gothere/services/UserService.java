@@ -1,9 +1,7 @@
 package web.backend.gothere.Services;
 
-import java.lang.StackWalker.Option;
 import java.text.MessageFormat;
 import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -12,8 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import web.backend.gothere.UserAlreadyExistException;
+import web.backend.gothere.Exceptions.UserAlreadyExistException;
 import web.backend.gothere.Repositories.Entities.ConfirmationTokenEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
