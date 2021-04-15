@@ -4,14 +4,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import web.backend.gothere.Services.OffersService;
 import web.backend.gothere.Services.Models.OfferDTO;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
 
 @RestController
 @RequestMapping("api/offers")
@@ -42,5 +50,38 @@ public class OffersController {
     //    // Esto se tiene que revisar porque es un copy/paste
     //     return offersService.findOffersByBarId(id);
     // }
+
+
+    @PostMapping()
+    public  ResponseEntity<HttpStatus> postOffer(@RequestBody OfferDTO offer) {
+        try {
+            offersService.add(offer);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+    
+   @PutMapping("/{id}")
+   public ResponseEntity<HttpStatus> putMethodName(@PathVariable Long id, @RequestBody OfferDTO offer) {
+    try {
+        offersService.update(id, offer);
+        return new ResponseEntity<>(HttpStatus.OK);
+    } catch (Exception e) {
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
+   }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
+        try {
+            offersService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+   
+
 
 }

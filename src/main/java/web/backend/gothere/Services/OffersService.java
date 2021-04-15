@@ -17,12 +17,12 @@ public class OffersService {
     @Autowired
     private OffersRepository offersRepository;
     @Autowired
-    private ModelMapper modelMappper;
+    private ModelMapper modelMapper;
 
     public List<OfferDTO> getAll() throws ResponseStatusException {
         
         List<OfferDTO> offersList = offersRepository.findAll().stream()
-        .map(x -> modelMappper.map(x, OfferDTO.class))
+        .map(x -> modelMapper.map(x, OfferDTO.class))
         .collect(Collectors.toList());
 
         if(!offersList.isEmpty()){
@@ -33,19 +33,25 @@ public class OffersService {
     }
 
     public OfferDTO add(OfferDTO offer){
-        OfferEntity entityToInsert = modelMappper.map(offer, OfferEntity.class);
-        OfferEntity result = offersRepository.save(entityToInsert);
-        return modelMappper.map(result, OfferDTO.class);
+        try {
+            OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
+            OfferEntity result = offersRepository.save(entityToInsert);
+            return offer;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        }
+        
+       
     }
 
-    public Optional<OfferDTO> update(Long ID, OfferDTO offer){
-        Optional<OfferEntity> dataToUpdate = offersRepository.findById(ID);
+    public Optional<OfferDTO> update(Long id, OfferDTO offer){
+        Optional<OfferEntity> dataToUpdate = offersRepository.findById(id);
         if(dataToUpdate.isPresent()){
-            if(dataToUpdate.get().getIdOffer() == ID){
-                OfferEntity entityToUpdate = modelMappper.map(offer, OfferEntity.class);
-                entityToUpdate.setIdOffer(ID);
+            if(dataToUpdate.get().getIdOffer() == id){
+                OfferEntity entityToUpdate = modelMapper.map(offer, OfferEntity.class);
+                entityToUpdate.setIdOffer(id);
                 OfferEntity result = offersRepository.save(entityToUpdate);
-                return Optional.of(modelMappper.map(result, OfferDTO.class));
+                return Optional.of(modelMapper.map(result, OfferDTO.class));
             }
         }
         return Optional.empty();
@@ -54,9 +60,9 @@ public class OffersService {
     public OfferDTO findbyOfferId(Long id) throws ResponseStatusException{
         Optional<OfferEntity> entity = offersRepository.findById(id);
         if(entity.isPresent()){
-            return modelMappper.map(entity.get(), OfferDTO.class);
+            return modelMapper.map(entity.get(), OfferDTO.class);
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -73,8 +79,8 @@ public class OffersService {
     // }
 
 
-    public void delete(Long ID) throws ResponseStatusException{
-        Optional<OfferEntity> entityToDelete = offersRepository.findById(ID);
+    public void deleteById(Long id) throws ResponseStatusException{
+        Optional<OfferEntity> entityToDelete = offersRepository.findById(id);
         if(entityToDelete.isPresent()){
             offersRepository.delete(entityToDelete.get());
         }else{

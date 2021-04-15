@@ -22,7 +22,6 @@ public class OfferEntity {
     private double offerPrice;
     private int offerRewardsPoints;
     private int offerMinimunPoints;
-    private Long offerQrCode;
     private LocalDate startDate;
     private LocalDate endDate;
     // @ManyToOne
@@ -33,14 +32,13 @@ public class OfferEntity {
     public OfferEntity() {
     }
 
-    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, Long offerQrCode, LocalDate startDate, LocalDate endDate) {
+    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, LocalDate startDate, LocalDate endDate) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
         this.offerImage = offerImage;
         this.offerPrice = offerPrice;
         this.offerRewardsPoints = offerRewardsPoints;
         this.offerMinimunPoints = offerMinimunPoints;
-        this.offerQrCode = offerQrCode;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -105,14 +103,6 @@ public class OfferEntity {
 
     public void setOfferRewardsPoints(int offerRewardsPoints) {
         this.offerRewardsPoints = offerRewardsPoints;
-    }
-
-    public Long getOfferQrCode() {
-        return this.offerQrCode;
-    }
-
-    public void setOfferQrCode(Long offerQrCode) {
-        this.offerQrCode = offerQrCode;
     }
 
     // public BarsEntity getBar() {
