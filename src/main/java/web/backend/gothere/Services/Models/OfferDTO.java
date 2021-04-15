@@ -3,14 +3,13 @@ package web.backend.gothere.Services.Models;
 import java.time.LocalDate;
 
 public class OfferDTO {
-    private long idOffer;
+    private Long idOffer;
     private String offerTitle;
     private String offerDescription;
     private String offerImage;
     private double offerPrice;
     private int offerRewardsPoints;
     private int offerMinimunPoints;
-    private long offerQrCode;
     private LocalDate startDate;
     private LocalDate endDate;
     // private BarsDTO bar;
@@ -30,14 +29,13 @@ public class OfferDTO {
     // }
 
 
-    public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, long offerQrCode, LocalDate startDate, LocalDate endDate) {
+    public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, LocalDate startDate, LocalDate endDate) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
         this.offerImage = offerImage;
         this.offerPrice = offerPrice;
         this.offerRewardsPoints = offerRewardsPoints;
         this.offerMinimunPoints = offerMinimunPoints;
-        this.offerQrCode = offerQrCode;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -91,14 +89,6 @@ public class OfferDTO {
         this.offerRewardsPoints = offerRewardsPoints;
     }
 
-    public long getOfferQrCode() {
-        return this.offerQrCode;
-    }
-
-    public void setOfferQrCode(long offerQrCode) {
-        this.offerQrCode = offerQrCode;
-    }
-
     public LocalDate getStartDate() {
         return this.startDate;
     }
@@ -123,7 +113,6 @@ public class OfferDTO {
     //     this.bar = bar;
     // }
 
-
     public int getOfferMinimunPoints() {
         return this.offerMinimunPoints;
     }
@@ -132,5 +121,4 @@ public class OfferDTO {
         this.offerMinimunPoints = offerMinimunPoints;
     }
  
-    
 }

@@ -15,14 +15,13 @@ import javax.persistence.Table;
 
 public class OfferEntity {
 
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long idOffer;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idOffer;
     private String offerTitle;
     private String offerDescription;
     private String offerImage;
     private double offerPrice;
     private int offerRewardsPoints;
     private int offerMinimunPoints;
-    private long offerQrCode;
     private LocalDate startDate;
     private LocalDate endDate;
     // @ManyToOne
@@ -33,14 +32,13 @@ public class OfferEntity {
     public OfferEntity() {
     }
 
-    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, long offerQrCode, LocalDate startDate, LocalDate endDate) {
+    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, LocalDate startDate, LocalDate endDate) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
         this.offerImage = offerImage;
         this.offerPrice = offerPrice;
         this.offerRewardsPoints = offerRewardsPoints;
         this.offerMinimunPoints = offerMinimunPoints;
-        this.offerQrCode = offerQrCode;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -105,14 +103,6 @@ public class OfferEntity {
 
     public void setOfferRewardsPoints(int offerRewardsPoints) {
         this.offerRewardsPoints = offerRewardsPoints;
-    }
-
-    public long getOfferQrCode() {
-        return this.offerQrCode;
-    }
-
-    public void setOfferQrCode(long offerQrCode) {
-        this.offerQrCode = offerQrCode;
     }
 
     // public BarsEntity getBar() {
