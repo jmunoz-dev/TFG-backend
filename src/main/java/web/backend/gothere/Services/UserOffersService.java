@@ -1,5 +1,6 @@
 package web.backend.gothere.Services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import net.bytebuddy.asm.Advice.Return;
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Exceptions.OfferCodeException;
 import web.backend.gothere.Exceptions.UserAlreadyExistException;
@@ -18,6 +20,7 @@ import web.backend.gothere.Repositories.Entities.UserOfferEntity;
 import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 import web.backend.gothere.Repositories.Interfaces.UserOfferRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
+import web.backend.gothere.Services.Models.OfferDTO;
 import web.backend.gothere.Services.Models.UserOfferDTO;
 
 public class UserOffersService {
@@ -32,7 +35,7 @@ public class UserOffersService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public String add(UserOfferDTO userOffer){
+    public String add(UserOfferDTO userOffer) {
         Optional<UserOfferEntity> userOfferTemp = UserOfferRepository.findByUserAndOffer(
                 UserRepository.findByEmail(userOffer.getUser().getEmail()).get(),
                 OfferRepository.findById(userOffer.getOffer().getIdOffer()).get());
@@ -50,7 +53,7 @@ public class UserOffersService {
                 userOffer.setCode(code);
             }
             count++;
-            if(count > 1000){
+            if (count > 1000) {
                 throw new OfferCodeException();
             }
         } while (!isUnique);
@@ -92,14 +95,31 @@ public class UserOffersService {
 
         return generatedString.toUpperCase();
     }
-    public void deleteUserOffer(String code){
+
+    public void deleteUserOffer(String code) {
         Optional<UserOfferEntity> entityToDelete = UserOfferRepository.findByCode(code.toUpperCase());
-        if(entityToDelete.isPresent()){
+        if (entityToDelete.isPresent()) {
             UserOfferRepository.delete(entityToDelete.get());
         }
     }
+
+    public OfferDTO setOfferUsed(String code, String userToken) {
+        Optional<UserOfferEntity> entityToUpdate = UserOfferRepository.findByCode(code.toUpperCase());
+        //TODO comprobar con "userToken" que el usuario que lo ha mandado es el dueño del bar
+        if (entityToUpdate.isPresent()) {
+            UserOfferDTO temp = modelMapper.map(entityToUpdate.get(), UserOfferDTO.class);
+            if (temp.isUsed() || LocalDate.now().isAfter(temp.getOffer().getEndDate())) {
+                return null;
+            }
+            temp.setUsed(true);
+            UserOfferRepository.save(modelMapper.map(temp, UserOfferEntity.class));
+            return temp.getOffer();
+        }
+        throw new ElementNotFoundException();
+
+    }
     // public List<UserOfferDTO> getByUserAndBar(Long idBar, Long idUser){
-    //     Optional<UserEntity> user = UserRepository.findById(idUser);
+    // Optional<UserEntity> user = UserRepository.findById(idUser);
     // }
 
 }
