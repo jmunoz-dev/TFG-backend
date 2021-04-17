@@ -15,10 +15,10 @@ public interface UserOfferRepository extends JpaRepository<UserOfferEntity, Long
     @Query(value = "SELECT uo FROM UserOffers uo WHERE uo.User = :idUser AND uo.offer = :idOffer")
     Optional<UserOfferEntity> findByUserAndOffer(@Param("idUser") UserEntity idUser,@Param("idOffer") OfferEntity idOffer);
 
-    @Query(value = "SELECT uo FROM UserOffers uo "+
-    "INNER JOIN Offers o "+
-    "ON o.idOffer = ou.idOffer "+
-     "WHERE uo.User = :user AND o.Bar = :b")
-    List<UserOfferEntity> findByUserAndBar(@Param("user") UserEntity user,  @Param("bar") OfferEntity bar);
+    // @Query(value = "SELECT uo FROM UserOffers uo "+
+    // "INNER JOIN Offers o "+
+    // "ON o.idOffer = ou.idOffer "+
+    //  "WHERE uo.User = :user AND o.Bar = :b")
+    // List<UserOfferEntity> findByUserAndBar(@Param("user") UserEntity user,  @Param("bar") OfferEntity bar);
 
 }
