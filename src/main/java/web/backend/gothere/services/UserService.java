@@ -68,22 +68,22 @@ public class UserService implements UserDetailsService{
     
         confirmationTokenService.saveConfirmationToken(confirmationToken);
         
-        //activar esto cuando tengamos email
+        //TODO activar esto cuando tengamos email
         //sendConfirmationMail(user.getEmail(), confirmationToken.getConfirmationToken());
         return modelMapper.map(createdUser, UserDTO.class);
 
     }
-    public boolean signInUser(UserEntity user){
+    public UserDTO signInUser(UserDTO userDto){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        Optional<UserEntity> optionalUser = UserRepository.findByEmail(user.getEmail());
+        Optional<UserEntity> optionalUser = UserRepository.findByEmail(userDto.getEmail());
         if(optionalUser.isPresent()){
-            if(encoder.matches(user.getPassword(), optionalUser.get().getPassword())){
-                return true;
+            if(encoder.matches(userDto.getPassword(), optionalUser.get().getPassword())){
+                return modelMapper.map(optionalUser.get(), UserDTO.class);
             }else{
-                return false;
+                return null;
             }
         }else{
-            throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", user.getEmail()));
+            throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", userDto.getEmail()));
         }
        
     }
@@ -96,7 +96,7 @@ public class UserService implements UserDetailsService{
       
         UserRepository.save(user);
       
-        confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+        //confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
       
     }
    public  void sendConfirmationMail(String userMail, String token) {
