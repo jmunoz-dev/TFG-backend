@@ -27,7 +27,7 @@ public class ConfirmationTokenService {
         confirmationTokenRepository.deleteById(id);
     }
 	public Optional<ConfirmationTokenEntity> findConfirmationTokenByToken(String token) {
-
+		
 		return confirmationTokenRepository.findConfirmationTokenByConfirmationToken(token);
 	}
 	public String findConfirmationTokenByUser(UserDTO user) {
