@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 public class BarEntity {
     // uso este autoincrementable en vez de el de dentro de los constructores
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idbar;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idBar;
 
     public BarEntity(Long qrcode, Long latitude, Long length, String name, String description, String direction,
             String phone, String schedule, int currentCapacity, int totalCapacity, int allowedCapacity) {
@@ -145,11 +145,11 @@ public class BarEntity {
     }
 
     public Long getIdbar() {
-        return idbar;
+        return idBar;
     }
 
     public void setIdbar(Long idbar) {
-        this.idbar = idbar;
+        this.idBar = idbar;
     }
 
     // constructores vacios solo con el autoincrem en los 3 models
