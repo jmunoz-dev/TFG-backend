@@ -15,7 +15,8 @@ import javax.persistence.Table;
 
 public class OfferEntity {
 
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idOffer;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long idOffer;
     private String offerTitle;
     private String offerDescription;
     private String offerImage;
@@ -24,15 +25,14 @@ public class OfferEntity {
     private int offerMinimunPoints;
     private LocalDate startDate;
     private LocalDate endDate;
-    // @ManyToOne
-    // @JoinColumn(name="idBar")
-    // private BarEntity bar;
-
+    @ManyToOne
+    @JoinColumn(name="idBar")
+    private BarEntity bar;
 
     public OfferEntity() {
     }
 
-    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, LocalDate startDate, LocalDate endDate) {
+    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, LocalDate startDate, LocalDate endDate, BarEntity bar) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
         this.offerImage = offerImage;
@@ -41,27 +41,14 @@ public class OfferEntity {
         this.offerMinimunPoints = offerMinimunPoints;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.bar = bar;
     }
-
-
-    // public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, long offerQrCode, LocalDate startDate, LocalDate endDate, BarsEntity bar) {
-    //     this.offerTitle = offerTitle;
-    //     this.offerDescription = offerDescription;
-    //     this.offerImage = offerImage;
-    //     this.offerPrice = offerPrice;
-    //     this.offerRewardsPoints = offerRewardsPoints;
-    //     this.offerQrCode = offerQrCode;
-    //     this.startDate = startDate;
-    //     this.endDate = endDate;
-    //     this.bar = bar;
-    // }
     
-
-    public long getIdOffer() {
+    public Long getIdOffer() {
         return this.idOffer;
     }
 
-    public void setIdOffer(long idOffer) {
+    public void setIdOffer(Long idOffer) {
         this.idOffer = idOffer;
     }
 
@@ -105,13 +92,13 @@ public class OfferEntity {
         this.offerRewardsPoints = offerRewardsPoints;
     }
 
-    // public BarsEntity getBar() {
-    //     return this.bar;
-    // }
+    public BarEntity getBar() {
+        return this.bar;
+    }
 
-    // public void setBar(BarsEntity bar) {
-    //     this.bar = bar;
-    // }
+    public void setBar(BarEntity bar) {
+        this.bar = bar;
+    }
 
 
     public LocalDate getStartDate() {
