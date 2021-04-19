@@ -35,7 +35,7 @@ public class OffersService {
     public OfferDTO add(OfferDTO offer){
         try {
             OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
-            OfferEntity result = offersRepository.save(entityToInsert);
+            offersRepository.save(entityToInsert);
             return offer;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
