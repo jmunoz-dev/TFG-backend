@@ -20,8 +20,8 @@ public class InitDB {
         return args -> {
             offerR.save(new OfferEntity("oferta de prueba", "dos jarricas", "hola.jpg", 2.3, 23, 23,  LocalDate.now(), LocalDate.now()));
             offerR.save(new OfferEntity("oferta de prueba 2", "holas", "hola.jpg", 2.3, 23, 23, LocalDate.now(), LocalDate.now()));
-            userR.save(new UserEntity("holsda@gmail.com", "ruben", "valero", "1234"));
-            userR.save(new UserEntity("hola@gmail.com", "ruben", "valero", "1234"));
+            userR.save(new UserEntity("holsda@gmail.com", "ruben", "valero", "1234","12345667"));
+            userR.save(new UserEntity("hola@gmail.com", "ruben", "valero", "1234","234123412"));
 
         };
     }

@@ -65,7 +65,7 @@ public class UserService implements UserDetailsService{
     
         user.setPassword(encryptedPassword);
     
-        final UserEntity createdUser = UserRepository.save(new UserEntity(user.getEmail(), user.getName(), user.getLastName(), user.getPassword()));
+        final UserEntity createdUser = UserRepository.save(new UserEntity(user.getEmail(), user.getName(), user.getLastName(), user.getPassword(), user.getPhoneNumber()));
     
         final ConfirmationTokenEntity confirmationToken = new ConfirmationTokenEntity(createdUser);
     
