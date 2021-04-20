@@ -34,7 +34,7 @@ public class BarService {
         if (dataToUpdate.isPresent()) {
 
             BarEntity entityToUpdate = modelMapper.map(bar, BarEntity.class);
-            entityToUpdate.setIdbar(id);
+            entityToUpdate.setIdBar(id);
             BarEntity result = barRepository.save(entityToUpdate);
             return modelMapper.map(result, BarDTO.class);
 

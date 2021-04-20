@@ -3,112 +3,103 @@ package web.backend.gothere.Services.Models;
 public class BarDTO {
 
     private Long idbar;
-    private Long latitude;
-    private Long length;
     private String name;
     private String description;
-    private String direction;
     private String phone;
+    private String direction;
+    private Long latitude;
+    private Long length;
     private String schedule;
-    private int currentCapacity;
     private int totalCapacity;
     private int allowedCapacity;
+    private int currentCapacity;
 
     public Long getIdbar() {
-        return idbar;
+        return this.idbar;
     }
 
     public void setIdbar(Long idbar) {
         this.idbar = idbar;
     }
 
-    //
-    public Long getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Long latitude) {
-        this.latitude = latitude;
-    }
-
-    //
-    public Long getLength() {
-        return length;
-    }
-
-    public void setLength(Long length) {
-        this.length = length;
-    }
-
-    //
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    //
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    //
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    //
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    //
+    public String getDirection() {
+        return this.direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public Long getLatitude() {
+        return this.latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public Long getLength() {
+        return this.length;
+    }
+
+    public void setLength(Long length) {
+        this.length = length;
+    }
+
     public String getSchedule() {
-        return schedule;
+        return this.schedule;
     }
 
     public void setSchedule(String schedule) {
         this.schedule = schedule;
     }
 
-    //
-    public int getCurrentCapacity() {
-        return currentCapacity;
-    }
-
-    public void setCurrentCapacity(int currentCapacity) {
-        this.currentCapacity = currentCapacity;
-    }
-
-    //
     public int getTotalCapacity() {
-        return totalCapacity;
+        return this.totalCapacity;
     }
 
     public void setTotalCapacity(int totalCapacity) {
         this.totalCapacity = totalCapacity;
     }
 
-    //
     public int getAllowedCapacity() {
-        return allowedCapacity;
+        return this.allowedCapacity;
     }
 
     public void setAllowedCapacity(int allowedCapacity) {
         this.allowedCapacity = allowedCapacity;
     }
+
+    public int getCurrentCapacity() {
+        return this.currentCapacity;
+    }
+
+    public void setCurrentCapacity(int currentCapacity) {
+        this.currentCapacity = currentCapacity;
+    }
+  
 }

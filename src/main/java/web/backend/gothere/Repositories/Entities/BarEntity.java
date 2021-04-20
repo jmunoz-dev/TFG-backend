@@ -14,146 +14,120 @@ import javax.persistence.Table;
 // AforoActual , AforoTotal, AforoPermitido(porcentajes)
 
 public class BarEntity {
-    // uso este autoincrementable en vez de el de dentro de los constructores
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idBar;
 
-    public BarEntity(Long qrcode, Long latitude, Long length, String name, String description, String direction,
-            String phone, String schedule, int currentCapacity, int totalCapacity, int allowedCapacity) {
-        this.qrcode = qrcode;
-        this.latitude = latitude;
-        this.length = length;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idBar;
+    private String name;
+    private String description;
+    private String phone;
+    private String direction;
+    private Long latitude;
+    private Long length;
+    private String schedule;
+    private int totalCapacity;
+    private int allowedCapacity;
+    private int currentCapacity;
+
+    public BarEntity() {}
+
+    public BarEntity(String name, String description, String phone, String direction, Long latitude, Long length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
         this.name = name;
         this.description = description;
-        this.direction = direction;
         this.phone = phone;
+        this.direction = direction;
+        this.latitude = latitude;
+        this.length = length;
         this.schedule = schedule;
-        this.currentCapacity = currentCapacity;
         this.totalCapacity = totalCapacity;
         this.allowedCapacity = allowedCapacity;
-
+        this.currentCapacity = currentCapacity;
     }
 
-    // getters y setters
-    private Long qrcode;
-
-    public Long getQrcode() {
-        return qrcode;
+    public Long getIdBar() {
+        return this.idBar;
     }
 
-    public void setQrcode(Long qrcode) {
-        this.qrcode = qrcode;
+    public void setIdBar(Long idBar) {
+        this.idBar = idBar;
     }
-
-    private Long latitude;
-
-    public Long getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Long latitude) {
-        this.latitude = latitude;
-    }
-
-    private Long length;
-
-    public Long getLength() {
-        return length;
-    }
-
-    public void setLength(Long length) {
-        this.length = length;
-    }
-
-    private String name;
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    private String description;
-
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    private String direction;
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    private String phone;
-
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    private String schedule;
+    public String getDirection() {
+        return this.direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public Long getLatitude() {
+        return this.latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public Long getLength() {
+        return this.length;
+    }
+
+    public void setLength(Long length) {
+        this.length = length;
+    }
 
     public String getSchedule() {
-        return schedule;
+        return this.schedule;
     }
 
     public void setSchedule(String schedule) {
         this.schedule = schedule;
     }
 
-    private int currentCapacity;
-
-    public int getCurrentCapacity() {
-        return currentCapacity;
-    }
-
-    public void setCurrentCapacity(int currentCapacity) {
-        this.currentCapacity = currentCapacity;
-    }
-
-    private int totalCapacity;
-
     public int getTotalCapacity() {
-        return totalCapacity;
+        return this.totalCapacity;
     }
 
     public void setTotalCapacity(int totalCapacity) {
         this.totalCapacity = totalCapacity;
     }
 
-    private int allowedCapacity;
-
     public int getAllowedCapacity() {
-        return allowedCapacity;
+        return this.allowedCapacity;
     }
 
     public void setAllowedCapacity(int allowedCapacity) {
         this.allowedCapacity = allowedCapacity;
     }
 
-    public Long getIdbar() {
-        return idBar;
+    public int getCurrentCapacity() {
+        return this.currentCapacity;
     }
 
-    public void setIdbar(Long idbar) {
-        this.idBar = idbar;
+    public void setCurrentCapacity(int currentCapacity) {
+        this.currentCapacity = currentCapacity;
     }
-
-    // constructores vacios solo con el autoincrem en los 3 models
-    public BarEntity() {
-
-    }
+   
 }
