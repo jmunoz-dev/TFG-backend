@@ -1,4 +1,4 @@
-package web.backend.gothere.Web.API;
+package web.backend.gothere.Web.API.Controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

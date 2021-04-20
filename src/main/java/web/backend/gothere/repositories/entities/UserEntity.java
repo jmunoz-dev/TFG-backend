@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity(name="Users")
 public class UserEntity implements UserDetails{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long idUser;
+    private Long idUser;
     private String email;
     private String name;
     private String lastName;

@@ -35,7 +35,7 @@ public class OffersService {
     public OfferDTO add(OfferDTO offer){
         try {
             OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
-            OfferEntity result = offersRepository.save(entityToInsert);
+            offersRepository.save(entityToInsert);
             return offer;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
@@ -66,17 +66,18 @@ public class OffersService {
         }
     }
 
-    // public List<OfferDTO> findOffersByBarId(Long id) throws ResponseStatusException{
-    //     List<OfferDTO> offersList = barsRespository.findById().stream()
-    //     .map(x -> modelMappper.map(x, OfferDTO.class))
-    //     .collect(Collectors.toList());
+    public List<OfferDTO> findOffersByBarId(Long id) throws ResponseStatusException{
 
-    //     if(!offersList.isEmpty()){
-    //         return offersList;
-    //     }else{
-    //         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
-    //     }
-    // }
+        List<OfferDTO> offersList = offersRepository.findByBar(id).stream()
+        .map(x -> modelMapper.map(x, OfferDTO.class))
+        .collect(Collectors.toList());
+
+        if(!offersList.isEmpty()){
+            return offersList;
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No data found");
+        }
+    }
 
 
     public void deleteById(Long id) throws ResponseStatusException{
