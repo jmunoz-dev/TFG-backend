@@ -12,6 +12,10 @@ import web.backend.gothere.Repositories.Entities.UserEntity;
 import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 import web.backend.gothere.Repositories.Interfaces.UserOfferRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
+import web.backend.gothere.Repositories.Entities.BarEntity;
+import web.backend.gothere.Repositories.Entities.OfferEntity;
+import web.backend.gothere.Repositories.Interfaces.BarRepository;
+import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 
 @Configuration
 public class InitDB {

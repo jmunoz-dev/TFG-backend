@@ -12,36 +12,22 @@ public class OfferDTO {
     private int offerMinimunPoints;
     private LocalDate startDate;
     private LocalDate endDate;
-    // private BarsDTO bar;
+    private BarDTO bar;
 
     public OfferDTO(){}
 
-    // public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, long offerQrCode, LocalDate startDate, LocalDate endDate, BarsDTO bar) {
-    //     this.offerTitle = offerTitle;
-    //     this.offerDescription = offerDescription;
-    //     this.offerImage = offerImage;
-    //     this.offerPrice = offerPrice;
-    //     this.offerRewardsPoints = offerRewardsPoints;
-    //     this.offerQrCode = offerQrCode;
-    //     this.startDate = startDate;
-    //     this.endDate = endDate;
-    //     this.bar = bar;
-    // }
-
-
-    public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, LocalDate startDate, LocalDate endDate) {
+    public OfferDTO(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, long offerQrCode, LocalDate startDate, LocalDate endDate, BarDTO bar) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
         this.offerImage = offerImage;
         this.offerPrice = offerPrice;
         this.offerRewardsPoints = offerRewardsPoints;
-        this.offerMinimunPoints = offerMinimunPoints;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.bar = bar;
     }
 
-
-    public Long getIdOffer() {
+    public long getIdOffer() {
         return this.idOffer;
     }
 
@@ -105,13 +91,13 @@ public class OfferDTO {
         this.endDate = endDate;
     }
 
-    // public BarsDTO getBar() {
-    //     return this.bar;
-    // }
+    public BarDTO getBar() {
+        return this.bar;
+    }
 
-    // public void setBar(BarsDTO bar) {
-    //     this.bar = bar;
-    // }
+    public void setBar(BarDTO bar) {
+        this.bar = bar;
+    }
 
     public int getOfferMinimunPoints() {
         return this.offerMinimunPoints;

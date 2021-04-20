@@ -2,22 +2,20 @@ package web.backend.gothere.Web.API.Controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import web.backend.gothere.Services.OffersService;
 import web.backend.gothere.Services.Models.OfferDTO;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -45,11 +43,10 @@ public class OffersController {
         return offersService.findbyOfferId(id);
     }
 
-    // @GetMapping("/bar/{id}")
-    // public OfferDTO GetBarOffersById(@PathVariable("id") Long id) throws ResponseStatusException {
-    //    // Esto se tiene que revisar porque es un copy/paste
-    //     return offersService.findOffersByBarId(id);
-    // }
+    @GetMapping("/bar/{id}")
+    public List<OfferDTO> GetBarOffersById(@PathVariable("id") Long id) throws ResponseStatusException {
+        return offersService.findOffersByBarId(id);
+    }
 
 
     @PostMapping()
