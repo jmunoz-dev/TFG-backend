@@ -9,13 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import web.backend.gothere.Exceptions.ElementNotFoundException;
+import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Entities.OfferEntity;
+import web.backend.gothere.Repositories.Interfaces.BarRepository;
 import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 import web.backend.gothere.Services.Models.OfferDTO;
 
 public class OffersService {
     @Autowired
     private OffersRepository offersRepository;
+    @Autowired
+    private BarRepository barRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -68,7 +73,11 @@ public class OffersService {
 
     public List<OfferDTO> findOffersByBarId(Long id) throws ResponseStatusException{
 
-        List<OfferDTO> offersList = offersRepository.findByBar(id).stream()
+        Optional<BarEntity> bar = barRepository.findById(id);
+        if(!bar.isPresent()){
+            throw new ElementNotFoundException();
+        }
+        List<OfferDTO> offersList = offersRepository.findByBar(bar.get()).stream()
         .map(x -> modelMapper.map(x, OfferDTO.class))
         .collect(Collectors.toList());
 
