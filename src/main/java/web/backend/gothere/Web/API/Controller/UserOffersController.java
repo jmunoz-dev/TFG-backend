@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import web.backend.gothere.Services.UserOffersService;
 import web.backend.gothere.Services.Models.OfferDTO;
+import web.backend.gothere.Services.Models.SimpleUserOfferDTO;
 import web.backend.gothere.Services.Models.UserOfferDTO;
 
 @RestController
@@ -40,12 +41,12 @@ public class UserOffersController {
         userOffersService.deleteUserOffer(code);
     }
     @PutMapping("/{code}")
-    public OfferDTO SetOfferUsed(@PathVariable("code") String code, @RequestHeader("accept-language") String userToken){
-       return userOffersService.setOfferUsed(code, userToken);
+    public OfferDTO SetOfferUsed(@PathVariable("code") String code){
+       return userOffersService.setOfferUsed(code, "userToken");
     }
-    // @GetMapping()
-    // public List<UserOfferDTO> getByUserAndBar(@RequestParam Long idBar,@RequestParam Long idUser){
-    //     return userOffersService.
-    // }
+    @GetMapping("/bar")
+    public List<SimpleUserOfferDTO> getByUserAndBar(@RequestParam Long idBar,@RequestParam Long idUser){
+        return userOffersService.getByUserAndBar(idBar, idUser);
+    }
 
 }

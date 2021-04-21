@@ -1,6 +1,8 @@
 package web.backend.gothere.Services;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -14,13 +16,16 @@ import net.bytebuddy.asm.Advice.Return;
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Exceptions.OfferCodeException;
 import web.backend.gothere.Exceptions.UserAlreadyExistException;
+import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Entities.OfferEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
 import web.backend.gothere.Repositories.Entities.UserOfferEntity;
+import web.backend.gothere.Repositories.Interfaces.BarRepository;
 import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 import web.backend.gothere.Repositories.Interfaces.UserOfferRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
 import web.backend.gothere.Services.Models.OfferDTO;
+import web.backend.gothere.Services.Models.SimpleUserOfferDTO;
 import web.backend.gothere.Services.Models.UserOfferDTO;
 
 public class UserOffersService {
@@ -31,6 +36,8 @@ public class UserOffersService {
 
     @Autowired
     private OffersRepository OfferRepository;
+    @Autowired
+    private BarRepository BarRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -41,7 +48,7 @@ public class UserOffersService {
                 OfferRepository.findById(userOffer.getOffer().getIdOffer()).get());
 
         if (userOfferTemp.isPresent()) {
-            throw new UserAlreadyExistException();
+            return userOfferTemp.get().getCode();
         }
         boolean isUnique = false;
         int count = 0;
@@ -86,7 +93,7 @@ public class UserOffersService {
     private String generateCode() {
         int leftLimit = 48; // numeral '0'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
+        int targetStringLength = 7;
         Random random = new Random();
 
         String generatedString = random.ints(leftLimit, rightLimit + 1)
@@ -118,8 +125,36 @@ public class UserOffersService {
         throw new ElementNotFoundException();
 
     }
-    // public List<UserOfferDTO> getByUserAndBar(Long idBar, Long idUser){
-    // Optional<UserEntity> user = UserRepository.findById(idUser);
-    // }
+    public List<SimpleUserOfferDTO> getByUserAndBar(Long idBar, Long idUser){
+        Optional<UserEntity> user = UserRepository.findById(idUser);
+        Optional<BarEntity> bar = BarRepository.findById(idBar);
+
+        if(bar.isPresent() && user.isPresent()){
+           List<UserOfferDTO> userOffersList = UserOfferRepository.findByUserAndOfferBar(user.get(), bar.get()).stream()
+           .map(x -> modelMapper.map(x, UserOfferDTO.class)).collect(Collectors.toList());
+            ArrayList<SimpleUserOfferDTO> offers = new ArrayList<SimpleUserOfferDTO>();
+
+           List<OfferDTO>  barOffersList = OfferRepository.findByBar(bar.get()).stream()
+           .map(x -> modelMapper.map(x, OfferDTO.class)).collect(Collectors.toList());
+
+           barOffersList.forEach(barOffer -> {
+               if(barOffer.getEndDate().isBefore(LocalDate.now()) || barOffer.getStartDate().isAfter(LocalDate.now())){
+                   return;
+               }
+                userOffersList.forEach(userOffer -> {
+                    if(barOffer.getIdOffer() == userOffer.getOffer().getIdOffer()){
+                        offers.add(new SimpleUserOfferDTO(barOffer, userOffer.isUsed()));
+                    }else{
+                        offers.add(new SimpleUserOfferDTO(barOffer, false));
+                    }   
+                });
+                if(userOffersList.isEmpty()){
+                    offers.add(new SimpleUserOfferDTO(barOffer, false));
+                }
+           });
+           return offers;
+        }
+        return null;
+    }
 
 }
