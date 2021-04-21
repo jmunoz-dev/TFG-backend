@@ -8,12 +8,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name="UserOffers")
-@Entity(name="UserOffers")
+@Table(name = "UserOffers")
+@Entity(name = "UserOffers")
 public class UserOfferEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private UserEntity user;
@@ -25,7 +26,17 @@ public class UserOfferEntity {
     private String code;
 
     private boolean used;
-    
+
+    public UserOfferEntity(UserEntity user, OfferEntity offer) {
+
+        this.user = user;
+        this.offer = offer;
+        this.used = false;
+    }
+
+    public UserOfferEntity() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -66,15 +77,4 @@ public class UserOfferEntity {
         this.used = used;
     }
 
-    public UserOfferEntity(UserEntity user, OfferEntity offer) {
-        
-        this.user = user;
-        this.offer = offer;
-        this.used = false;
-    }
-
-    public UserOfferEntity() {
-    }
-
-    
 }

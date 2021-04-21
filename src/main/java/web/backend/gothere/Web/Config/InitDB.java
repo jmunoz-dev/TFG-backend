@@ -20,10 +20,14 @@ import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 @Configuration
 public class InitDB {
     @Bean
-    CommandLineRunner initDataBase(OffersRepository offerR, UserOfferRepository userofferR, UserRepository userR){
+    CommandLineRunner initDataBase(OffersRepository offerR, UserOfferRepository userofferR, UserRepository userR, BarRepository barR){
         return args -> {
-            offerR.save(new OfferEntity("oferta de prueba", "dos jarricas", "hola.jpg", 2.3, 23, 23,  LocalDate.now(), LocalDate.now()));
-            offerR.save(new OfferEntity("oferta de prueba 2", "holas", "hola.jpg", 2.3, 23, 23, LocalDate.now(), LocalDate.now()));
+            barR.save(new BarEntity("name", "description", "66666666", "direccion", 45L, 5569L, "schedule", 25, 90, 80));
+
+            offerR.save(new OfferEntity("oferta de prueba", "dos jarricas", "hola.jpg", 2.3, 23, 23,  LocalDate.now(), LocalDate.now(), barR.findById(1L).get() ));
+            offerR.save(new OfferEntity("oferta de prueba 2", "holas", "hola.jpg", 2.3, 23, 23, LocalDate.now(), LocalDate.now(),  barR.findById(1L).get() ));
+            offerR.save(new OfferEntity("titulo oferta ", "desciption", "img.png", 22.50, 15, 0, LocalDate.now(), LocalDate.of(2022, 01, 01), barR.findById(1L).get() ));
+
             userR.save(new UserEntity("holsda@gmail.com", "ruben", "valero", "1234","12345667"));
             userR.save(new UserEntity("hola@gmail.com", "ruben", "valero", "1234","234123412"));
 
