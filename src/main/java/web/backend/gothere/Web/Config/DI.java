@@ -10,6 +10,7 @@ import web.backend.gothere.Services.BarService;
 import web.backend.gothere.Services.ConfirmationTokenService;
 import web.backend.gothere.Services.EmailSenderService;
 import web.backend.gothere.Services.OffersService;
+import web.backend.gothere.Services.UserOffersService;
 import web.backend.gothere.Services.UserService;
 
 import java.util.Properties;
@@ -24,6 +25,10 @@ public class DI {
     @Bean
     UserService createUserService(){
         return new UserService();
+    }
+    @Bean
+    UserOffersService createUserOffersService(){
+        return new UserOffersService(); 
     }
     @Bean
     BarService createBarService(){

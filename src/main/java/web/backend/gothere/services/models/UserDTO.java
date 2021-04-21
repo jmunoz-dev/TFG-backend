@@ -1,5 +1,7 @@
 package web.backend.gothere.Services.Models;
 
+import java.util.Date;
+
 public class UserDTO {
     private  Long idUser;
     private String email;
@@ -9,8 +11,24 @@ public class UserDTO {
     private String userRole;
 	private Boolean locked;
 	private Boolean enabled;
-
+    private Date signUpDate;
+    private String phoneNumber;
     
+
+    public UserDTO(Long idUser, String email, String name, String lastName, String password, String userRole,
+        Boolean locked, Boolean enabled, String phoneNumber ) {
+            this.idUser = idUser;
+            this.email = email;
+            this.name = name;
+            this.lastName = lastName;
+            this.password = password;
+            this.userRole = userRole;
+            this.locked = locked;
+            this.phoneNumber = phoneNumber;
+            this.enabled = enabled;
+    }
+    public UserDTO() {
+    }
     public Long getIdUser() {
         return idUser;
     }
@@ -59,19 +77,14 @@ public class UserDTO {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-    public UserDTO(Long idUser, String email, String name, String lastName, String password, String userRole,
-            Boolean locked, Boolean enabled) {
-        this.idUser = idUser;
-        this.email = email;
-        this.name = name;
-        this.lastName = lastName;
-        this.password = password;
-        this.userRole = userRole;
-        this.locked = locked;
-        this.enabled = enabled;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
-    public UserDTO() {
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
-
+    public Date getSignUpDate() {
+        return signUpDate;
+    }
     
 }
