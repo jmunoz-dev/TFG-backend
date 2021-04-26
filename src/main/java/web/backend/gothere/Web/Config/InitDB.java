@@ -22,8 +22,8 @@ public class InitDB {
     @Bean
     CommandLineRunner initDataBase(OffersRepository offerR, UserOfferRepository userofferR, UserRepository userR, BarRepository barR){
         return args -> {
-            barR.save(new BarEntity("name", "description", "66666666", "direccion", 45L, 5569L, "schedule", 25, 90, 80));
-            barR.save(new BarEntity("name 2", "description", "66666666", "direccion", 45L, 5569L, "schedule", 25, 90, 80));
+            barR.save(new BarEntity("name", "description", "66666666", "direccion", 45.4, 55.69, "schedule", 25, 90, 80));
+            barR.save(new BarEntity("name 2", "description", "66666666", "direccion", 45.4, 55.69, "schedule", 25, 90, 80));
 
             offerR.save(new OfferEntity("oferta de prueba", "dos jarricas", "hola.jpg", 2.3, 23, 23,  LocalDate.now(), LocalDate.now(), barR.findById(1L).get() ));
             offerR.save(new OfferEntity("oferta de prueba 2", "holas", "hola.jpg", 2.3, 23, 23, LocalDate.now(), LocalDate.now(),  barR.findById(2L).get() ));
