@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import web.backend.gothere.Services.BarService;
@@ -53,5 +54,10 @@ public class BarController {
     public void DeleteBar(@PathVariable("id") Long idbar) {
         barService.delete(idbar);
     }
+    @GetMapping("/coordinates")
+    public List<BarDTO> GetByCoordinates(@RequestParam(name = "latitude") double latitude, @RequestParam(name = "length") double length) {
+        return barService.getByCoordinates(length, latitude);
+    }
+
 
 }
