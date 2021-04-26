@@ -1,4 +1,4 @@
-package web.backend.gothere.Web.view;
+package web.backend.gothere.Web.View;
 
 import java.util.Optional;
 import org.springframework.stereotype.Controller;
