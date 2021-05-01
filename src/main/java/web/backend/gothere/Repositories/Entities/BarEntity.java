@@ -20,8 +20,8 @@ public class BarEntity {
     private String description;
     private String phone;
     private String direction;
-    private Long latitude;
-    private Long length;
+    private double latitude;
+    private double length;
     private String schedule;
     private int totalCapacity;
     private int allowedCapacity;
@@ -29,7 +29,7 @@ public class BarEntity {
 
     public BarEntity() {}
 
-    public BarEntity(String name, String description, String phone, String direction, Long latitude, Long length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
+    public BarEntity(String name, String description, String phone, String direction, double latitude, double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
         this.name = name;
         this.description = description;
         this.phone = phone;
@@ -82,19 +82,19 @@ public class BarEntity {
         this.direction = direction;
     }
 
-    public Long getLatitude() {
+    public double getLatitude() {
         return this.latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLength() {
+    public double getLength() {
         return this.length;
     }
 
-    public void setLength(Long length) {
+    public void setLength(double length) {
         this.length = length;
     }
 

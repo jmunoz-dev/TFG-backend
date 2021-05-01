@@ -7,12 +7,31 @@ public class BarDTO {
     private String description;
     private String phone;
     private String direction;
-    private Long latitude;
-    private Long length;
+    private double latitude;
+    private double length;
     private String schedule;
     private int totalCapacity;
     private int allowedCapacity;
     private int currentCapacity;
+
+
+    public BarDTO(Long idbar, String name, String description, String phone, String direction, double latitude,
+    double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
+        this.idbar = idbar;
+        this.name = name;
+        this.description = description;
+        this.phone = phone;
+        this.direction = direction;
+        this.latitude = latitude;
+        this.length = length;
+        this.schedule = schedule;
+        this.totalCapacity = totalCapacity;
+        this.allowedCapacity = allowedCapacity;
+        this.currentCapacity = currentCapacity;
+    }
+
+    public BarDTO() {
+    }
 
     public Long getIdbar() {
         return this.idbar;
@@ -54,19 +73,19 @@ public class BarDTO {
         this.direction = direction;
     }
 
-    public Long getLatitude() {
+    public double getLatitude() {
         return this.latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLength() {
+    public double getLength() {
         return this.length;
     }
 
-    public void setLength(Long length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
@@ -101,5 +120,6 @@ public class BarDTO {
     public void setCurrentCapacity(int currentCapacity) {
         this.currentCapacity = currentCapacity;
     }
-  
+
+   
 }
