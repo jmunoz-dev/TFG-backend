@@ -4,6 +4,15 @@ API Rest con datos sobre negocios (bares, cafeterías, restaurantes) de la ciuda
 
 ***Desarrollo del proyecto de TFG para el segundo curso de Desarrollo de Aplicaciones Web de San Valero.***
 
+---
+## SWAGGER ##
+[API - Docs](http://localhost:8080/v2/api-docs)
+
+[Swagger UI](http://localhost:8080/swagger-ui/)
+
+
+-----
+
 ### EQUIPO ## 
 
 - Jorge Muñoz Villanova
