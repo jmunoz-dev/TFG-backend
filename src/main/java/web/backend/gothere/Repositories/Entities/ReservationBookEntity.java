@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-public class ReservationBook {
+public class ReservationBookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class ReservationBook {
     private LocalDate entrada;
     private LocalDate salida;
 
-    public ReservationBook() {
+    public ReservationBookEntity() {
     }
 
-    public ReservationBook(UserEntity user, BarTableEntity barTable, LocalDate entrada, LocalDate salida) {
+    public ReservationBookEntity(UserEntity user, BarTableEntity barTable, LocalDate entrada, LocalDate salida) {
         this.user = user;
         this.barTable = barTable;
         this.entrada = entrada;
