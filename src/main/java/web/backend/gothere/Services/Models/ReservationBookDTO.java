@@ -1,32 +1,20 @@
-package web.backend.gothere.Repositories.Entities;
+package web.backend.gothere.Services.Models;
 
 import java.time.LocalDate;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+public class ReservationBookDTO {
 
-public class ReservationBookEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservationBook;
-    @ManyToOne
-    @JoinColumn(name = "idUser")
-    private UserEntity user;
-    @ManyToOne
-    @JoinColumn(name = "idBarTable")
-    private BarTableEntity barTable;
-
+    private UserDTO user;
+    private BarTableDTO barTable;
     private LocalDate checkInHour;
     private LocalDate checkOutHour;
 
-    public ReservationBookEntity() {
+
+    public ReservationBookDTO() {
     }
 
-    public ReservationBookEntity(UserEntity user, BarTableEntity barTable, LocalDate checkInHour, LocalDate checkOutHour) {
+    public ReservationBookDTO(UserDTO user, BarTableDTO barTable, LocalDate checkInHour, LocalDate checkOutHour) {
         this.user = user;
         this.barTable = barTable;
         this.checkInHour = checkInHour;
@@ -42,19 +30,19 @@ public class ReservationBookEntity {
         this.idReservationBook = idReservationBook;
     }
 
-    public UserEntity getUser() {
+    public UserDTO getUser() {
         return this.user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
-    public BarTableEntity getBarTable() {
+    public BarTableDTO getBarTable() {
         return this.barTable;
     }
 
-    public void setBarTable(BarTableEntity barTable) {
+    public void setBarTable(BarTableDTO barTable) {
         this.barTable = barTable;
     }
 
@@ -73,5 +61,6 @@ public class ReservationBookEntity {
     public void setCheckOutHour(LocalDate checkOutHour) {
         this.checkOutHour = checkOutHour;
     }
-    
+
+
 }
