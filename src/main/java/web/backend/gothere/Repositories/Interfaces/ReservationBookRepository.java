@@ -8,4 +8,5 @@ import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 public interface ReservationBookRepository 
     extends JpaRepository<ReservationBookEntity, Long> {
     
+    Optional<ReservationBookEntity> findById(Long id);
 }

@@ -30,4 +30,11 @@ public class ReservationBookService {
         }
     }
 
+    public ReservationBookDTO getById(Long reBoId){
+        Optional<ReservationBookEntity> resevation =  reservationBookRepository.findById(reBoId);
+        if(resevation.isPresent()){
+            return modelMapper.map(resevation, ReservationBookDTO.class);
+        }
+        throw new ElementNotFoundException();
+    }
 }
