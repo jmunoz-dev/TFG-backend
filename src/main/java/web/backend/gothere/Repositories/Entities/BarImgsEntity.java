@@ -1,6 +1,9 @@
 package web.backend.gothere.Repositories.Entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "BarImgs")
@@ -8,7 +11,7 @@ import javax.persistence.Table;
 
 public class BarImgsEntity {
     
-    private Long idImgBar;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY)Long idImgBar;
     private String imgUrl;
     private BarEntity barEntity;
 
