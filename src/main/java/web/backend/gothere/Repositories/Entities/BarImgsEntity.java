@@ -8,15 +8,21 @@ import javax.persistence.Table;
 
 public class BarImgsEntity {
     
+    private Long idImgBar;
     private String imgUrl;
     private BarEntity barEntity;
 
 
     public BarImgsEntity() {}
 
-    public BarImgsEntity(String imgUrl, BarEntity barEntity ) {
+    public BarImgsEntity(String imgUrl, BarEntity barEntity, Long idImgBar ) {
         this.imgUrl = imgUrl;
         this.barEntity = barEntity;
+        this.idImgBar = idImgBar;
     }
+
+    
+  
+  
 
 }
