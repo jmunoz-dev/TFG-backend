@@ -1,26 +1,37 @@
 package web.backend.gothere.Services.Models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ReservationBookDTO {
 
     private Long idReservationBook;
     private UserDTO user;
     private BarTableDTO barTable;
-    private LocalDate checkInHour;
-    private LocalDate checkOutHour;
+    private LocalDateTime checkInHour;
+    private LocalDateTime checkOutHour;
+    private boolean canceled;
 
 
     public ReservationBookDTO() {
     }
 
-    public ReservationBookDTO(UserDTO user, BarTableDTO barTable, LocalDate checkInHour, LocalDate checkOutHour) {
+    public ReservationBookDTO(UserDTO user, BarTableDTO barTable, LocalDateTime checkInHour, LocalDateTime checkOutHour) {
         this.user = user;
         this.barTable = barTable;
         this.checkInHour = checkInHour;
         this.checkOutHour = checkOutHour;
+        this.canceled = false;
     }
 
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
 
     public Long getIdReservationBook() {
         return this.idReservationBook;
@@ -46,19 +57,19 @@ public class ReservationBookDTO {
         this.barTable = barTable;
     }
 
-    public LocalDate getCheckInHour() {
+    public LocalDateTime getCheckInHour() {
         return this.checkInHour;
     }
 
-    public void setCheckInHour(LocalDate checkInHour) {
+    public void setCheckInHour(LocalDateTime checkInHour) {
         this.checkInHour = checkInHour;
     }
 
-    public LocalDate getCheckOutHour() {
+    public LocalDateTime getCheckOutHour() {
         return this.checkOutHour;
     }
 
-    public void setCheckOutHour(LocalDate checkOutHour) {
+    public void setCheckOutHour(LocalDateTime checkOutHour) {
         this.checkOutHour = checkOutHour;
     }
 
