@@ -1,6 +1,10 @@
 package web.backend.gothere.Services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -64,6 +68,7 @@ public class ReservationBookService {
         return currentReservations;
 
     }
+
     public ReservationBookDTO getById(Long reBoId){
         Optional<ReservationBookEntity> resevation =  reservationBookRepository.findById(reBoId);
         if(resevation.isPresent()){
@@ -71,4 +76,16 @@ public class ReservationBookService {
         }
         throw new ElementNotFoundException();
     }
+
+    public void setCanceled(Long reBoId){
+        Optional<ReservationBookEntity> resevation =  reservationBookRepository.findById(reBoId);
+        if(resevation.isPresent()){
+            ReservationBookEntity temp = resevation.get();
+            temp.setCanceled(true);
+            reservationBookRepository.save(temp);
+        }
+        throw new ElementNotFoundException();
+    }
+
+
 }
