@@ -11,6 +11,7 @@ import web.backend.gothere.Services.BarTableService;
 import web.backend.gothere.Services.ConfirmationTokenService;
 import web.backend.gothere.Services.EmailSenderService;
 import web.backend.gothere.Services.OffersService;
+import web.backend.gothere.Services.ReservationBookService;
 import web.backend.gothere.Services.UserOffersService;
 import web.backend.gothere.Services.UserService;
 
@@ -38,6 +39,10 @@ public class DI {
     @Bean
     BarTableService createBarTableService(){
         return new BarTableService();
+    }
+    @Bean
+    ReservationBookService createReservationBookService(){
+        return new ReservationBookService();
     }
     @Bean 
     BCryptPasswordEncoder createBCryptPasswordEncoder(){
