@@ -1,7 +1,6 @@
 package web.backend.gothere.Repositories.Entities;
 
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,13 +19,15 @@ public class ReservationBookEntity {
     @JoinColumn(name = "idBarTable")
     private BarTableEntity barTable;
 
+    private LocalDateTime checkInHour;
+    private LocalDateTime checkOutHour;
     private LocalDate checkInHour;
     private LocalDate checkOutHour;
 
     public ReservationBookEntity() {
     }
 
-    public ReservationBookEntity(UserEntity user, BarTableEntity barTable, LocalDate checkInHour, LocalDate checkOutHour) {
+    public ReservationBookEntity(UserEntity user, BarTableEntity barTable, LocalDateTime checkInHour, LocalDateTime checkOutHour, boolean canceled) {
         this.user = user;
         this.barTable = barTable;
         this.checkInHour = checkInHour;
@@ -58,19 +59,19 @@ public class ReservationBookEntity {
         this.barTable = barTable;
     }
 
-    public LocalDate getCheckInHour() {
+    public LocalDateTime getCheckInHour() {
         return this.checkInHour;
     }
 
-    public void setCheckInHour(LocalDate checkInHour) {
+    public void setCheckInHour(LocalDateTime checkInHour) {
         this.checkInHour = checkInHour;
     }
 
-    public LocalDate getCheckOutHour() {
+    public LocalDateTime getCheckOutHour() {
         return this.checkOutHour;
     }
 
-    public void setCheckOutHour(LocalDate checkOutHour) {
+    public void setCheckOutHour(LocalDateTime checkOutHour) {
         this.checkOutHour = checkOutHour;
     }
     
