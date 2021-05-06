@@ -21,8 +21,7 @@ public class ReservationBookEntity {
 
     private LocalDateTime checkInHour;
     private LocalDateTime checkOutHour;
-    private LocalDate checkInHour;
-    private LocalDate checkOutHour;
+    private boolean canceled;
 
     public ReservationBookEntity() {
     }
@@ -32,8 +31,17 @@ public class ReservationBookEntity {
         this.barTable = barTable;
         this.checkInHour = checkInHour;
         this.checkOutHour = checkOutHour;
+        this.canceled = false;
     }
 
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
 
     public Long getIdReservationBook() {
         return this.idReservationBook;
