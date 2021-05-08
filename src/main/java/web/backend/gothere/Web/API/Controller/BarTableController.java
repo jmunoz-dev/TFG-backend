@@ -1,7 +1,9 @@
 package web.backend.gothere.Web.API.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +46,10 @@ public class BarTableController {
     @DeleteMapping("/{id}")
     public void DeleteBar(@PathVariable("id") Long idbar) {
         barTableService.delete(idbar);
+    }
+    @GetMapping("/{iBar}/{date}")
+    public List<BarTableDTO> GetBarTableBydateAndBar(@PathVariable("iBar") Long idBar, @PathVariable("date")@DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
+        return barTableService.getTableByBarAndAvailabilityDate(idBar, date);
     }
 
 }
