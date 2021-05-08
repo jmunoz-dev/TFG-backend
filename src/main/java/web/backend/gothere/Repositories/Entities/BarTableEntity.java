@@ -1,11 +1,14 @@
 package web.backend.gothere.Repositories.Entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name = "BarTables")
@@ -21,21 +24,27 @@ public class BarTableEntity {
     private BarEntity bar;
     
     // TODO - Asociar con la tabla de reservas central
-    // 
-    // @ManyToOne
-    // @JoinColumn(name="idTablesSchedule")
-    // private TablesSchedule idSchedule;
+    
+    @OneToMany
+    @JoinColumn(name="idTablesSchedule")
+    private List<ScheduleEntity> schedules;
 
 
     public BarTableEntity() {
     }
 
-    public BarTableEntity(Long idBarTable, int capacity, boolean reservated, BarEntity bar) {
+  
+
+    public BarTableEntity(Long idBarTable, int capacity, boolean reservated, BarEntity bar,
+            List<ScheduleEntity> schedules) {
         this.idBarTable = idBarTable;
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
+        this.schedules = schedules;
     }
+
+
 
     public Long getIdBarTable() {
         return this.idBarTable;
@@ -66,13 +75,15 @@ public class BarTableEntity {
     }
 
 
-    // public TablesSchedule getIdSchedule() {
-    //     return this.idSchedule;
-    // }
+   
 
-    // public void setIdSchedule(TablesSchedule idSchedule) {
-    //     this.idSchedule = idSchedule;
-    // }
+    public List<ScheduleEntity> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<ScheduleEntity> schedules) {
+        this.schedules = schedules;
+    }
 
     public BarEntity getBar() {
         return this.bar;
