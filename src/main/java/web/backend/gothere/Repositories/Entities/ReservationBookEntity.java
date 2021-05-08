@@ -14,6 +14,19 @@ import javax.persistence.Table;
 @Entity(name="ReservationBooks")
 public class ReservationBookEntity {
 
+
+    /*  
+    
+    ESTA ES LA TABLA RESERVAS
+        tiene:  id 
+                Usuario (tabla user)
+                Fecha (LocalDateTime)
+                Cancelado (booleano)
+                Horario-Mesa (tabla de ScheduleTableReservation)
+
+    TODO:       comprobar que la referencia a scheduleTableReservationEntity está bien hecha
+    */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservationBook;
@@ -24,27 +37,20 @@ public class ReservationBookEntity {
     @JoinColumn(name = "idBarTable")
     private BarTableEntity barTable;
 
-    private LocalDateTime checkInHour;
-    private LocalDateTime checkOutHour;
+    private LocalDateTime reservationDate;
     private boolean canceled;
+
+    @ManyToOne
+    @JoinColumn(name = "idScheduleTableReservation")
+    private ScheduleTableReservationEntity scheduleTableReservationEntity;
 
     public ReservationBookEntity() {
     }
 
-    public ReservationBookEntity(UserEntity user, BarTableEntity barTable, LocalDateTime checkInHour, LocalDateTime checkOutHour, boolean canceled) {
+    public ReservationBookEntity(UserEntity user, BarTableEntity barTable, LocalDateTime reservationDate, boolean canceled) {
         this.user = user;
         this.barTable = barTable;
-        this.checkInHour = checkInHour;
-        this.checkOutHour = checkOutHour;
-        this.canceled = false;
-    }
-
-
-    public boolean isCanceled() {
-        return canceled;
-    }
-
-    public void setCanceled(boolean canceled) {
+        this.reservationDate = reservationDate;
         this.canceled = canceled;
     }
 
@@ -72,20 +78,24 @@ public class ReservationBookEntity {
         this.barTable = barTable;
     }
 
-    public LocalDateTime getCheckInHour() {
-        return this.checkInHour;
+    public LocalDateTime getReservationDate() {
+        return this.reservationDate;
     }
 
-    public void setCheckInHour(LocalDateTime checkInHour) {
-        this.checkInHour = checkInHour;
+    public void setReservationDate(LocalDateTime reservationDate) {
+        this.reservationDate = reservationDate;
     }
 
-    public LocalDateTime getCheckOutHour() {
-        return this.checkOutHour;
+    public boolean isCanceled() {
+        return this.canceled;
     }
 
-    public void setCheckOutHour(LocalDateTime checkOutHour) {
-        this.checkOutHour = checkOutHour;
+    public boolean getCanceled() {
+        return this.canceled;
     }
-    
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
 }
