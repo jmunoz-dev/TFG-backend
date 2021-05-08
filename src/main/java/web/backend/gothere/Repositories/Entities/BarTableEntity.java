@@ -25,24 +25,23 @@ public class BarTableEntity {
     
     // TODO - Asociar con la tabla de reservas central
     
-    @OneToMany
-    @JoinColumn(name="idTablesSchedule")
-    private List<ScheduleEntity> schedules;
+    @OneToMany(mappedBy="barTable")
+    private List<ScheduleTableReservationEntity> ScheduleTableReservations;
 
 
     public BarTableEntity() {
     }
 
-  
-
-    public BarTableEntity(Long idBarTable, int capacity, boolean reservated, BarEntity bar,
-            List<ScheduleEntity> schedules) {
-        this.idBarTable = idBarTable;
+    public BarTableEntity(int capacity, boolean reservated, BarEntity bar,
+            List<ScheduleTableReservationEntity> scheduleTableReservations) {
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
-        this.schedules = schedules;
+        ScheduleTableReservations = scheduleTableReservations;
     }
+
+
+
 
 
 
@@ -77,13 +76,24 @@ public class BarTableEntity {
 
    
 
-    public List<ScheduleEntity> getSchedules() {
-        return schedules;
+   
+    public List<ScheduleTableReservationEntity> getScheduleTableReservations() {
+        return ScheduleTableReservations;
     }
 
-    public void setSchedules(List<ScheduleEntity> schedules) {
-        this.schedules = schedules;
+
+
+
+
+
+    public void setScheduleTableReservations(List<ScheduleTableReservationEntity> scheduleTableReservations) {
+        ScheduleTableReservations = scheduleTableReservations;
     }
+
+
+
+
+
 
     public BarEntity getBar() {
         return this.bar;
