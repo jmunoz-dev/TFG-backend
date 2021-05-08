@@ -37,9 +37,8 @@ public class ScheduleTableReservationEntity {
     public ScheduleTableReservationEntity() {
     }
     
-    public ScheduleTableReservationEntity(Long idScheduleTableReservation, BarTableEntity barTable,
+    public ScheduleTableReservationEntity( BarTableEntity barTable,
             ScheduleEntity schedule) {
-        this.idScheduleTableReservation = idScheduleTableReservation;
         this.barTable = barTable;
         this.schedule = schedule;
     }
@@ -50,16 +49,16 @@ public class ScheduleTableReservationEntity {
     public void setIdScheduleTableReservation(Long idScheduleTableReservation) {
         this.idScheduleTableReservation = idScheduleTableReservation;
     }
-    public BarTableEntity getBarTableEntity() {
+    public BarTableEntity getBarTable() {
         return barTable;
     }
-    public void setBarTableEntity(BarTableEntity barTable) {
+    public void setBarTable(BarTableEntity barTable) {
         this.barTable = barTable;
     }
-    public ScheduleEntity getScheduleEntity() {
+    public ScheduleEntity getSchedule() {
         return schedule;
     }
-    public void setScheduleEntity(ScheduleEntity schedule) {
+    public void setSchedule(ScheduleEntity schedule) {
         this.schedule = schedule;
     }
 
