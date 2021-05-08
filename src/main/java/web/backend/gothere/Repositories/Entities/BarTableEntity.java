@@ -1,6 +1,7 @@
 package web.backend.gothere.Repositories.Entities;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,24 +27,19 @@ public class BarTableEntity {
     // TODO - Asociar con la tabla de reservas central
     
     @OneToMany(mappedBy="barTable")
-    private List<ScheduleTableReservationEntity> ScheduleTableReservations;
+    private Set<ScheduleTableReservationEntity> ScheduleTableReservations;
 
 
     public BarTableEntity() {
     }
 
     public BarTableEntity(int capacity, boolean reservated, BarEntity bar,
-            List<ScheduleTableReservationEntity> scheduleTableReservations) {
+            Set<ScheduleTableReservationEntity> scheduleTableReservations) {
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
         ScheduleTableReservations = scheduleTableReservations;
     }
-
-
-
-
-
 
     public Long getIdBarTable() {
         return this.idBarTable;
@@ -73,27 +69,13 @@ public class BarTableEntity {
         this.reservated = reservated;
     }
 
-
-   
-
-   
-    public List<ScheduleTableReservationEntity> getScheduleTableReservations() {
+    public Set<ScheduleTableReservationEntity> getScheduleTableReservations() {
         return ScheduleTableReservations;
     }
 
-
-
-
-
-
-    public void setScheduleTableReservations(List<ScheduleTableReservationEntity> scheduleTableReservations) {
+    public void setScheduleTableReservations(Set<ScheduleTableReservationEntity> scheduleTableReservations) {
         ScheduleTableReservations = scheduleTableReservations;
     }
-
-
-
-
-
 
     public BarEntity getBar() {
         return this.bar;
