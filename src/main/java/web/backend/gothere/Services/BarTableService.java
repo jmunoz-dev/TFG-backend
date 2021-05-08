@@ -1,6 +1,7 @@
 package web.backend.gothere.Services;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,6 +63,7 @@ public class BarTableService {
         if(!bar.isPresent()){
             throw new ElementNotFoundException();
         }
+        
         List<BarTableDTO> barTables =  barTableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, BarTableDTO.class))
         .collect(Collectors.toList());
 
@@ -82,14 +84,17 @@ public class BarTableService {
             }
             //recorremos las reservas para ver que horarios están cogidos
             for(int j = 0; j < reservationBooks.size(); j++){
-                for(int k = 0; k < actualTable.getSchedules().size(); k++){
+                if(reservationBooks.get(j).isCanceled()){
+                    break;
+                }
+                for(int k = 0; k < actualTable.getScheduleTableReservations().size(); k++){
                     //si el horario de la reserva coincide eliminamos ese horario de la mesa
-                    if(reservationBooks.get(j).getScheduleTableReservation().getSchedule().equals(actualTable.getSchedules().get(k))){
-                        actualTable.getSchedules().remove(k);
+                    if(reservationBooks.get(j).getScheduleTableReservation().getIdScheduleTableReservation().equals(actualTable.getScheduleTableReservations().get(k).getIdScheduleTableReservation())){
+                        actualTable.getScheduleTableReservations().remove(k);
                     }
                 }
             }
-            if(actualTable.getSchedules().isEmpty()){
+            if(actualTable.getScheduleTableReservations().isEmpty()){
                 actualTable.setReservated(true);
             }
         }
