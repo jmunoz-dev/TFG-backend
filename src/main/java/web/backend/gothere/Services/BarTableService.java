@@ -64,8 +64,7 @@ public class BarTableService {
             throw new ElementNotFoundException();
         }
         
-        List<BarTableDTO> barTables =  barTableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, BarTableDTO.class))
-        .collect(Collectors.toList());
+        List<BarTableDTO> barTables = getByBarId(idBar);
 
         //recorro la lista de mesas para comprobar si están libres
         for(int i = 0 ; i < barTables.size(); i++){
@@ -100,6 +99,17 @@ public class BarTableService {
         }
 
         return barTables;
+    }
+    public List<BarTableDTO> getByBarId(Long idBar){
+        Optional<BarEntity> bar = barRepository.findById(idBar);
+        if(!bar.isPresent()){
+            throw new ElementNotFoundException();
+        }
+        
+        List<BarTableDTO> barTables =  barTableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, BarTableDTO.class))
+        .collect(Collectors.toList());
+        return barTables;
+
     }
 
 }
