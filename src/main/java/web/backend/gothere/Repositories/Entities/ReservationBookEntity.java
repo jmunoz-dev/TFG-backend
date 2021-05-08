@@ -45,11 +45,11 @@ public class ReservationBookEntity {
     public ReservationBookEntity() {
     }
 
-    public ScheduleTableReservationEntity getScheduleTableReservationEntity() {
+    public ScheduleTableReservationEntity getScheduleTableReservation() {
         return scheduleTableReservation;
     }
 
-    public void setScheduleTableReservationEntity(ScheduleTableReservationEntity scheduleTableReservation) {
+    public void setScheduleTableReservation(ScheduleTableReservationEntity scheduleTableReservation) {
         this.scheduleTableReservation = scheduleTableReservation;
     }
 
