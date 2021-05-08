@@ -19,21 +19,50 @@ public class ScheduleTableReservationEntity {
         tiene:  id 
                 Horario
                 Mesa
-    TODO:       (No se si también tendría que tener Reserva, lo dejo comentado)
+    TODO:       (No se si también tendría que tener Reserva, lo dejo comentado) nop
 
     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idScheduleTableReservation;
-    // @ManyToOne
-    // @JoinColumn(name = "idReservationBook")
-    // private ReservationBookEntity reservationBookEntity;
     @ManyToOne
     @JoinColumn(name = "idBarTable")
-    private BarTableEntity barTableEntity;
+    private BarTableEntity barTable;
     @ManyToOne
     @JoinColumn(name="idSchedule")
-    private ScheduleEntity scheduleEntity;
+    private ScheduleEntity schedule;
+
+    
+    public ScheduleTableReservationEntity() {
+    }
+    
+    public ScheduleTableReservationEntity(Long idScheduleTableReservation, BarTableEntity barTable,
+            ScheduleEntity schedule) {
+        this.idScheduleTableReservation = idScheduleTableReservation;
+        this.barTable = barTable;
+        this.schedule = schedule;
+    }
+
+    public Long getIdScheduleTableReservation() {
+        return idScheduleTableReservation;
+    }
+    public void setIdScheduleTableReservation(Long idScheduleTableReservation) {
+        this.idScheduleTableReservation = idScheduleTableReservation;
+    }
+    public BarTableEntity getBarTableEntity() {
+        return barTable;
+    }
+    public void setBarTableEntity(BarTableEntity barTable) {
+        this.barTable = barTable;
+    }
+    public ScheduleEntity getScheduleEntity() {
+        return schedule;
+    }
+    public void setScheduleEntity(ScheduleEntity schedule) {
+        this.schedule = schedule;
+    }
+
+    
 
 }
