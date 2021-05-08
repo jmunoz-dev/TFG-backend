@@ -55,9 +55,8 @@ public class ReservationBookEntity {
 
    
 
-    public ReservationBookEntity(Long idReservationBook, UserEntity user, LocalDate reservationDate, boolean canceled,
+    public ReservationBookEntity( UserEntity user, LocalDate reservationDate, boolean canceled,
             ScheduleTableReservationEntity scheduleTableReservation) {
-        this.idReservationBook = idReservationBook;
         this.user = user;
         this.reservationDate = reservationDate;
         this.canceled = canceled;
