@@ -8,27 +8,26 @@ public class BarTableDTO {
     private int capacity;
     private boolean reservated;
     private BarDTO bar;
-    private List<ScheduleDTO> schedules;
+    private List<ScheduleTableReservationDTO> scheduleTableReservations;
 
     public BarTableDTO() {
     }
 
   
 
-    public BarTableDTO(Long idBarTable, int capacity, boolean reservated, BarDTO bar, List<ScheduleDTO> schedules) {
-        this.idBarTable = idBarTable;
+    public BarTableDTO( int capacity, boolean reservated, BarDTO bar, List<ScheduleTableReservationDTO> scheduleTableReservations) {
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
-        this.schedules = schedules;
+        this.scheduleTableReservations = scheduleTableReservations;
     }
 
-    public List<ScheduleDTO> getSchedules() {
-        return schedules;
+    public List<ScheduleTableReservationDTO> getScheduleTableReservations() {
+        return scheduleTableReservations;
     }
 
-    public void setSchedules(List<ScheduleDTO> schedules) {
-        this.schedules = schedules;
+    public void setScheduleTableReservations(List<ScheduleTableReservationDTO> scheduleTableReservations) {
+        this.scheduleTableReservations = scheduleTableReservations;
     }
 
     public Long getIdBarTable() {
