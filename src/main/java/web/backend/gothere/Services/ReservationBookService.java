@@ -1,21 +1,22 @@
 package web.backend.gothere.Services;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
-
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
+import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
+import web.backend.gothere.Repositories.Interfaces.ScheduleTableReservationRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
 import web.backend.gothere.Services.Models.UserDTO;
@@ -23,6 +24,8 @@ import web.backend.gothere.Services.Models.UserDTO;
 public class ReservationBookService {
     @Autowired
     private ReservationBookRepository reservationBookRepository;
+    @Autowired
+    private ScheduleTableReservationRepository scheduleTableReservationRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -89,6 +92,26 @@ public class ReservationBookService {
     }
 
     public Long add(ReservationBookDTO reservation){
+        //buscamos el usuario y lo seteamos
+        Long idUser = reservation.getUser().getIdUser();
+        Optional<UserEntity> user = userRepository.findById(idUser);
+        if(!user.isPresent()){
+            throw new ElementNotFoundException();
+        }
+        reservation.setUser(modelMapper.map(user, UserDTO.class));
+
+        //buscamos el horario de la mesa
+        Optional<ScheduleTableReservationEntity> scheduletable = scheduleTableReservationRepository.findById(reservation.getScheduleTableReservation().getIdScheduleTableReservation());
+        if(!scheduletable.isPresent()){
+            throw new ElementNotFoundException();
+        }
+        
+        //comprobamos que esa reserva no haya hecho
+        Collection<ReservationBookEntity> reservasConEseHorarioMesa = reservationBookRepository.findByReservationDateAndScheduleTableReservation(reservation.getReservationDate(), scheduletable.get());
+        if(!reservasConEseHorarioMesa.isEmpty()){
+            throw new ElementNotFoundException();
+        }
+        //insertamos la nueva reserva
         ReservationBookEntity entityToInsert = modelMapper.map(reservation, ReservationBookEntity.class);
        return  modelMapper.map(reservationBookRepository.save(entityToInsert), ReservationBookDTO.class).getIdReservationBook();
         
