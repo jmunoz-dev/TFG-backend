@@ -58,11 +58,6 @@ public class BarTableDTO {
         this.reservated = reservated;
     }
 
-    public BarDTO getBar() {
-        return this.bar;
-    }
+   
 
-    public void setBar(BarDTO bar) {
-        this.bar = bar;
-    }
 }
