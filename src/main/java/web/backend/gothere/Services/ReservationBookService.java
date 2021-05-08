@@ -62,7 +62,7 @@ public class ReservationBookService {
         //listado de solo las que aún no han pasado
         List<ReservationBookDTO> currentReservations = new ArrayList<>();
         for(int i = 0 ; i < reservationList.size(); i++){
-            if(reservationList.get(i).getReservationDate().isAfter(LocalDate.now())){
+            if(reservationList.get(i).getReservationDate().isAfter(LocalDate.now().minus(1, ChronoUnit.DAYS))){
                 currentReservations.add(reservationList.get(i));
             }
         }
