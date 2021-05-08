@@ -24,25 +24,25 @@ public class ScheduleEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idReservationBook;
+    private Long idSchedule;
     private LocalTime checkInHour;
-    private LocalDateTime checkOutHour;
+    private LocalTime checkOutHour;
 
 
     public ScheduleEntity() {
     }
 
-    public ScheduleEntity(LocalTime checkInHour, LocalDateTime checkOutHour) {
+    public ScheduleEntity(LocalTime checkInHour, LocalTime checkOutHour) {
         this.checkInHour = checkInHour;
         this.checkOutHour = checkOutHour;
     }
 
     public Long getIdReservationBook() {
-        return this.idReservationBook;
+        return this.idSchedule;
     }
 
     public void setIdReservationBook(Long idReservationBook) {
-        this.idReservationBook = idReservationBook;
+        this.idSchedule = idReservationBook;
     }
 
     public LocalTime getCheckInHour() {
@@ -53,11 +53,11 @@ public class ScheduleEntity {
         this.checkInHour = checkInHour;
     }
 
-    public LocalDateTime getCheckOutHour() {
+    public LocalTime getCheckOutHour() {
         return this.checkOutHour;
     }
 
-    public void setCheckOutHour(LocalDateTime checkOutHour) {
+    public void setCheckOutHour(LocalTime checkOutHour) {
         this.checkOutHour = checkOutHour;
     }
     
