@@ -7,22 +7,55 @@ public class ReservationBookDTO {
 
     private Long idReservationBook;
     private UserDTO user;
-    private BarTableDTO barTable;
-    private LocalDateTime checkInHour;
-    private LocalDateTime checkOutHour;
+    private LocalDate reservationDate;
+    private ScheduleTableReservationDTO scheduleTableReservation;
     private boolean canceled;
 
 
     public ReservationBookDTO() {
     }
+    
+ 
 
-    public ReservationBookDTO(UserDTO user, BarTableDTO barTable, LocalDateTime checkInHour, LocalDateTime checkOutHour) {
+
+    public ReservationBookDTO(Long idReservationBook, UserDTO user, LocalDate reservationDate,
+            ScheduleTableReservationDTO scheduleTableReservation, boolean canceled) {
+        this.idReservationBook = idReservationBook;
         this.user = user;
-        this.barTable = barTable;
-        this.checkInHour = checkInHour;
-        this.checkOutHour = checkOutHour;
-        this.canceled = false;
+        this.reservationDate = reservationDate;
+        this.scheduleTableReservation = scheduleTableReservation;
+        this.canceled = canceled;
     }
+
+
+
+
+    public LocalDate getReservationDate() {
+        return reservationDate;
+    }
+
+
+
+
+    public void setReservationDate(LocalDate reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+
+
+
+    public ScheduleTableReservationDTO getScheduleTableReservation() {
+        return scheduleTableReservation;
+    }
+
+
+
+
+    public void setScheduleTableReservation(ScheduleTableReservationDTO scheduleTableReservation) {
+        this.scheduleTableReservation = scheduleTableReservation;
+    }
+
+
 
 
     public boolean isCanceled() {
@@ -49,29 +82,9 @@ public class ReservationBookDTO {
         this.user = user;
     }
 
-    public BarTableDTO getBarTable() {
-        return this.barTable;
-    }
+  
 
-    public void setBarTable(BarTableDTO barTable) {
-        this.barTable = barTable;
-    }
 
-    public LocalDateTime getCheckInHour() {
-        return this.checkInHour;
-    }
-
-    public void setCheckInHour(LocalDateTime checkInHour) {
-        this.checkInHour = checkInHour;
-    }
-
-    public LocalDateTime getCheckOutHour() {
-        return this.checkOutHour;
-    }
-
-    public void setCheckOutHour(LocalDateTime checkOutHour) {
-        this.checkOutHour = checkOutHour;
-    }
 
 
 }
