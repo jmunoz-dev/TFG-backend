@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class ScheduleEntity {
     private LocalTime checkOutHour;
    
     @OneToMany(mappedBy="schedule")
-    private List<ScheduleTableReservationEntity> ScheduleTableReservations;
+    private Set<ScheduleTableReservationEntity> ScheduleTableReservations;
 
     public ScheduleEntity() {
     }
@@ -41,7 +42,7 @@ public class ScheduleEntity {
 
 
     public ScheduleEntity(LocalTime checkInHour, LocalTime checkOutHour,
-            List<ScheduleTableReservationEntity> scheduleTableReservations) {
+            Set<ScheduleTableReservationEntity> scheduleTableReservations) {
         this.checkInHour = checkInHour;
         this.checkOutHour = checkOutHour;
         ScheduleTableReservations = scheduleTableReservations;
@@ -52,37 +53,17 @@ public class ScheduleEntity {
         return idSchedule;
     }
 
-
-
-
-
-
     public void setIdSchedule(Long idSchedule) {
         this.idSchedule = idSchedule;
     }
 
-
-
-
-
-
-    public List<ScheduleTableReservationEntity> getScheduleTableReservations() {
+    public Set<ScheduleTableReservationEntity> getScheduleTableReservations() {
         return ScheduleTableReservations;
     }
 
-
-
-
-
-
-    public void setScheduleTableReservations(List<ScheduleTableReservationEntity> scheduleTableReservations) {
+    public void setScheduleTableReservations(Set<ScheduleTableReservationEntity> scheduleTableReservations) {
         ScheduleTableReservations = scheduleTableReservations;
     }
-
-
-
-
-
 
     public Long getIdReservationBook() {
         return this.idSchedule;
