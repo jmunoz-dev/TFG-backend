@@ -87,5 +87,9 @@ public class ReservationBookService {
         throw new ElementNotFoundException();
     }
 
-
+    public Long add(ReservationBookDTO reservation){
+        ReservationBookEntity entityToInsert = modelMapper.map(reservation, ReservationBookEntity.class);
+       return  modelMapper.map(reservationBookRepository.save(entityToInsert), ReservationBookDTO.class).getIdReservationBook();
+        
+    }
 }
