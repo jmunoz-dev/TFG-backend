@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +26,10 @@ public class ReservationBookController {
     @GetMapping("/{idUser}")
     public List<ReservationBookDTO> getByUserAndBar(@PathVariable("idUser") Long idUser, @RequestParam(required = false , value = "current") boolean current){
         return reservationBookService.getByUser(idUser, current);
+    }
+
+    @PostMapping("/new")
+    public Long post(@RequestBody ReservationBookDTO reservation){
+        return reservationBookService.add(reservation);
     }
 }
