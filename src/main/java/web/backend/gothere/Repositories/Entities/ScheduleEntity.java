@@ -1,10 +1,14 @@
 package web.backend.gothere.Repositories.Entities;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,15 +31,58 @@ public class ScheduleEntity {
     private Long idSchedule;
     private LocalTime checkInHour;
     private LocalTime checkOutHour;
-
+   
+    @OneToMany(mappedBy="schedule")
+    private List<ScheduleTableReservationEntity> ScheduleTableReservations;
 
     public ScheduleEntity() {
     }
 
-    public ScheduleEntity(LocalTime checkInHour, LocalTime checkOutHour) {
+
+
+    public ScheduleEntity(LocalTime checkInHour, LocalTime checkOutHour,
+            List<ScheduleTableReservationEntity> scheduleTableReservations) {
         this.checkInHour = checkInHour;
         this.checkOutHour = checkOutHour;
+        ScheduleTableReservations = scheduleTableReservations;
     }
+
+
+    public Long getIdSchedule() {
+        return idSchedule;
+    }
+
+
+
+
+
+
+    public void setIdSchedule(Long idSchedule) {
+        this.idSchedule = idSchedule;
+    }
+
+
+
+
+
+
+    public List<ScheduleTableReservationEntity> getScheduleTableReservations() {
+        return ScheduleTableReservations;
+    }
+
+
+
+
+
+
+    public void setScheduleTableReservations(List<ScheduleTableReservationEntity> scheduleTableReservations) {
+        ScheduleTableReservations = scheduleTableReservations;
+    }
+
+
+
+
+
 
     public Long getIdReservationBook() {
         return this.idSchedule;
