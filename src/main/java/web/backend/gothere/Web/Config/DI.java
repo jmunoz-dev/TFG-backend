@@ -58,6 +58,9 @@ public class DI {
     }
     @Bean
     ModelMapper createModelMapper(){
+        // ModelMapper modelMapper = new ModelMapper();
+        // modelMapper.getConfiguration().setAmbiguityIgnored(true);
+        // return modelMapper;
         return new ModelMapper();
     }
     @Bean
