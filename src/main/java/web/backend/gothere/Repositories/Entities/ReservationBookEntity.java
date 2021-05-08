@@ -1,5 +1,6 @@
 package web.backend.gothere.Repositories.Entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name="ReservationBooks")
@@ -24,7 +26,7 @@ public class ReservationBookEntity {
                 Cancelado (booleano)
                 Horario-Mesa (tabla de ScheduleTableReservation)
 
-    TODO:       comprobar que la referencia a scheduleTableReservationEntity está bien hecha
+    TODO:       comprobar que la referencia a scheduleTableReservationEntity está bien hecha (hecho)
     */
 
     @Id
@@ -33,25 +35,33 @@ public class ReservationBookEntity {
     @ManyToOne
     @JoinColumn(name = "idUser")
     private UserEntity user;
-    @ManyToOne
-    @JoinColumn(name = "idBarTable")
-    private BarTableEntity barTable;
-
-    private LocalDateTime reservationDate;
+    private LocalDate reservationDate;
     private boolean canceled;
 
     @ManyToOne
     @JoinColumn(name = "idScheduleTableReservation")
-    private ScheduleTableReservationEntity scheduleTableReservationEntity;
+    private ScheduleTableReservationEntity scheduleTableReservation;
 
     public ReservationBookEntity() {
     }
 
-    public ReservationBookEntity(UserEntity user, BarTableEntity barTable, LocalDateTime reservationDate, boolean canceled) {
+    public ScheduleTableReservationEntity getScheduleTableReservationEntity() {
+        return scheduleTableReservation;
+    }
+
+    public void setScheduleTableReservationEntity(ScheduleTableReservationEntity scheduleTableReservation) {
+        this.scheduleTableReservation = scheduleTableReservation;
+    }
+
+   
+
+    public ReservationBookEntity(Long idReservationBook, UserEntity user, LocalDate reservationDate, boolean canceled,
+            ScheduleTableReservationEntity scheduleTableReservation) {
+        this.idReservationBook = idReservationBook;
         this.user = user;
-        this.barTable = barTable;
         this.reservationDate = reservationDate;
         this.canceled = canceled;
+        this.scheduleTableReservation = scheduleTableReservation;
     }
 
     public Long getIdReservationBook() {
@@ -70,19 +80,11 @@ public class ReservationBookEntity {
         this.user = user;
     }
 
-    public BarTableEntity getBarTable() {
-        return this.barTable;
-    }
-
-    public void setBarTable(BarTableEntity barTable) {
-        this.barTable = barTable;
-    }
-
-    public LocalDateTime getReservationDate() {
+    public LocalDate getReservationDate() {
         return this.reservationDate;
     }
 
-    public void setReservationDate(LocalDateTime reservationDate) {
+    public void setReservationDate(LocalDate reservationDate) {
         this.reservationDate = reservationDate;
     }
 
