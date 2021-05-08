@@ -83,12 +83,12 @@ public class ReservationBookService {
         throw new ElementNotFoundException();
     }
 
-    public void setCanceled(Long reBoId){
+    public ReservationBookDTO setCanceled(Long reBoId){
         Optional<ReservationBookEntity> resevation =  reservationBookRepository.findById(reBoId);
         if(resevation.isPresent()){
             ReservationBookEntity temp = resevation.get();
             temp.setCanceled(true);
-            reservationBookRepository.save(temp);
+            return modelMapper.map(reservationBookRepository.save(temp), ReservationBookDTO.class);
         }
         throw new ElementNotFoundException();
     }

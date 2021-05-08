@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,5 +32,9 @@ public class ReservationBookController {
     @PostMapping("/new")
     public Long post(@RequestBody ReservationBookDTO reservation){
         return reservationBookService.add(reservation);
+    }
+    @PutMapping("/cancel/{idR}")
+    public ReservationBookDTO cancelReservationBook(@PathVariable Long idR){
+        return reservationBookService.setCanceled(idR);
     }
 }
