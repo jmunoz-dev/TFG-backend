@@ -59,9 +59,10 @@ public class ReservationBookService {
         if(!currentReservation){
             return reservationList;
         }
+        //listado de solo las que aún no han pasado
         List<ReservationBookDTO> currentReservations = new ArrayList<>();
         for(int i = 0 ; i < reservationList.size(); i++){
-            if(reservationList.get(i).getCheckOutHour().isBefore(LocalDateTime.now())){
+            if(reservationList.get(i).getReservationDate().isAfter(LocalDate.now())){
                 currentReservations.add(reservationList.get(i));
             }
         }
