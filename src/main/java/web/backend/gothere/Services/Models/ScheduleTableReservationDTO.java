@@ -17,9 +17,7 @@ public class ScheduleTableReservationDTO {
     public void setIdScheduleTableReservation(Long idScheduleTableReservation) {
         this.idScheduleTableReservation = idScheduleTableReservation;
     }
-    public BarTableDTO getBarTable() {
-        return barTable;
-    }
+    
     public void setBarTable(BarTableDTO barTable) {
         this.barTable = barTable;
     }
