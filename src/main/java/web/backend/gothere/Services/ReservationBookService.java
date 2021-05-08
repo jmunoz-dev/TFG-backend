@@ -18,7 +18,9 @@ import web.backend.gothere.Repositories.Entities.UserEntity;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
 import web.backend.gothere.Repositories.Interfaces.ScheduleTableReservationRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
+import web.backend.gothere.Services.Models.BarTableDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
+import web.backend.gothere.Services.Models.ScheduleTableReservationDTO;
 import web.backend.gothere.Services.Models.UserDTO;
 
 public class ReservationBookService {
@@ -90,7 +92,7 @@ public class ReservationBookService {
         }
         throw new ElementNotFoundException();
     }
-
+    //TODO: Mejorar el control de errores siempre mando un 404 :)
     public Long add(ReservationBookDTO reservation){
         //buscamos el usuario y lo seteamos
         Long idUser = reservation.getUser().getIdUser();
@@ -98,14 +100,15 @@ public class ReservationBookService {
         if(!user.isPresent()){
             throw new ElementNotFoundException();
         }
-        reservation.setUser(modelMapper.map(user, UserDTO.class));
+        reservation.setUser(modelMapper.map(user.get(), UserDTO.class));
 
         //buscamos el horario de la mesa
         Optional<ScheduleTableReservationEntity> scheduletable = scheduleTableReservationRepository.findById(reservation.getScheduleTableReservation().getIdScheduleTableReservation());
         if(!scheduletable.isPresent()){
             throw new ElementNotFoundException();
         }
-        
+        ScheduleTableReservationDTO table = modelMapper.map(scheduletable.get(), ScheduleTableReservationDTO.class);
+        reservation.setScheduleTableReservation(table);
         //comprobamos que esa reserva no haya hecho
         Collection<ReservationBookEntity> reservasConEseHorarioMesa = reservationBookRepository.findByReservationDateAndScheduleTableReservation(reservation.getReservationDate(), scheduletable.get());
         if(!reservasConEseHorarioMesa.isEmpty()){
