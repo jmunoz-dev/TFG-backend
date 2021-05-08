@@ -15,48 +15,30 @@ public class ReservationBookDTO {
     public ReservationBookDTO() {
     }
     
- 
 
-
-    public ReservationBookDTO(Long idReservationBook, UserDTO user, LocalDate reservationDate,
-            ScheduleTableReservationDTO scheduleTableReservation, boolean canceled) {
-        this.idReservationBook = idReservationBook;
+    public ReservationBookDTO( UserDTO user, LocalDate reservationDate,
+             boolean canceled, ScheduleTableReservationDTO scheduleTableReservation) {
         this.user = user;
         this.reservationDate = reservationDate;
         this.scheduleTableReservation = scheduleTableReservation;
         this.canceled = canceled;
     }
 
-
-
-
     public LocalDate getReservationDate() {
         return reservationDate;
     }
-
-
-
 
     public void setReservationDate(LocalDate reservationDate) {
         this.reservationDate = reservationDate;
     }
 
-
-
-
     public ScheduleTableReservationDTO getScheduleTableReservation() {
         return scheduleTableReservation;
     }
 
-
-
-
     public void setScheduleTableReservation(ScheduleTableReservationDTO scheduleTableReservation) {
         this.scheduleTableReservation = scheduleTableReservation;
     }
-
-
-
 
     public boolean isCanceled() {
         return canceled;
@@ -81,10 +63,5 @@ public class ReservationBookDTO {
     public void setUser(UserDTO user) {
         this.user = user;
     }
-
-  
-
-
-
 
 }
