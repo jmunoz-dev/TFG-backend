@@ -1,11 +1,15 @@
 package web.backend.gothere.Repositories.Entities;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name = "BarTables")
@@ -21,20 +25,20 @@ public class BarTableEntity {
     private BarEntity bar;
     
     // TODO - Asociar con la tabla de reservas central
-    // 
-    // @ManyToOne
-    // @JoinColumn(name="idTablesSchedule")
-    // private TablesSchedule idSchedule;
+    
+    @OneToMany(mappedBy="barTable")
+    private Set<ScheduleTableReservationEntity> ScheduleTableReservations;
 
 
     public BarTableEntity() {
     }
 
-    public BarTableEntity(Long idBarTable, int capacity, boolean reservated, BarEntity bar) {
-        this.idBarTable = idBarTable;
+    public BarTableEntity(int capacity, boolean reservated, BarEntity bar,
+            Set<ScheduleTableReservationEntity> scheduleTableReservations) {
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
+        ScheduleTableReservations = scheduleTableReservations;
     }
 
     public Long getIdBarTable() {
@@ -65,14 +69,13 @@ public class BarTableEntity {
         this.reservated = reservated;
     }
 
+    public Set<ScheduleTableReservationEntity> getScheduleTableReservations() {
+        return ScheduleTableReservations;
+    }
 
-    // public TablesSchedule getIdSchedule() {
-    //     return this.idSchedule;
-    // }
-
-    // public void setIdSchedule(TablesSchedule idSchedule) {
-    //     this.idSchedule = idSchedule;
-    // }
+    public void setScheduleTableReservations(Set<ScheduleTableReservationEntity> scheduleTableReservations) {
+        ScheduleTableReservations = scheduleTableReservations;
+    }
 
     public BarEntity getBar() {
         return this.bar;

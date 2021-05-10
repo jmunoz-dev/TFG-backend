@@ -11,6 +11,7 @@ import web.backend.gothere.Services.BarTableService;
 import web.backend.gothere.Services.ConfirmationTokenService;
 import web.backend.gothere.Services.EmailSenderService;
 import web.backend.gothere.Services.OffersService;
+import web.backend.gothere.Services.ReservationBookService;
 import web.backend.gothere.Services.UserOffersService;
 import web.backend.gothere.Services.UserService;
 
@@ -39,6 +40,10 @@ public class DI {
     BarTableService createBarTableService(){
         return new BarTableService();
     }
+    @Bean
+    ReservationBookService createReservationBookService(){
+        return new ReservationBookService();
+    }
     @Bean 
     BCryptPasswordEncoder createBCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
@@ -53,6 +58,9 @@ public class DI {
     }
     @Bean
     ModelMapper createModelMapper(){
+        // ModelMapper modelMapper = new ModelMapper();
+        // modelMapper.getConfiguration().setAmbiguityIgnored(true);
+        // return modelMapper;
         return new ModelMapper();
     }
     @Bean
