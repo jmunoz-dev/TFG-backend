@@ -95,6 +95,6 @@ public class UserController {
 	}
 	@GetMapping("/")
 	public String index(){
-		return "index";
+		return "redirect:/swagger-ui/";
 	}
 }
