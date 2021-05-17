@@ -1,7 +1,9 @@
 package web.backend.gothere.Web.API.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,20 +32,30 @@ public class BarTableController {
     }
 
     @PostMapping
-    public BarTableDTO AddBar(@RequestBody BarTableDTO bar) {
-        return barTableService.add(bar);
+    public BarTableDTO AddBarTable(@RequestBody BarTableDTO barTable) {
+        return barTableService.add(barTable);
     }
 
     // update
     @PutMapping("/{id}")
-    public BarTableDTO UpdateBar(@RequestBody BarTableDTO bar, @PathVariable("id") Long idbar) {
-        return barTableService.update(idbar, bar);
+    public BarTableDTO UpdateBarTable(@RequestBody BarTableDTO barTable, @PathVariable("id") Long idbarTable) {
+        return barTableService.update(idbarTable, barTable);
     }
 
     // DELETEAR
     @DeleteMapping("/{id}")
-    public void DeleteBar(@PathVariable("id") Long idbar) {
+    public void DeleteBarTable(@PathVariable("id") Long idbar) {
         barTableService.delete(idbar);
+    }
+    //por bar y fecha (esta es la importante para el listado de front)
+    @GetMapping("/{iBar}/{date}")
+    public List<BarTableDTO> GetBarTableBydateAndBar(@PathVariable("iBar") Long idBar, @PathVariable("date")@DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
+        return barTableService.getTableByBarAndAvailabilityDate(idBar, date);
+    }
+    //por bar
+    @GetMapping("/{iBar}")
+    public List<BarTableDTO> GetBarTableByBar(@PathVariable("iBar") Long idBar) {
+        return barTableService.getByBarId(idBar);
     }
 
 }
