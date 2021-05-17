@@ -67,5 +67,13 @@ public class BarService {
 
         return barsList;
     }
+    public List<BarDTO> getByNameOrDirection(String query){
+        query = query.trim().toUpperCase();
+        List<BarDTO> barsList =barRepository.findByNameOrDirection(query,query).stream()
+        .map(x -> modelMapper.map(x, BarDTO.class))
+        .collect(Collectors.toList());
+
+        return barsList;
+    }
 
 }
