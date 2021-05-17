@@ -17,14 +17,14 @@ public class BarImgsEntity {
     private String imgUrl;
     @ManyToOne
     @JoinColumn(name="idBar")
-    private BarEntity barEntity;
+    private BarEntity bar;
 
 
     public BarImgsEntity() {}
 
-    public BarImgsEntity(String imgUrl, BarEntity barEntity, Long idImgBar ) {
+    public BarImgsEntity(String imgUrl, BarEntity bar, Long idImgBar ) {
         this.imgUrl = imgUrl;
-        this.barEntity = barEntity;
+        this.bar = bar;
         this.idImgBar = idImgBar;
     }
 
@@ -44,13 +44,15 @@ public class BarImgsEntity {
         this.imgUrl = imgUrl;
     }
 
-    public BarEntity getBarEntity() {
-        return barEntity;
+    public BarEntity getBar() {
+        return bar;
     }
 
-    public void setBarEntity(BarEntity barEntity) {
-        this.barEntity = barEntity;
+    public void setBar(BarEntity bar) {
+        this.bar = bar;
     }
+
+ 
 
   
   
