@@ -1,9 +1,13 @@
 package web.backend.gothere.Repositories.Entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name = "Bars")
@@ -26,7 +30,8 @@ public class BarEntity {
     private int totalCapacity;
     private int allowedCapacity;
     private int currentCapacity;
-
+    @OneToMany(mappedBy = "bar")
+    Set<BarImgsEntity> barImages;
     public BarEntity() {}
 
     public BarEntity(String name, String description, String phone, String direction, double latitude, double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {

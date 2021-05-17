@@ -34,9 +34,7 @@ public class BarImgsDTO {
         this.imgUrl = imgUrl;
     }
 
-    public BarEntity getBarEntity() {
-        return barEntity;
-    }
+ 
 
     public void setBarEntity(BarEntity barEntity) {
         this.barEntity = barEntity;
