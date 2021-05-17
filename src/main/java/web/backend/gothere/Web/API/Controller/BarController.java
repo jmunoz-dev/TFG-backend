@@ -58,6 +58,10 @@ public class BarController {
     public List<BarDTO> GetByCoordinates(@RequestParam(name = "latitude") double latitude, @RequestParam(name = "length") double length) {
         return barService.getByCoordinates(length, latitude);
     }
+    @GetMapping("/search")
+    public List<BarDTO> GetByNameOrDirecction(@RequestParam(name = "q") String query) {
+        return barService.getByNameOrDirection(query);
+    }
 
 
 }
