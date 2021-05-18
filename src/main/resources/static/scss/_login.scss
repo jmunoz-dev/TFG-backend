@@ -1,3 +1,30 @@
-.gothere_background {
-    color: white;
+.modal-login {
+    width: 100%;
+    display: flex;
+    // border: 3px solid black;
+    .logo-section {
+        padding: 25px;
+        background-color: #FEA701;
+        width: 50%;
+        img {
+            width: 100%;
+        }
+    }
+    .login-form-wrapper {
+        width: 50%;
+        .login-form {
+            width: 70%;
+            margin: 40% auto;
+            p {
+                padding-bottom: 15px;
+            }
+            form {
+                display: flex;
+                flex-wrap: wrap;
+                input {
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
 }
