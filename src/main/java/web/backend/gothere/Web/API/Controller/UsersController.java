@@ -58,16 +58,29 @@ public class UsersController {
         userService.sendPasswordReset(email);
     }
 
-    @GetMapping(value="/sign-in")
+    @PostMapping(value="/sign-in")
     public boolean loginUser(@RequestBody UserDTO user, HttpServletResponse response){
         UserDTO userToLog = userService.signInUser(user);
         if(userToLog != null){
             Cookie ck = new Cookie("Login", confirmationTokenService.findConfirmationTokenByUser(userToLog));
             ck.setMaxAge(60 * 60 * 24 * 365 * 10);
+            ck.setPath("/");
             response.addCookie(ck);
             return true;
         }
         return false;
-     
+    }
+    
+    @PostMapping(value="/sign-in-bar")
+    public boolean loginBarUser(@RequestBody UserDTO user, HttpServletResponse response){
+        UserDTO userToLog = userService.signInUser(user);
+        if(userToLog != null){
+            Cookie ck = new Cookie("adminlogin", confirmationTokenService.findConfirmationTokenByUser(userToLog));
+            ck.setMaxAge(60 * 60 * 24 * 365 * 10);
+            ck.setPath("/admin");
+            response.addCookie(ck);
+            return true;
+        }
+        return false;
     }
 }
