@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/admin-login.js}"></script>
+    <title>Sign in</title>
+</head>
+
+<body>
+    <div class="">
+        <div class="modal-login">
+            <div class="logo-section">
+                <img src="images/logo.png" th:src="@{images/logo.png}" alt=" ">
+            </div>
+            <div class="login-form-wrapper">
+                <div class="login-form">
+                    <p>Log In</p>
+                    <form th:action="@{api/users/sign-in}"  method="post">
+                        <input type="text" th:name="email">
+                        <input type="password" th:name="password">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

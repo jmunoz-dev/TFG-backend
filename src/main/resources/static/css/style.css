@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-login {
+  width: 100%;
+  display: flex;
+}
+.modal-login .logo-section {
+  padding: 25px;
+  background-color: #FEA701;
+  width: 50%;
+}
+.modal-login .logo-section img {
+  width: 100%;
+}
+.modal-login .login-form-wrapper {
+  width: 50%;
+}
+.modal-login .login-form-wrapper .login-form {
+  width: 70%;
+  margin: 40% auto;
+}
+.modal-login .login-form-wrapper .login-form p {
+  padding-bottom: 15px;
+}
+.modal-login .login-form-wrapper .login-form form {
+  display: flex;
+  flex-wrap: wrap;
+}
+.modal-login .login-form-wrapper .login-form form input {
+  margin-bottom: 15px;
+}
+
+.main-header {
+  background-color: #FEA701;
+  color: black;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 33pt;
+  padding: 2%;
+  display: flex;
+  justify-content: flex-start;
+}
+.main-header > div {
+  width: 46%;
+}
+.main-header > div img {
+  width: 82px;
+  height: 58px;
+}
+.main-header .brand-name {
+  display: inline;
+  width: 54%;
+}
+
+/*# sourceMappingURL=style.css.map */
