@@ -1,0 +1,20 @@
+.main-header {
+    background-color: #FEA701;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 33pt;
+    padding: 2%;
+    display: flex;
+    justify-content: flex-start;
+    >div {
+        width: 46%;
+        img {
+            width: 82px;
+            height: 58px;
+        }
+    }
+    .brand-name {
+        display: inline;
+        width: 54%;
+    }
+}
