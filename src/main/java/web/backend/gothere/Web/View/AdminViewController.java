@@ -26,7 +26,7 @@ public class AdminViewController {
     @GetMapping("")
     public ModelAndView barLoginPage(){
         //TODO mirar que esté la cookie
-        ModelAndView mv = new ModelAndView("login");
+        ModelAndView mv = new ModelAndView("/admin/login");
         UserDTO user = new UserDTO();
         mv.addObject("user", user);
         mv.addObject("bar", barService.getBarById(3L));
