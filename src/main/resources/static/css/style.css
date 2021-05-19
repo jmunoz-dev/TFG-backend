@@ -14,7 +14,8 @@ p {
 }
 
 .modal-login {
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
 }
 .modal-login .logo-section {
@@ -23,24 +24,64 @@ p {
   width: 50%;
 }
 .modal-login .logo-section img {
+  margin-top: 12%;
   width: 100%;
 }
-.modal-login .login-form-wrapper {
+.modal-login .login-wrapper {
   width: 50%;
+  font-family: "Roboto", sans-serif;
 }
-.modal-login .login-form-wrapper .login-form {
-  width: 70%;
-  margin: 40% auto;
+.modal-login .login-wrapper .login-form-wrapper {
+  padding: 35% 9% 0;
 }
-.modal-login .login-form-wrapper .login-form p {
-  padding-bottom: 15px;
+.modal-login .login-wrapper .login-form-wrapper > h2 {
+  font-size: xx-large;
+  text-align: left;
 }
-.modal-login .login-form-wrapper .login-form form {
-  display: flex;
-  flex-wrap: wrap;
+.modal-login .login-wrapper .login-form-wrapper .login-form {
+  display: grid;
+  width: 100%;
+  margin: 70px auto 0;
 }
-.modal-login .login-form-wrapper .login-form form input {
-  margin-bottom: 15px;
+.modal-login .login-wrapper .login-form-wrapper .login-form input[type=mail],
+.modal-login .login-wrapper .login-form-wrapper .login-form [type=password] {
+  margin-top: 20px;
+  border-radius: 10px;
+  font-size: inherit;
+  font-weight: 500;
+  height: 45px;
+  background-color: white;
+  border-color: black;
+  padding-left: 20px;
+  font-family: "Roboto", sans-serif;
+}
+.modal-login .login-wrapper .login-form-wrapper .login-form .submit-button {
+  margin-top: 50px;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  height: 60px;
+  border-color: black;
+  padding-left: 20px;
+  background-color: black;
+  font-size: x-large;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+.modal-login .login-wrapper .privacy-terms {
+  margin: auto;
+  text-align: center;
+}
+.modal-login a {
+  color: deepskyblue;
+}
+.modal-login a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.modal-login input:focus {
+  outline: none;
 }
 
 .main-header {
