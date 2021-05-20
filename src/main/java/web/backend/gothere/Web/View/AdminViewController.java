@@ -41,9 +41,23 @@ public class AdminViewController {
             return mv2;
         }
         ModelAndView mv = new ModelAndView("admin_home");
-        //TODO usuario por token
-        //bar por usuario
-        mv.addObject("bar", barService.getBarById(3L));
+    @GetMapping("/tables")
+    public ModelAndView barTablesPage(@CookieValue( required = false, value="adminlogin") String cookie ){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+    
+        ModelAndView mv = new ModelAndView("admin_offers");
+       
+       UserDTO user = userService.getUserByToken(cookie);
+       
+        List<BarTableDTO> barTables = barTableService.getByBarId(user.getIdBar());
+        mv.addObject("barTables",barTables);
 
         return mv;
     } 
