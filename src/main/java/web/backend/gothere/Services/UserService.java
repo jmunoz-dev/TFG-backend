@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Exceptions.UserAlreadyExistException;
+import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Entities.ConfirmationTokenEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
+import web.backend.gothere.Repositories.Interfaces.BarRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
 import web.backend.gothere.Services.Models.UserDTO;
 
@@ -23,6 +25,9 @@ public class UserService implements UserDetailsService{
 
     @Autowired
     private UserRepository UserRepository;
+
+    @Autowired
+    private BarRepository BarRepository;
 
     @Autowired
 	private  ConfirmationTokenService confirmationTokenService;
@@ -61,10 +66,27 @@ public class UserService implements UserDetailsService{
         UserEntity user = modelMapper.map(newUser, UserEntity.class);
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         final String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-    
+        
         user.setPassword(encryptedPassword);
-    
-        final UserEntity createdUser = UserRepository.save(new UserEntity(user.getEmail(), user.getName(), user.getLastName(), user.getPassword(), user.getPhoneNumber()));
+
+        //comprobamos si tiene asociado un bar
+        if(newUser.getIdBar() != null){
+            if(newUser.getIdBar() != 0){
+                Optional<BarEntity> bar =  BarRepository.findById(newUser.getIdBar());
+                if(bar.isPresent()){
+                    user.setBar(bar.get());
+                }else{
+                    user.setBar(null);
+                    throw new ElementNotFoundException();
+                }
+            }
+        }
+        UserEntity createdUser;      
+        if(user.getBar() == null){
+            createdUser = UserRepository.save(new UserEntity(user.getEmail(), user.getName(), user.getLastName(), user.getPassword(), user.getPhoneNumber()));
+       }else{
+            createdUser = UserRepository.save(new UserEntity(user.getEmail(), user.getName(), user.getLastName(), user.getPassword(), user.getPhoneNumber(), user.getBar()));
+       }
     
         final ConfirmationTokenEntity confirmationToken = new ConfirmationTokenEntity(createdUser);
     
