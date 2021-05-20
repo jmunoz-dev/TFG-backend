@@ -13,10 +13,25 @@ public class UserDTO {
 	private Boolean enabled;
     private Date signUpDate;
     private String phoneNumber;
+    private Long idBar;
     
 
     public UserDTO(Long idUser, String email, String name, String lastName, String password, String userRole,
-        Boolean locked, Boolean enabled, String phoneNumber ) {
+        Boolean locked, Boolean enabled, String phoneNumber, Long idBar) {
+            this.idUser = idUser;
+            this.email = email;
+            this.name = name;
+            this.lastName = lastName;
+            this.password = password;
+            this.userRole = userRole;
+            this.locked = locked;
+            this.phoneNumber = phoneNumber;
+            this.enabled = enabled;
+            this.idBar = idBar;
+    }
+    
+    public UserDTO(Long idUser, String email, String name, String lastName, String password, String userRole,
+        Boolean locked, Boolean enabled, String phoneNumber) {
             this.idUser = idUser;
             this.email = email;
             this.name = name;
@@ -27,6 +42,7 @@ public class UserDTO {
             this.phoneNumber = phoneNumber;
             this.enabled = enabled;
     }
+
     public UserDTO() {
     }
     public Long getIdUser() {
@@ -86,5 +102,12 @@ public class UserDTO {
     public Date getSignUpDate() {
         return signUpDate;
     }
+    public Long getIdBar() {
+        return idBar;
+    }
+    public void setIdBar(Long idBar) {
+        this.idBar = idBar;
+    }
+    
     
 }
