@@ -2,32 +2,30 @@ package web.backend.gothere.Web.Config;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
 
-import org.apache.catalina.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import web.backend.gothere.Repositories.Entities.BarEntity;
+import web.backend.gothere.Repositories.Entities.BarTableEntity;
+import web.backend.gothere.Repositories.Entities.ConfirmationTokenEntity;
 import web.backend.gothere.Repositories.Entities.OfferEntity;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
+import web.backend.gothere.Repositories.Entities.UserRole;
+import web.backend.gothere.Repositories.Interfaces.BarRepository;
+import web.backend.gothere.Repositories.Interfaces.BarTableRepository;
+import web.backend.gothere.Repositories.Interfaces.ConfirmationTokenRepository;
 import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
 import web.backend.gothere.Repositories.Interfaces.ScheduleRepository;
 import web.backend.gothere.Repositories.Interfaces.ScheduleTableReservationRepository;
 import web.backend.gothere.Repositories.Interfaces.UserOfferRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
-import web.backend.gothere.Repositories.Entities.BarEntity;
-import web.backend.gothere.Repositories.Entities.BarTableEntity;
-import web.backend.gothere.Repositories.Entities.OfferEntity;
-import web.backend.gothere.Repositories.Interfaces.BarRepository;
-import web.backend.gothere.Repositories.Interfaces.BarTableRepository;
-import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 
 @Configuration
 public class InitDB {
@@ -39,7 +37,8 @@ public class InitDB {
         BarTableRepository barTableR,
         ReservationBookRepository reservationBookR,
         ScheduleTableReservationRepository scheduleTableReservationR,
-        ScheduleRepository scheduleR
+        ScheduleRepository scheduleR,
+        ConfirmationTokenRepository confirmationTokenR
         ){
             
         return args -> {
@@ -110,7 +109,17 @@ public class InitDB {
             reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.of(2023,8,24), false, scheduleTableReservationR.findById(5L).get()));
             reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.of(2021,05,23), false, scheduleTableReservationR.findById(5L).get()));
            
-
+            //user-token
+            // BarEntity barTest = barR.findById(2L).get();
+            // UserEntity userTest = userR.findById(3L).get();
+            UserEntity userTest = new UserEntity("aa", "aa", "aa", encryptedPassword , "1234");
+            userTest.setUserRole(UserRole.BAR);
+            BarEntity barTest = new BarEntity();
+            barTest.setName("namePOA");
+            barTest.setUser(userTest);
+            userTest.setBar(barTest);
+            userR.save(userTest);
+            confirmationTokenR.save(new ConfirmationTokenEntity(userTest));
             
         };
     }
