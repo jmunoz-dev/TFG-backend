@@ -48,4 +48,13 @@ public class AdminViewController {
         return mv;
     } 
 
+    private boolean isBarOwner(String cookie){
+        
+        UserDTO user = userService.getUserByToken(cookie);
+        return user.getUserRole().equals(UserRole.BAR.toString());
+        
+    }
+
+      
+
 }
