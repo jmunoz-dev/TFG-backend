@@ -83,4 +83,16 @@ public class UsersController {
         }
         return false;
     }
+    @PostMapping(value="/sign-up-bar")
+    public boolean createBarUser(@RequestBody UserDTO user, HttpServletResponse response){
+        UserDTO userToLog = userService.signUpUser(user);
+        if(userToLog != null){
+            Cookie ck = new Cookie("adminlogin", confirmationTokenService.findConfirmationTokenByUser(userToLog));
+            ck.setMaxAge(60 * 60 * 24 * 365 * 10);
+            ck.setPath("/admin");
+            response.addCookie(ck);
+            return true;
+        }
+        return false;
+    }
 }
