@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import web.backend.gothere.Services.ConfirmationTokenService;
 import web.backend.gothere.Services.UserService;
+import web.backend.gothere.Services.Models.BarUserDTO;
 import web.backend.gothere.Services.Models.UserDTO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -74,6 +75,18 @@ public class UsersController {
     @PostMapping(value="/sign-in-bar")
     public boolean loginBarUser(@RequestBody UserDTO user, HttpServletResponse response){
         UserDTO userToLog = userService.signInUser(user);
+        if(userToLog != null){
+            Cookie ck = new Cookie("adminlogin", confirmationTokenService.findConfirmationTokenByUser(userToLog));
+            ck.setMaxAge(60 * 60 * 24 * 365 * 10);
+            ck.setPath("/admin");
+            response.addCookie(ck);
+            return true;
+        }
+        return false;
+    }
+    @PostMapping(value="/sign-up-bar")
+    public boolean createBarUser(@RequestBody BarUserDTO user, HttpServletResponse response){
+        UserDTO userToLog = userService.signUpUser(user);
         if(userToLog != null){
             Cookie ck = new Cookie("adminlogin", confirmationTokenService.findConfirmationTokenByUser(userToLog));
             ck.setMaxAge(60 * 60 * 24 * 365 * 10);
