@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import web.backend.gothere.Services.ConfirmationTokenService;
 import web.backend.gothere.Services.UserService;
-import web.backend.gothere.Services.Models.BarUserDTO;
 import web.backend.gothere.Services.Models.UserDTO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -85,7 +84,7 @@ public class UsersController {
         return false;
     }
     @PostMapping(value="/sign-up-bar")
-    public boolean createBarUser(@RequestBody BarUserDTO user, HttpServletResponse response){
+    public boolean createBarUser(@RequestBody UserDTO user, HttpServletResponse response){
         UserDTO userToLog = userService.signUpUser(user);
         if(userToLog != null){
             Cookie ck = new Cookie("adminlogin", confirmationTokenService.findConfirmationTokenByUser(userToLog));
