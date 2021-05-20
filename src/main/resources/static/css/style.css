@@ -32,7 +32,7 @@ p {
   font-family: "Roboto", sans-serif;
 }
 .modal-login .login-wrapper .login-form-wrapper {
-  padding: 35% 9% 0;
+  padding: 28% 9% 0;
 }
 .modal-login .login-wrapper .login-form-wrapper > h2 {
   font-size: xx-large;
@@ -41,7 +41,7 @@ p {
 .modal-login .login-wrapper .login-form-wrapper .login-form {
   display: grid;
   width: 100%;
-  margin: 70px auto 0;
+  margin: 60px auto 0;
 }
 .modal-login .login-wrapper .login-form-wrapper .login-form input[type=mail],
 .modal-login .login-wrapper .login-form-wrapper .login-form [type=password] {
