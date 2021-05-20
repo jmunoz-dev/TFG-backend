@@ -17,8 +17,12 @@
         <div>
             <div>
                 <!-- columnas Datos, Ofertas, Mesas -->
+                <div th:insert="~{fragments/admin_menu.html :: body} ">
+                </div>
             </div>
-            <div>
+            <div th:object="${bar}">
+                <h1 th:text="*{name}"></h1>
+                <p th:text="*{description}"></p>
                 <!-- info del bar editable -->
             </div>
         </div>
