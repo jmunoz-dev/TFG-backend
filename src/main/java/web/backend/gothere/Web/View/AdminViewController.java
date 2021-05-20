@@ -39,8 +39,14 @@ public class AdminViewController {
     }
 
     @GetMapping("")
-    public ModelAndView barLoginPage(){
-        //TODO mirar que esté la cookie
+    public ModelAndView barLoginPage(@CookieValue( required = false, value="adminlogin") String cookie ){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin/home");
+        
+        if(cookie != null && isBarOwner(cookie)){
+            return mv2;
+        }
+      
         ModelAndView mv = new ModelAndView("/admin/login");
         return mv;
     } 
