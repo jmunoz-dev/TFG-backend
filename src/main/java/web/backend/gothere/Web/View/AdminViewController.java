@@ -41,6 +41,27 @@ public class AdminViewController {
             return mv2;
         }
         ModelAndView mv = new ModelAndView("admin_home");
+    @GetMapping("/reservations")
+    public ModelAndView barReservationsPage(@CookieValue( required = false, value="adminlogin") String cookie ){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        
+        ModelAndView mv = new ModelAndView("admin_reservations");
+       
+       UserDTO user = userService.getUserByToken(cookie);
+       
+       
+        List<ReservationBookDTO> reservations = reservationBookService.getByBar(user.getIdBar());
+        mv.addObject("reservations",reservations);
+
+        return mv;
+    }
     @GetMapping("/tables")
     public ModelAndView barTablesPage(@CookieValue( required = false, value="adminlogin") String cookie ){
         
