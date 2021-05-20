@@ -32,7 +32,7 @@ p {
   font-family: "Roboto", sans-serif;
 }
 .modal-login .login-wrapper .login-form-wrapper {
-  padding: 35% 9% 0;
+  padding: 28% 9% 0;
 }
 .modal-login .login-wrapper .login-form-wrapper > h2 {
   font-size: xx-large;
@@ -41,7 +41,7 @@ p {
 .modal-login .login-wrapper .login-form-wrapper .login-form {
   display: grid;
   width: 100%;
-  margin: 70px auto 0;
+  margin: 60px auto 0;
 }
 .modal-login .login-wrapper .login-form-wrapper .login-form input[type=mail],
 .modal-login .login-wrapper .login-form-wrapper .login-form [type=password] {
@@ -144,7 +144,7 @@ p {
   display: block;
   width: fit-content;
   margin: 100px auto;
-  font-size: large;
+  font-size: 18pt;
   border-radius: 10px;
   font-style: normal;
   font-weight: 600;
@@ -159,6 +159,31 @@ p {
   text-decoration: none;
 }
 .go-home:hover {
+  color: #FEA701;
+  background-color: black;
+  border-color: black;
+  transform: translateY(3px);
+  box-shadow: 0px 2px #4e4e4e;
+}
+
+.restart {
+  display: inline;
+  width: fit-content;
+  font-size: inherit;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px;
+  background-color: rgba(126, 125, 125, 0.315);
+  color: black;
+  line-height: 10pt;
+  border-color: transparent;
+  box-shadow: 0px 6px #797979;
+  font-family: monospace;
+  text-decoration: none;
+}
+.restart:hover {
   color: #FEA701;
   background-color: black;
   border-color: black;

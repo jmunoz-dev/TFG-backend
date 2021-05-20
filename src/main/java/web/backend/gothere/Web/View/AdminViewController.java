@@ -42,9 +42,6 @@ public class AdminViewController {
     public ModelAndView barLoginPage(){
         //TODO mirar que esté la cookie
         ModelAndView mv = new ModelAndView("/admin/login");
-        UserDTO user = new UserDTO();
-        mv.addObject("user", user);
-        mv.addObject("bar", barService.getBarById(3L));
         return mv;
     } 
 
@@ -58,7 +55,7 @@ public class AdminViewController {
         if(!isBarOwner(cookie)){
             return mv2;
         }
-        ModelAndView mv = new ModelAndView("admin_home");
+        ModelAndView mv = new ModelAndView("admin/admin_home");
        
        UserDTO user = userService.getUserByToken(cookie);
        
