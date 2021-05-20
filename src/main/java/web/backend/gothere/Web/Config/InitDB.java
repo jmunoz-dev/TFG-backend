@@ -116,10 +116,55 @@ public class InitDB {
             userTest.setUserRole(UserRole.BAR);
             BarEntity barTest = new BarEntity();
             barTest.setName("namePOA");
+            barTest.setAllowedCapacity(100);
+            barTest.setCurrentCapacity(2);
+            barTest.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget ultricies est. Nam porta mi ");
+            barTest.setDirection("calle Lolo n 2,1 Zaragoza");
+            barTest.setLatitude(-0.8725120896989844);
+            barTest.setLength(41.65828155577524);
             barTest.setUser(userTest);
             userTest.setBar(barTest);
             userR.save(userTest);
             confirmationTokenR.save(new ConfirmationTokenEntity(userTest));
+             //mesas
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(5,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(8,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(3,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(2,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(1,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+             barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+
+             scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(16L).get(), scheduleR.findById(1L).get()));
+            scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(17L).get(), scheduleR.findById(2L).get()));
+            scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(17L).get(), scheduleR.findById(3L).get()));
+            scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(19L).get(), scheduleR.findById(4L).get()));
+            scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(20L).get(), scheduleR.findById(3L).get()));
+            scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(21L).get(), scheduleR.findById(1L).get()));
+            scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(20L).get(), scheduleR.findById(2L).get()));
+            scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(29L).get(), scheduleR.findById(4L).get()));
+
+            offerR.save(new OfferEntity("oferta de prueba", "dos jarricas", "hola.jpg", 2.3, 23, 23,  LocalDate.now(), LocalDate.now(), barR.findById(10L).get() ));
+            offerR.save(new OfferEntity("oferta de prueba 2", "holas", "hola.jpg", 2.3, 23, 23, LocalDate.now(), LocalDate.now(),  barR.findById(10L).get() ));
+            offerR.save(new OfferEntity("titulo oferta ", "desciption", "img.png", 22.50, 15, 0, LocalDate.of(2021,05,30), LocalDate.of(2022, 01, 01), barR.findById(10L).get() ));
+
+            reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.now(), false, scheduleTableReservationR.findById(9L).get()));
+            reservationBookR.save(new ReservationBookEntity( userR.findById(2L).get(),LocalDate.now(), false, scheduleTableReservationR.findById(10L).get()));
+            reservationBookR.save(new ReservationBookEntity( userR.findById(2L).get(),LocalDate.now(), true, scheduleTableReservationR.findById(11L).get()));
+            reservationBookR.save(new ReservationBookEntity( userR.findById(2L).get(),LocalDate.now(), true, scheduleTableReservationR.findById(12L).get()));
+            reservationBookR.save(new ReservationBookEntity( userR.findById(2L).get(),LocalDate.of(2021,05,1), false, scheduleTableReservationR.findById(13L).get()));
+            reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.of(2023,8,21), true, scheduleTableReservationR.findById(14L).get()));
+            reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.of(2023,8,24), false, scheduleTableReservationR.findById(15L).get()));
+            reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.of(2021,05,23), false, scheduleTableReservationR.findById(16L).get()));
+           
             
         };
     }
