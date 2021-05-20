@@ -153,5 +153,13 @@ public class UserService implements UserDetailsService{
     
         emailSenderService.sendEmail(mailMessage);
     }
+    public UserDTO getUserByToken(String token){
+        Optional<ConfirmationTokenEntity> userToken =
+         confirmationTokenService.findConfirmationTokenByToken(token);
+         if(userToken.isPresent()){
+             return modelMapper.map( userToken.get().getUser(), UserDTO.class);
+         }
+         throw new ElementNotFoundException();
+    }
 
 }
