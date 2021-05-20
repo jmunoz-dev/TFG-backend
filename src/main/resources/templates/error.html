@@ -1,8 +1,15 @@
 <html xmlns="http://www.thymeleaf.org">
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+<script type="text/javascript" th:src="@{/js/error-template.js}"></script>
 
 <body>
-    <h1>Something went wrong! </h1>
-    <h2>This gonna looks better really soon :) </h2>
+    <div class="super-cool-game">
+        <p class="game-description">👾Space Invadors destroyed this page!👾 </br> Take revenge on them!</p>
+        <p> Use <span class="info label-danger">Space</span> to shoot and <span class="info label-danger">←</span>&#160;<span class="info label-danger">→</span> to move!&#160;&#160;&#160;</p>
+    </div>
+    <canvas id="space-invaders"></canvas>
+
+    <a th:href="@{/admin}" class="go-home">HOME</a>
 </body>
 
 </html>
