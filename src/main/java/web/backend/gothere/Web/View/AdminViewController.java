@@ -83,7 +83,7 @@ public class AdminViewController {
         }
         UserDTO user = userService.getUserByToken(cookie);
         
-        ModelAndView mv = new ModelAndView("admin_offers");
+        ModelAndView mv = new ModelAndView("admin/offers");
         List<OfferDTO> offers = offerService.findOffersByBarId(user.getIdBar());
         mv.addObject("offers",offers);
 
@@ -101,7 +101,7 @@ public class AdminViewController {
             return mv2;
         }
         
-        ModelAndView mv = new ModelAndView("admin_reservations");
+        ModelAndView mv = new ModelAndView("admin/reservations");
        
        UserDTO user = userService.getUserByToken(cookie);
        
@@ -123,7 +123,7 @@ public class AdminViewController {
             return mv2;
         }
     
-        ModelAndView mv = new ModelAndView("admin_offers");
+        ModelAndView mv = new ModelAndView("admin/tables");
        
        UserDTO user = userService.getUserByToken(cookie);
        
