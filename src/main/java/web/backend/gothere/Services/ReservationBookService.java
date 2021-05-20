@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,12 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import web.backend.gothere.Exceptions.ElementNotFoundException;
+import web.backend.gothere.Repositories.Entities.BarEntity;
+import web.backend.gothere.Repositories.Entities.BarTableEntity;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
+import web.backend.gothere.Repositories.Interfaces.BarRepository;
+import web.backend.gothere.Repositories.Interfaces.BarTableRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
 import web.backend.gothere.Repositories.Interfaces.ScheduleTableReservationRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
+import web.backend.gothere.Services.Models.BarDTO;
 import web.backend.gothere.Services.Models.BarTableDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
 import web.backend.gothere.Services.Models.ScheduleTableReservationDTO;
@@ -31,6 +37,13 @@ public class ReservationBookService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BarTableRepository barTableRepository;
+
+    @Autowired
+    private BarRepository barRepository;
+
     @Autowired
     private ModelMapper modelMapper;
 
@@ -118,5 +131,24 @@ public class ReservationBookService {
         ReservationBookEntity entityToInsert = modelMapper.map(reservation, ReservationBookEntity.class);
        return  modelMapper.map(reservationBookRepository.save(entityToInsert), ReservationBookDTO.class).getIdReservationBook();
         
+    }
+   
+    public List<ReservationBookDTO> getByBar(Long id){
+        Optional<BarEntity> bar = barRepository.findById(id);
+        ArrayList<ReservationBookDTO>  reservations = new ArrayList<ReservationBookDTO>();
+        if(bar.isPresent()){
+            List<BarTableDTO> barTables =  barTableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, BarTableDTO.class))
+            .collect(Collectors.toList());
+            for(int i = 0; i< barTables.size(); i++){
+                BarTableEntity tableTemp = modelMapper.map(barTables.get(i), BarTableEntity.class);
+                // List<ScheduleTableReservationDTO> barSchedules =scheduleTableReservationRepository.findByBarTable(tableTemp).stream().map(x -> modelMapper.map(x, ScheduleTableReservationDTO.class))
+                // .collect(Collectors.toList());
+               List<ReservationBookDTO> reservationsTemp  = reservationBookRepository.findByScheduleTableReservationBarTable(tableTemp).stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
+               .collect(Collectors.toList());
+               reservations.addAll(reservationsTemp);
+            }
+            return reservations;
+        }
+        return null;
     }
 }

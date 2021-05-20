@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name = "Bars")
@@ -27,9 +28,12 @@ public class BarEntity {
     private int allowedCapacity;
     private int currentCapacity;
 
+    @OneToOne(mappedBy = "bar")
+    private UserEntity user;
+
     public BarEntity() {}
 
-    public BarEntity(String name, String description, String phone, String direction, double latitude, double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
+    public BarEntity(String name, String description, String phone, String direction, double latitude, double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity, UserEntity user) {
         this.name = name;
         this.description = description;
         this.phone = phone;
@@ -40,6 +44,7 @@ public class BarEntity {
         this.totalCapacity = totalCapacity;
         this.allowedCapacity = allowedCapacity;
         this.currentCapacity = currentCapacity;
+        this.user =  user;
     }
 
     public Long getIdBar() {

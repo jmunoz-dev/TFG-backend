@@ -17,6 +17,7 @@ public interface ReservationBookRepository
     
     Collection<ReservationBookEntity> findByUser(UserEntity user);
     Optional<ReservationBookEntity> findById(Long id);
+    Optional<ReservationBookEntity> findByScheduleTableReservationBarTable(BarTableEntity barTable);
     Collection<ReservationBookEntity> findByReservationDateAndScheduleTableReservationBarTable(LocalDate date,BarTableEntity barTable);
     Collection<ReservationBookEntity>  findByReservationDateAndScheduleTableReservation(LocalDate date,ScheduleTableReservationEntity scheduleTableReservation);
 }

@@ -4,10 +4,13 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -29,8 +32,13 @@ public class UserEntity implements UserDetails{
 	private Boolean enabled;
     private LocalDate signUpDate; 
     private String phoneNumber;
-  
-    public UserEntity (String email, String name, String lastName, String password, String phoneNumber ){
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_bar", referencedColumnName = "idBar")
+    private BarEntity bar;
+
+    
+    public UserEntity (String email, String name, String lastName, String password, String phoneNumber){
         this.email = email;
         this.name = name;
         this.lastName = lastName;
@@ -41,9 +49,20 @@ public class UserEntity implements UserDetails{
         this.locked = false;
         this.enabled = false;
     }
+    public UserEntity (String email, String name, String lastName, String password, String phoneNumber, BarEntity bar){
+        this.email = email;
+        this.name = name;
+        this.lastName = lastName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.userRole = UserRole.BAR;
+        this.signUpDate= LocalDate.now();
+        this.locked = false;
+        this.enabled = false;
+        this.bar = bar;
+    }
+
     public UserEntity(){}
-
-
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -135,6 +154,12 @@ public class UserEntity implements UserDetails{
     }
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+    public BarEntity getBar() {
+        return bar;
+    }
+    public void setBar(BarEntity bar) {
+        this.bar = bar;
     }
     
 }
