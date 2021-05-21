@@ -1,11 +1,14 @@
 package web.backend.gothere.Web.View;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.backend.gothere.Repositories.Entities.UserRole;
@@ -91,7 +94,9 @@ public class AdminViewController {
     }
 
     @GetMapping("/reservations")
-    public ModelAndView barReservationsPage(@CookieValue( required = false, value="adminlogin") String cookie ){
+    public ModelAndView barReservationsPage(@CookieValue( required = false, value="adminlogin") String cookie, 
+        @RequestParam (required = false, value= "phone") String phone,
+        @RequestParam( required = false, value="date")@DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date){
         
         ModelAndView mv2 = new ModelAndView("redirect:/admin");
         if(cookie == null){
@@ -105,8 +110,7 @@ public class AdminViewController {
        
        UserDTO user = userService.getUserByToken(cookie);
        
-       
-        List<ReservationBookDTO> reservations = reservationBookService.getByBar(user.getIdBar());
+        List<ReservationBookDTO> reservations = reservationBookService.getAllByBar(user.getIdBar(), phone, date);
         mv.addObject("reservations",reservations);
 
         return mv;
