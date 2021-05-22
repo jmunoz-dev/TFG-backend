@@ -1,0 +1,22 @@
+<html xmlns="http://www.thymeleaf.org">
+
+<body>
+    <div class="admin-menu-wrapper">
+        <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
+        <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
+        <a th:href="@{/admin/tables}" class="page-section-menu active">Mesas</a>
+        <a th:href="@{/admin/reservations}" class="page-section-menu ">Reservas</a>
+    </div>
+    <div th:each="table : ${barTables}" th:object="${table}">
+        <div class="m-4 card">
+            <p>Numero mesa</p>
+            <h2 th:text="*{idBarTable}"></h2>
+            <p>capacidad</p>
+            <h2 th:text="*{capacity}"></h2>
+
+        </div>
+        -----------------------------------------------------
+    </div>
+</body>
+
+</html>

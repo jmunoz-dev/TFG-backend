@@ -27,6 +27,9 @@ public class ScheduleTableReservationDTO {
     public void setSchedule(ScheduleDTO schedule) {
         this.schedule = schedule;
     }
+    public BarTableDTO getBarTable() {
+        return barTable;
+    }
    
    
 }

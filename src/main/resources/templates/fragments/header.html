@@ -3,9 +3,13 @@
 <body>
     <div class="main-header">
         <div>
-            <img src="../../images/logo.png" th:src="@{../../images/logo.png}" alt=" ">
+            <img th:src="@{../../images/logo_small.png}" alt=" ">
         </div>
-        <p class="brand-name">GO THERE</p>
+
+        <p class="brand-name">
+            <a th:href="@{/admin/home}">GO THERE</a>
+        </p>
+
     </div>
 </body>
 
