@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name = "Bars")
@@ -30,12 +31,13 @@ public class BarEntity {
     private int totalCapacity;
     private int allowedCapacity;
     private int currentCapacity;
-
+    @OneToOne(mappedBy = "bar")
+    private UserEntity user;
     @OneToMany(mappedBy = "bar")
     Set<BarImgsEntity> barImages;
     public BarEntity() {}
 
-    public BarEntity(String name, String description, String phone, String address, double latitude, double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
+    public BarEntity(String name, String description, String phone, String address, double latitude, double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity, UserEntity user) {
         this.name = name;
         this.description = description;
         this.phone = phone;
