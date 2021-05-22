@@ -19,6 +19,6 @@ public interface BarRepository
         " ((b.latitude< :latitude + " +  Constants.BAR_SEARCH_RADIUS+") AND (b.latitude > :latitude - " + Constants.BAR_SEARCH_RADIUS + "))")
         Collection<BarEntity> getByCoordinates(@Param("latitude") double latitude, @Param("length") double length);
 
-        @Query(value = "SELECT * FROM Bars b WHERE UPPER(b.name) LIKE %:name% OR UPPER(b.direction) LIKE %:direction% ORDER BY b.name LIMIT 10", nativeQuery = true)
-        Collection<BarEntity> findByNameOrDirection(String name, String direction);
+        @Query(value = "SELECT * FROM Bars b WHERE UPPER(b.name) LIKE %:name% OR UPPER(b.address) LIKE %:address% ORDER BY b.name LIMIT 10", nativeQuery = true)
+        Collection<BarEntity> findByNameOrAddress(String name, String address);
 }

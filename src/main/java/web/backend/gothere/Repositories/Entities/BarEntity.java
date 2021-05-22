@@ -23,7 +23,7 @@ public class BarEntity {
     private String name;
     private String description;
     private String phone;
-    private String direction;
+    private String address;
     private double latitude;
     private double length;
     private String schedule;
@@ -34,11 +34,11 @@ public class BarEntity {
     Set<BarImgsEntity> barImages;
     public BarEntity() {}
 
-    public BarEntity(String name, String description, String phone, String direction, double latitude, double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
+    public BarEntity(String name, String description, String phone, String address, double latitude, double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
         this.name = name;
         this.description = description;
         this.phone = phone;
-        this.direction = direction;
+        this.address = address;
         this.latitude = latitude;
         this.length = length;
         this.schedule = schedule;
@@ -79,12 +79,12 @@ public class BarEntity {
         this.phone = phone;
     }
 
-    public String getDirection() {
-        return this.direction;
+    public String getAddress() {
+        return this.address;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public double getLatitude() {

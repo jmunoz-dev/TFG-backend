@@ -60,7 +60,7 @@ public class BarController {
     }
     @GetMapping("/search")
     public List<BarDTO> GetByNameOrDirecction(@RequestParam(name = "q") String query) {
-        return barService.getByNameOrDirection(query);
+        return barService.getByNameOrAddress(query);
     }
 
 
