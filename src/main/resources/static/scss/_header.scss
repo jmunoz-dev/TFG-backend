@@ -16,5 +16,19 @@
     .brand-name {
         display: inline;
         width: 54%;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
     }
+}
+
+.bar-hero-img {
+    height: 150px;
+    width: 100vw;
+    background-image: url(../images/hero-bar.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top;
+    background-size: cover;
 }
