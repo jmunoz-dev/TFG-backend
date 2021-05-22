@@ -1,27 +1,31 @@
 package web.backend.gothere.Services.Models;
 
+import java.util.List;
+
 public class BarDTO {
 
     private Long idbar;
     private String name;
     private String description;
     private String phone;
-    private String direction;
+    private String address;
     private double latitude;
     private double length;
     private String schedule;
     private int totalCapacity;
     private int allowedCapacity;
     private int currentCapacity;
+    
+    private List<BarImgsDTO> barImages;
+    
 
-
-    public BarDTO(Long idbar, String name, String description, String phone, String direction, double latitude,
+    public BarDTO(Long idbar, String name, String description, String phone, String address, double latitude,
     double length, String schedule, int totalCapacity, int allowedCapacity, int currentCapacity) {
         this.idbar = idbar;
         this.name = name;
         this.description = description;
         this.phone = phone;
-        this.direction = direction;
+        this.address = address;
         this.latitude = latitude;
         this.length = length;
         this.schedule = schedule;
@@ -65,12 +69,12 @@ public class BarDTO {
         this.phone = phone;
     }
 
-    public String getDirection() {
-        return this.direction;
+    public String getAddress() {
+        return this.address;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public double getLatitude() {
@@ -119,6 +123,14 @@ public class BarDTO {
 
     public void setCurrentCapacity(int currentCapacity) {
         this.currentCapacity = currentCapacity;
+    }
+
+    public List<BarImgsDTO> getBarImages() {
+        return barImages;
+    }
+
+    public void setBarImages(List<BarImgsDTO> barImages) {
+        this.barImages = barImages;
     }
 
    

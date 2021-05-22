@@ -59,16 +59,16 @@ public class UsersController {
     }
 
     @PostMapping(value="/sign-in")
-    public boolean loginUser(@RequestBody UserDTO user, HttpServletResponse response){
+    public Cookie loginUser(@RequestBody UserDTO user, HttpServletResponse response){
         UserDTO userToLog = userService.signInUser(user);
         if(userToLog != null){
             Cookie ck = new Cookie("Login", confirmationTokenService.findConfirmationTokenByUser(userToLog));
             ck.setMaxAge(60 * 60 * 24 * 365 * 10);
             ck.setPath("/");
             response.addCookie(ck);
-            return true;
+            return ck;
         }
-        return false;
+        return null;
     }
     
     @PostMapping(value="/sign-in-bar")
