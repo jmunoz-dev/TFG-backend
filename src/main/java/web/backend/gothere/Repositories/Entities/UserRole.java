@@ -1,5 +1,5 @@
 package web.backend.gothere.Repositories.Entities;
 
-enum UserRole {
+public enum UserRole {
     ADMIN, USER, BAR
 }

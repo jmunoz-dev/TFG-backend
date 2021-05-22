@@ -30,6 +30,7 @@ public class BarEntity {
     private int totalCapacity;
     private int allowedCapacity;
     private int currentCapacity;
+
     @OneToMany(mappedBy = "bar")
     Set<BarImgsEntity> barImages;
     public BarEntity() {}
@@ -45,6 +46,7 @@ public class BarEntity {
         this.totalCapacity = totalCapacity;
         this.allowedCapacity = allowedCapacity;
         this.currentCapacity = currentCapacity;
+        this.user =  user;
     }
 
     public Long getIdBar() {
@@ -133,6 +135,14 @@ public class BarEntity {
 
     public void setCurrentCapacity(int currentCapacity) {
         this.currentCapacity = currentCapacity;
+    }
+
+    public UserEntity getUser() {
+        return this.user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
    
 }

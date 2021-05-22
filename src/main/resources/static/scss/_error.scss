@@ -1,0 +1,85 @@
+.super-cool-game {
+    text-align: center;
+    display: block;
+    margin: 25px auto 50px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: 600;
+    .game-description {
+        font-size: x-large;
+        padding: 1%;
+    }
+    .info {
+        display: inline;
+        padding: .2em .6em .3em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25em;
+    }
+    .label-danger {
+        background-color: #FEA701;
+        color: #000;
+    }
+}
+
+#space-invaders {
+    margin: 0 auto;
+    display: block;
+    background: white
+}
+
+.go-home {
+    display: block;
+    width: fit-content;
+    margin: 100px auto;
+    font-size: 18pt;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 1%;
+    background-color: rgba(126, 125, 125, 0.315);
+    color: black;
+    line-height: 10pt;
+    border-color: transparent;
+    box-shadow: 0px 6px #797979;
+    font-family: monospace;
+    text-decoration: none;
+    &:hover {
+        color: #FEA701;
+        background-color: black;
+        border-color: black;
+        transform: translateY(3px);
+        box-shadow: 0px 2px #4e4e4e;
+    }
+}
+
+.restart {
+    display: inline;
+    width: fit-content;
+    font-size: inherit;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px;
+    background-color: rgba(126, 125, 125, 0.315);
+    color: black;
+    line-height: 10pt;
+    border-color: transparent;
+    box-shadow: 0px 6px #797979;
+    font-family: monospace;
+    text-decoration: none;
+    &:hover {
+        color: #FEA701;
+        background-color: black;
+        border-color: black;
+        transform: translateY(3px);
+        box-shadow: 0px 2px #4e4e4e;
+    }
+}
