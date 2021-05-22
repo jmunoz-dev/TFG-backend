@@ -9,21 +9,26 @@
     </div>
     <div th:object="${bar}" class="bar-info">
         <h1 th:text="*{name}"></h1>
-
-        <p class="title-setion">Descripción</p>
-        <textarea type="text" th:text="*{description}"></textarea>
-        <p class="title-setion">Teléfono</p>
-        <input type="text" th:value="*{phone}"></input>
-        <p class="title-setion">Dirección</p>
-        <input type="text" th:value="*{direction}"></input>
-        <p class="title-setion">Horario apertura</p>
-        <input type="text" th:value="*{schedule}"></input>
-        <p class="title-setion">Aforo total del bar <span>(máx. personas)</span></p>
-        <input type="number" th:value="*{totalCapacity}"></input>
-        <p class="title-setion">Aforo actual <span>(número personas)</span></p>
-        <input type="number" th:value="*{currentCapacity}"></input>
-        <p class="title-setion">Aforo permitido <span>(%)</span></p>
-        <input type="number" th:value="*{allowedCapacity}"></input>
+        <div class="info-wrapper">
+            <p class="title-section">Descripción</p>
+            <textarea type="text" th:text="*{description}"></textarea>
+            <p class="title-section">Teléfono</p>
+            <input type="text" th:value="*{phone}"></input>
+            <p class="title-section">Dirección</p>
+            <input type="text" th:value="*{direction}"></input>
+            <p class="title-section">Horario apertura</p>
+            <input type="text" th:value="*{schedule}"></input>
+            <p class="title-section">Aforo total del bar <span>(máx. personas)</span></p>
+            <input type="number" th:value="*{totalCapacity}"></input>
+            <p class="title-section">Aforo actual <span>(número personas)</span></p>
+            <input type="number" th:value="*{currentCapacity}"></input>
+            <p class="title-section">Aforo permitido <span>(%)</span></p>
+            <input type="number" th:value="*{allowedCapacity}"></input>
+        </div>
+    </div>
+    <div class="submit-changes">
+        <button class="changes-button">Guardar cambios</button>
+    </div>
 </body>
 
 </html>

@@ -9,6 +9,7 @@
     </div>
     <div th:each="res : ${reservations}" th:object="${res}">
         <div class="m-4 card">
+            <!-- Buscador por num de telf y feche -->
             <p>Id Reserva</p>
             <h2 th:text="*{idReservationBook}"></h2>
             <p>Numero mesa</p>
@@ -18,7 +19,7 @@
             <p>Hora de la reserva </p>
             <h2 th:text="*{scheduleTableReservation.schedule.checkInHour}"></h2> -
             <h2 th:text="*{scheduleTableReservation.schedule.checkOutHour}"></h2>
-
+            <!--  -->
         </div>
         -----------------------------------------------------
     </div>
