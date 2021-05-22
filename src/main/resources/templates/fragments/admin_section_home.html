@@ -8,8 +8,7 @@
         <a th:href="@{/admin/reservations}" class="page-section-menu">Reservas</a>
     </div>
     <div th:object="${bar}" class="bar-info">
-        <h1 th:text="*{name}"></h1>
-        <p id="idbar" th:text='*{idbar}' style="display:none"></p>
+        <h1 id="name" th:text="*{name}"></h1>
         <div class="info-wrapper">
             <p class="title-section">Descripción</p>
             <textarea id="description" type="text" th:text="*{description}"></textarea>
@@ -18,13 +17,18 @@
             <p class="title-section">Dirección</p>
             <input id="address" type="text" th:value="*{direction}"></input>
             <p class="title-section">Horario apertura</p>
-            <input id="schedule" type="text" th:value="*{schedule}"></input>
+            <textarea id="schedule" type="text" th:text="*{schedule}"></textarea>
             <p class="title-section">Aforo total del bar <span>(máx. personas)</span></p>
             <input id="totalCapacity" type="number" th:value="*{totalCapacity}"></input>
             <p class="title-section">Aforo actual <span>(número personas)</span></p>
             <input id="currentCapacity" type="number" th:value="*{currentCapacity}"></input>
             <p class="title-section">Aforo permitido <span>(%)</span></p>
             <input id="allowedCapacity" type="number" th:value="*{allowedCapacity}"></input>
+            <!-- Hide values for object creration  -->
+            <input id="idbar" th:value='*{idbar}' style="display:none"></input>
+            <input id="length" type="number" th:value="*{length}" style="display:none"></input>
+            <input id="latitude" type="number" th:value="*{latitude}" style="display:none"></input>
+            <!--  -->
         </div>
     </div>
     <div class="submit-changes">
