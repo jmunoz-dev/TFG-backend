@@ -1,0 +1,27 @@
+<html xmlns="http://www.thymeleaf.org">
+
+<body>
+    <div class="admin-menu-wrapper">
+        <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
+        <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
+        <a th:href="@{/admin/tables}" class="page-section-menu">Mesas</a>
+        <a th:href="@{/admin/reservations}" class="page-section-menu active">Reservas</a>
+    </div>
+    <div th:each="res : ${reservations}" th:object="${res}">
+        <div class="m-4 card">
+            <p>Id Reserva</p>
+            <h2 th:text="*{idReservationBook}"></h2>
+            <p>Numero mesa</p>
+            <h2 th:text="*{scheduleTableReservation.barTable.idBarTable}"></h2>
+            <p>Fecha reserva:</p>
+            <h2 th:text="*{reservationDate}"></h2>
+            <p>Hora de la reserva </p>
+            <h2 th:text="*{scheduleTableReservation.schedule.checkInHour}"></h2> -
+            <h2 th:text="*{scheduleTableReservation.schedule.checkOutHour}"></h2>
+
+        </div>
+        -----------------------------------------------------
+    </div>
+</body>
+
+</html>

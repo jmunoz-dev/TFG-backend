@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns="http://www.thymeleaf.org"></html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +10,11 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" />
     <title>Tables</title>
 </head>
+
 <body>
     <header th:insert="~{fragments/header.html :: body} "></header>
     <div th:insert="~{fragments/admin_menu.html :: body} "> </div>
-        <div th:each="table : ${barTables}" th:object="${table}">
-            <div class="m-4 card">
-                <p>Numero mesa</p>
-                <h2 th:text="*{idBarTable}"></h2>
-                <p>capacidad</p>
-                <h2 th:text="*{capacity}"></h2>
-            
-                </div>
-            -----------------------------------------------------
-        </div>
+    <div th:insert="~{fragments/admin_section_tables.html :: body} "></div>
 </body>
+
 </html>
