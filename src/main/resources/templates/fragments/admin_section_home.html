@@ -9,7 +9,21 @@
     </div>
     <div th:object="${bar}" class="bar-info">
         <h1 th:text="*{name}"></h1>
-        <p th:text="*{description}"></p>
+
+        <p class="title-setion">Descripción</p>
+        <textarea type="text" th:text="*{description}"></textarea>
+        <p class="title-setion">Teléfono</p>
+        <input type="text" th:value="*{phone}"></input>
+        <p class="title-setion">Dirección</p>
+        <input type="text" th:value="*{direction}"></input>
+        <p class="title-setion">Horario apertura</p>
+        <input type="text" th:value="*{schedule}"></input>
+        <p class="title-setion">Aforo total del bar <span>(máx. personas)</span></p>
+        <input type="number" th:value="*{totalCapacity}"></input>
+        <p class="title-setion">Aforo actual <span>(número personas)</span></p>
+        <input type="number" th:value="*{currentCapacity}"></input>
+        <p class="title-setion">Aforo permitido <span>(%)</span></p>
+        <input type="number" th:value="*{allowedCapacity}"></input>
 </body>
 
 </html>
