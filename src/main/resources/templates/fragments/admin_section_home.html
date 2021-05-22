@@ -1,0 +1,15 @@
+<html xmlns="http://www.thymeleaf.org">
+
+<body>
+    <div class="admin-menu-wrapper">
+        <a th:href="@{/admin/home}" class="page-section-menu active">Inicio</a>
+        <a th:href="@{/admin/offers}" class="page-section-menu">Ofertas</a>
+        <a th:href="@{/admin/tables}" class="page-section-menu">Mesas</a>
+        <a th:href="@{/admin/reservations}" class="page-section-menu">Reservas</a>
+    </div>
+    <div th:object="${bar}" class="bar-info">
+        <h1 th:text="*{name}"></h1>
+        <p th:text="*{description}"></p>
+</body>
+
+</html>
