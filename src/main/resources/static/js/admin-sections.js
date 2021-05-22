@@ -5,31 +5,31 @@ window.onload = () => {
     if (/admin\/home/.test(window.location.href)) {
         let button = document.querySelector("button.changes-button")
         button.addEventListener('click', function(event) {
+            let idBar = parseInt(document.querySelector('#idbar').value)
             let bar = {
-                idBar: document.querySelector('#idbar').value,
+                idBar: parseInt(document.querySelector('#idbar').value),
                 name: document.querySelector('#name').innerHTML,
                 description: document.querySelector('#description').value,
                 address: document.querySelector('#address').value,
-                phone: document.querySelector('#phone').value,
+                phone: parseInt(document.querySelector('#phone').value),
                 schedule: document.querySelector('#schedule').value,
-                currentCapacity: document.querySelector('#currentCapacity').value,
-                totalCapacity: document.querySelector('#totalCapacity').value,
-                allowedCapacity: document.querySelector('#allowedCapacity').value,
-                length: document.querySelector('#length').value,
-                latitude: document.querySelector('#latitude').value,
+                currentCapacity: parseInt(document.querySelector('#currentCapacity').value),
+                totalCapacity: parseInt(document.querySelector('#totalCapacity').value),
+                allowedCapacity: parseInt(document.querySelector('#allowedCapacity').value),
+                length: parseInt(document.querySelector('#length').value),
+                latitude: parseInt(document.querySelector('#latitude').value),
             }
-            fetch(BASE_URL + '/api/bars/' + idbar, {
+            fetch(BASE_URL + 'api/bars/' + idBar, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(bar),
                 })
-                .then(response => console.log(response))
+                .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data, bar);
-                    if (data === true)
-                        window.location = "/admin/home"
+                    window.location = "/admin/home"
                 })
                 .catch((error) => {
                     console.error('Error:', error);
