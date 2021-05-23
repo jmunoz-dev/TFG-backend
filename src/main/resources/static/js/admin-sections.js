@@ -26,7 +26,7 @@ window.onload = () => {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data, bar);
+                    console.log('Success:', data);
                     window.location = "/admin/home"
                 })
                 .catch((error) => {
