@@ -132,20 +132,44 @@ public class ReservationBookService {
        return  modelMapper.map(reservationBookRepository.save(entityToInsert), ReservationBookDTO.class).getIdReservationBook();
         
     }
-   
-    public List<ReservationBookDTO> getByBar(Long id){
+  
+    public List<ReservationBookDTO> getAllByBar(Long id, String phone, LocalDate date){
         Optional<BarEntity> bar = barRepository.findById(id);
         ArrayList<ReservationBookDTO>  reservations = new ArrayList<ReservationBookDTO>();
+        
+        if(phone !=null){
+            phone = phone.trim();
+        }
         if(bar.isPresent()){
+            //buscamos todas las mesas del bar
             List<BarTableDTO> barTables =  barTableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, BarTableDTO.class))
             .collect(Collectors.toList());
+
+            //por cada mesa buscamos las reservas en las que aparece
             for(int i = 0; i< barTables.size(); i++){
                 BarTableEntity tableTemp = modelMapper.map(barTables.get(i), BarTableEntity.class);
-                // List<ScheduleTableReservationDTO> barSchedules =scheduleTableReservationRepository.findByBarTable(tableTemp).stream().map(x -> modelMapper.map(x, ScheduleTableReservationDTO.class))
-                // .collect(Collectors.toList());
-               List<ReservationBookDTO> reservationsTemp  = reservationBookRepository.findByScheduleTableReservationBarTable(tableTemp).stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
-               .collect(Collectors.toList());
-               reservations.addAll(reservationsTemp);
+              
+                List<ReservationBookDTO> reservationsTemp;
+
+                //filtamos por fecha
+                if(date != null){
+                    reservationsTemp = reservationBookRepository.findByReservationDateAndScheduleTableReservationBarTable(date, tableTemp).stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
+                    .collect(Collectors.toList());
+                }else{
+                   reservationsTemp  = reservationBookRepository.findByScheduleTableReservationBarTable(tableTemp).stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
+                    .collect(Collectors.toList());
+                }
+
+                //filtramos por número de teléfono
+               if(phone != null){
+                    for(int j = 0; j< reservationsTemp.size(); j++){
+                        if(reservationsTemp.get(j).getUser().getPhoneNumber().equals(phone)){
+                            reservations.add(reservationsTemp.get(j));
+                        }
+                    }
+               }else{
+                    reservations.addAll(reservationsTemp);
+               }
             }
             return reservations;
         }
