@@ -14,17 +14,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Repositories.Entities.BarEntity;
-import web.backend.gothere.Repositories.Entities.BarTableEntity;
+import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
-import web.backend.gothere.Repositories.Interfaces.BarTableRepository;
+import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
 import web.backend.gothere.Repositories.Interfaces.ScheduleTableReservationRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
 import web.backend.gothere.Services.Models.BarDTO;
-import web.backend.gothere.Services.Models.BarTableDTO;
+import web.backend.gothere.Services.Models.TableDTO;
+import web.backend.gothere.Services.Models.NoScheduleTableDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
 import web.backend.gothere.Services.Models.ScheduleTableReservationDTO;
 import web.backend.gothere.Services.Models.UserDTO;
@@ -39,13 +40,16 @@ public class ReservationBookService {
     private UserRepository userRepository;
 
     @Autowired
-    private BarTableRepository barTableRepository;
+    private TableRepository tableRepository;
 
     @Autowired
     private BarRepository barRepository;
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private UserService userService;
 
     public List<ReservationBookDTO> getAll() throws ResponseStatusException {
         
@@ -61,16 +65,18 @@ public class ReservationBookService {
     }
 
     // find user reservations 
-    public List<ReservationBookDTO> getByUser(Long idUser, boolean currentReservation) throws ResponseStatusException {
-        Optional<UserEntity> user = userRepository.findById(idUser);
-        if(!user.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not foud");
-        }
+    public List<ReservationBookDTO> getByUser(String userToken, boolean currentReservation) throws ResponseStatusException {
+        UserEntity user = modelMapper.map(userService.getUserByToken(userToken), UserEntity.class);
+        
 
-        List<ReservationBookDTO> reservationList = reservationBookRepository.findByUser(user.get()).stream()
+        List<ReservationBookDTO> reservationList = reservationBookRepository.findByUser(user).stream()
         .map(x -> modelMapper.map(x, ReservationBookDTO.class))
         .collect(Collectors.toList());
-        
+        for(ReservationBookDTO reservation : reservationList){
+            reservation.setUser(null);
+            NoScheduleTableDTO table = modelMapper.map(reservation.getScheduleTableReservation().getTable(), NoScheduleTableDTO.class);
+            reservation.getScheduleTableReservation().setTable(modelMapper.map(table, TableDTO.class));
+        }
         if(reservationList.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding data");
         }
@@ -80,6 +86,7 @@ public class ReservationBookService {
         //listado de solo las que aún no han pasado
         List<ReservationBookDTO> currentReservations = new ArrayList<>();
         for(int i = 0 ; i < reservationList.size(); i++){
+
             if(reservationList.get(i).getReservationDate().isAfter(LocalDate.now().minus(1, ChronoUnit.DAYS))){
                 currentReservations.add(reservationList.get(i));
             }
@@ -142,21 +149,21 @@ public class ReservationBookService {
         }
         if(bar.isPresent()){
             //buscamos todas las mesas del bar
-            List<BarTableDTO> barTables =  barTableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, BarTableDTO.class))
+            List<TableDTO> tables =  tableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, TableDTO.class))
             .collect(Collectors.toList());
 
             //por cada mesa buscamos las reservas en las que aparece
-            for(int i = 0; i< barTables.size(); i++){
-                BarTableEntity tableTemp = modelMapper.map(barTables.get(i), BarTableEntity.class);
+            for(int i = 0; i< tables.size(); i++){
+                TableEntity tableTemp = modelMapper.map(tables.get(i), TableEntity.class);
               
                 List<ReservationBookDTO> reservationsTemp;
 
                 //filtamos por fecha
                 if(date != null){
-                    reservationsTemp = reservationBookRepository.findByReservationDateAndScheduleTableReservationBarTable(date, tableTemp).stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
+                    reservationsTemp = reservationBookRepository.findByReservationDateAndScheduleTableReservationTable(date, tableTemp).stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
                     .collect(Collectors.toList());
                 }else{
-                   reservationsTemp  = reservationBookRepository.findByScheduleTableReservationBarTable(tableTemp).stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
+                   reservationsTemp  = reservationBookRepository.findByScheduleTableReservationTable(tableTemp).stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
                     .collect(Collectors.toList());
                 }
 
