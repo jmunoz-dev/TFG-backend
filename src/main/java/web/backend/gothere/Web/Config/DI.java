@@ -7,7 +7,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import web.backend.gothere.Services.BarService;
-import web.backend.gothere.Services.BarTableService;
+import web.backend.gothere.Services.TableService;
 import web.backend.gothere.Services.ConfirmationTokenService;
 import web.backend.gothere.Services.EmailSenderService;
 import web.backend.gothere.Services.OffersService;
@@ -37,8 +37,8 @@ public class DI {
         return new BarService();
     }
     @Bean
-    BarTableService createBarTableService(){
-        return new BarTableService();
+    TableService createTableService(){
+        return new TableService();
     }
     @Bean
     ReservationBookService createReservationBookService(){

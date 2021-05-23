@@ -9,16 +9,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import web.backend.gothere.Repositories.Entities.BarEntity;
-import web.backend.gothere.Repositories.Entities.BarTableEntity;
+import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Entities.ConfirmationTokenEntity;
 import web.backend.gothere.Repositories.Entities.OfferEntity;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
+import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
 import web.backend.gothere.Repositories.Entities.UserRole;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
-import web.backend.gothere.Repositories.Interfaces.BarTableRepository;
+import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Repositories.Interfaces.ConfirmationTokenRepository;
 import web.backend.gothere.Repositories.Interfaces.OffersRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
@@ -34,7 +35,7 @@ public class InitDB {
         UserOfferRepository userofferR, 
         UserRepository userR, 
         BarRepository barR, 
-        BarTableRepository barTableR,
+        TableRepository barTableR,
         ReservationBookRepository reservationBookR,
         ScheduleTableReservationRepository scheduleTableReservationR,
         ScheduleRepository scheduleR,
@@ -65,21 +66,21 @@ public class InitDB {
         
                
              //mesas
-            barTableR.save(new BarTableEntity(4,false,barR.findById(1L).get(),null));
-            barTableR.save(new BarTableEntity(5,false,barR.findById(1L).get(),null));
-            barTableR.save(new BarTableEntity(8,false,barR.findById(1L).get(),null));
-            barTableR.save(new BarTableEntity(3,false,barR.findById(2L).get(),null));
-            barTableR.save(new BarTableEntity(2,false,barR.findById(2L).get(),null));
-            barTableR.save(new BarTableEntity(1,false,barR.findById(2L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(2L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(2L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(3L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(4L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(5L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(6L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(7L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(8L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(7L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(1L).get(),null));
+            barTableR.save(new TableEntity(5,false,barR.findById(1L).get(),null));
+            barTableR.save(new TableEntity(8,false,barR.findById(1L).get(),null));
+            barTableR.save(new TableEntity(3,false,barR.findById(2L).get(),null));
+            barTableR.save(new TableEntity(2,false,barR.findById(2L).get(),null));
+            barTableR.save(new TableEntity(1,false,barR.findById(2L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(2L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(2L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(3L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(4L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(5L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(6L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(7L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(8L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(7L).get(),null));
 
             //horarios mesas
             scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(1L).get(), scheduleR.findById(1L).get()));
@@ -99,8 +100,11 @@ public class InitDB {
            //usuarios
            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             final String encryptedPassword = bCryptPasswordEncoder.encode("1234");
-           userR.save(new UserEntity("holsda@gmail.com", "ruben", "valero", encryptedPassword,"12345667"));
-            userR.save(new UserEntity("hola@gmail.com", "ruben", "valero", encryptedPassword,"234123412"));
+           
+           UserEntity user1 = userR.save(new UserEntity("holsda@gmail.com", "ruben", "valero", encryptedPassword,"12345667"));
+           confirmationTokenR.save(new ConfirmationTokenEntity(user1));
+           UserEntity user2 =  userR.save(new UserEntity("hola@gmail.com", "ruben", "valero", encryptedPassword,"234123412"));
+            confirmationTokenR.save(new ConfirmationTokenEntity(user2));
             
             // //reservas
             reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.now(), false, scheduleTableReservationR.findById(1L).get()));
@@ -131,21 +135,21 @@ public class InitDB {
             confirmationTokenR.save(new ConfirmationTokenEntity(userTest));
 
             //mesas
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(5,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(8,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(3,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(2,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(1,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new BarTableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(5,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(8,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(3,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(2,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(1,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
 
             scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(16L).get(), scheduleR.findById(1L).get()));
             scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(17L).get(), scheduleR.findById(2L).get()));

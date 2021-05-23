@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import web.backend.gothere.Repositories.Entities.BarTableEntity;
+import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
@@ -17,7 +17,7 @@ public interface ReservationBookRepository
     
     Collection<ReservationBookEntity> findByUser(UserEntity user);
     Optional<ReservationBookEntity> findById(Long id);
-    Collection<ReservationBookEntity> findByScheduleTableReservationBarTable(BarTableEntity barTable);
-    Collection<ReservationBookEntity> findByReservationDateAndScheduleTableReservationBarTable(LocalDate date,BarTableEntity barTable);
+    Collection<ReservationBookEntity> findByScheduleTableReservationTable(TableEntity table);
+    Collection<ReservationBookEntity> findByReservationDateAndScheduleTableReservationTable(LocalDate date,TableEntity table);
     Collection<ReservationBookEntity>  findByReservationDateAndScheduleTableReservation(LocalDate date,ScheduleTableReservationEntity scheduleTableReservation);
 }
