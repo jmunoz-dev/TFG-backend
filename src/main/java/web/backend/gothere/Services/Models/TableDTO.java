@@ -2,20 +2,20 @@ package web.backend.gothere.Services.Models;
 
 import java.util.List;
 
-public class BarTableDTO {
+public class TableDTO {
 
-    private Long idBarTable;
+    private Long idTable;
     private int capacity;
     private boolean reservated;
     private BarDTO bar;
     private List<ScheduleTableReservationDTO> scheduleTableReservations;
 
-    public BarTableDTO() {
+    public TableDTO() {
     }
 
   
 
-    public BarTableDTO( int capacity, boolean reservated, BarDTO bar, List<ScheduleTableReservationDTO> scheduleTableReservations) {
+    public TableDTO( int capacity, boolean reservated, BarDTO bar, List<ScheduleTableReservationDTO> scheduleTableReservations) {
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
@@ -30,12 +30,12 @@ public class BarTableDTO {
         this.scheduleTableReservations = scheduleTableReservations;
     }
 
-    public Long getIdBarTable() {
-        return this.idBarTable;
+    public Long getIdTable() {
+        return this.idTable;
     }
 
-    public void setIdBarTable(Long idBarTable) {
-        this.idBarTable = idBarTable;
+    public void setIdTable(Long idTable) {
+        this.idTable = idTable;
     }
 
     public int getCapacity() {
@@ -54,8 +54,19 @@ public class BarTableDTO {
         return this.reservated;
     }
 
+  
     public void setReservated(boolean reservated) {
         this.reservated = reservated;
+    }
+
+
+
+    public BarDTO getBar() {
+        return bar;
+    }
+
+    public void setBar(BarDTO bar) {
+        this.bar = bar;
     }
 
    

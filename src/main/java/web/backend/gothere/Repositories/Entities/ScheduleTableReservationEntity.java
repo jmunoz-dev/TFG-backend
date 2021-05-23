@@ -27,8 +27,8 @@ public class ScheduleTableReservationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idScheduleTableReservation;
     @ManyToOne
-    @JoinColumn(name = "idBarTable")
-    private BarTableEntity barTable;
+    @JoinColumn(name = "idTable")
+    private TableEntity table;
     @ManyToOne
     @JoinColumn(name="idSchedule")
     private ScheduleEntity schedule;
@@ -37,9 +37,9 @@ public class ScheduleTableReservationEntity {
     public ScheduleTableReservationEntity() {
     }
     
-    public ScheduleTableReservationEntity( BarTableEntity barTable,
+    public ScheduleTableReservationEntity( TableEntity table,
             ScheduleEntity schedule) {
-        this.barTable = barTable;
+        this.table = table;
         this.schedule = schedule;
     }
 
@@ -49,11 +49,11 @@ public class ScheduleTableReservationEntity {
     public void setIdScheduleTableReservation(Long idScheduleTableReservation) {
         this.idScheduleTableReservation = idScheduleTableReservation;
     }
-    public BarTableEntity getBarTable() {
-        return barTable;
+    public TableEntity getTable() {
+        return table;
     }
-    public void setBarTable(BarTableEntity barTable) {
-        this.barTable = barTable;
+    public void setTable(TableEntity table) {
+        this.table = table;
     }
     public ScheduleEntity getSchedule() {
         return schedule;

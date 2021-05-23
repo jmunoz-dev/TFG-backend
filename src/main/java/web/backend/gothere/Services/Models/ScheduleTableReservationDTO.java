@@ -2,13 +2,13 @@ package web.backend.gothere.Services.Models;
 
 public class ScheduleTableReservationDTO {
     private Long idScheduleTableReservation;
-    private BarTableDTO barTable;
+    private TableDTO table;
     private ScheduleDTO schedule;
     public ScheduleTableReservationDTO() {
     }
-    public ScheduleTableReservationDTO(Long idScheduleTableReservation, BarTableDTO barTable, ScheduleDTO schedule) {
+    public ScheduleTableReservationDTO(Long idScheduleTableReservation, TableDTO table, ScheduleDTO schedule) {
         this.idScheduleTableReservation = idScheduleTableReservation;
-        this.barTable = barTable;
+        this.table = table;
         this.schedule = schedule;
     }
     public Long getIdScheduleTableReservation() {
@@ -18,8 +18,8 @@ public class ScheduleTableReservationDTO {
         this.idScheduleTableReservation = idScheduleTableReservation;
     }
     
-    public void setBarTable(BarTableDTO barTable) {
-        this.barTable = barTable;
+    public void setTable(TableDTO table) {
+        this.table = table;
     }
     public ScheduleDTO getSchedule() {
         return schedule;
@@ -27,8 +27,8 @@ public class ScheduleTableReservationDTO {
     public void setSchedule(ScheduleDTO schedule) {
         this.schedule = schedule;
     }
-    public BarTableDTO getBarTable() {
-        return barTable;
+    public TableDTO getTable() {
+        return table;
     }
    
    
