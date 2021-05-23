@@ -180,6 +180,9 @@ p {
   margin-left: 5%;
   height: min-content;
 }
+.admin-menu-wrapper a {
+  color: inherit;
+}
 .admin-menu-wrapper a:visited:not(.active) {
   text-decoration: none;
   color: #000;

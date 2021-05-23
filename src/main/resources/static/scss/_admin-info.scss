@@ -59,6 +59,7 @@
     margin-left: 5%;
     height: min-content;
     a {
+        color: inherit;
         &:visited:not(.active) {
             text-decoration: none;
             color: $base-black-color;
