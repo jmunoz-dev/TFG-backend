@@ -55,8 +55,8 @@ public class BarController {
         barService.delete(idbar);
     }
     @GetMapping("/coordinates")
-    public List<BarDTO> GetByCoordinates(@RequestParam(name = "latitude") double latitude, @RequestParam(name = "length") double length) {
-        return barService.getByCoordinates(length, latitude);
+    public List<BarDTO> GetByCoordinates(@RequestParam(name = "latitude") double latitude, @RequestParam(name = "length") double length, @RequestParam(name = "distance") double distance) {
+        return barService.getByCoordinates(length, latitude, distance);
     }
     @GetMapping("/search")
     public List<BarDTO> GetByNameOrDirecction(@RequestParam(name = "q") String query) {
