@@ -60,8 +60,9 @@ public class BarService {
         }
 
     }
-    public List<BarDTO> getByCoordinates(double length, double latitude){
-        List<BarDTO> barsList =barRepository.getByCoordinates(latitude, length).stream()
+    public List<BarDTO> getByCoordinates(double length, double latitude, double distance){
+        distance = OffersService.transformDistance(distance);
+        List<BarDTO> barsList =barRepository.getByCoordinates(latitude, length, distance).stream()
         .map(x -> modelMapper.map(x, BarDTO.class))
         .collect(Collectors.toList());
 
