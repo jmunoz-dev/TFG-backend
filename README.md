@@ -1,5 +1,7 @@
 # PROYECTO TFG - BACKEND 2ºDAW #
 
+[![Deploy - goThereTFG](https://github.com/a24786/TFG-backend/actions/workflows/master_goThereTFG.yml/badge.svg)](https://github.com/a24786/TFG-backend/actions/workflows/master_goThereTFG.yml)
+
 API Rest con datos sobre negocios (bares, cafeterías, restaurantes) de la ciudad de Zaragoza. Permite generar uso de ofertas entre clientes y establecimientos, con un sistema de fidelización mediante gamificación, con recompensas y niveles de perfil de usuario. _bronce, plata, oro_
 
 ***Desarrollo del proyecto de TFG para el segundo curso de Desarrollo de Aplicaciones Web de San Valero.***
