@@ -1,5 +1,6 @@
 package web.backend.gothere.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Entities.OfferEntity;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
 import web.backend.gothere.Repositories.Interfaces.OffersRepository;
+import web.backend.gothere.Services.Models.BarDTO;
 import web.backend.gothere.Services.Models.OfferDTO;
 
 public class OffersService {
@@ -24,11 +26,32 @@ public class OffersService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<OfferDTO> getAll() throws ResponseStatusException {
-        
-        List<OfferDTO> offersList = offersRepository.findAll().stream()
-        .map(x -> modelMapper.map(x, OfferDTO.class))
+    public List<OfferDTO> getAll(Double latitude,Double length, Double distance) throws ResponseStatusException {
+        List<OfferDTO> offersList = new ArrayList<OfferDTO>();
+        if(latitude == null || length == null || distance == null){
+            offersList= offersRepository.findAll().stream()
+            .map(x -> modelMapper.map(x, OfferDTO.class))
+            .collect(Collectors.toList());
+            if(!offersList.isEmpty()){
+                return offersList;
+            }else{
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
+            }
+        }
+        distance = transformDistance(distance);
+
+        List<BarDTO> barList = barRepository.getByCoordinates(latitude, length, distance).stream()
+        .map(x -> modelMapper.map(x, BarDTO.class))
         .collect(Collectors.toList());
+        
+        for (BarDTO barDTO : barList) {
+            try{
+                offersList.addAll(findOffersByBarId(barDTO.getIdbar()));
+            }catch(Exception ex){
+                continue;
+            }
+            
+        }
 
         if(!offersList.isEmpty()){
             return offersList;
@@ -96,5 +119,8 @@ public class OffersService {
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting data");
         }
+    }
+    static Double transformDistance(Double distance){
+        return (Double)distance/100;
     }
 }
