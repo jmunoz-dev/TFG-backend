@@ -47,7 +47,7 @@ public class AdminViewController {
             return mv2;
         }
       
-        ModelAndView mv = new ModelAndView("/admin/login");
+        ModelAndView mv = new ModelAndView("admin/login");
         return mv;
     } 
 
