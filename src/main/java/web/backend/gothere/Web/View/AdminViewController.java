@@ -13,11 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import web.backend.gothere.Repositories.Entities.UserRole;
 import web.backend.gothere.Services.BarService;
-import web.backend.gothere.Services.BarTableService;
+import web.backend.gothere.Services.TableService;
 import web.backend.gothere.Services.OffersService;
 import web.backend.gothere.Services.ReservationBookService;
 import web.backend.gothere.Services.UserService;
-import web.backend.gothere.Services.Models.BarTableDTO;
+import web.backend.gothere.Services.Models.TableDTO;
 import web.backend.gothere.Services.Models.OfferDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
 import web.backend.gothere.Services.Models.UserDTO;
@@ -30,15 +30,15 @@ public class AdminViewController {
     private final BarService barService;
     private final OffersService offerService;
     private final ReservationBookService reservationBookService;
-    private final BarTableService barTableService;
+    private final TableService tableService;
     
 
-    public AdminViewController(UserService userService, BarService barService, OffersService offerService, ReservationBookService reservationBookService, BarTableService barTableService) {
+    public AdminViewController(UserService userService, BarService barService, OffersService offerService, ReservationBookService reservationBookService, TableService tableService) {
         this.userService = userService;
         this.barService = barService;
         this.offerService = offerService;
         this.reservationBookService = reservationBookService;
-        this.barTableService = barTableService;
+        this.tableService = tableService;
     }
 
     @GetMapping("")
@@ -117,7 +117,7 @@ public class AdminViewController {
     }
 
     @GetMapping("/tables")
-    public ModelAndView barTablesPage(@CookieValue( required = false, value="adminlogin") String cookie ){
+    public ModelAndView tablesPage(@CookieValue( required = false, value="adminlogin") String cookie ){
         
         ModelAndView mv2 = new ModelAndView("redirect:/admin");
         if(cookie == null){
@@ -131,8 +131,8 @@ public class AdminViewController {
        
        UserDTO user = userService.getUserByToken(cookie);
        
-        List<BarTableDTO> barTables = barTableService.getByBarId(user.getIdBar());
-        mv.addObject("barTables",barTables);
+        List<TableDTO> tables = tableService.getByBarId(user.getIdBar());
+        mv.addObject("tables",tables);
 
         return mv;
     }

@@ -11,17 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Repositories.Entities.BarEntity;
-import web.backend.gothere.Repositories.Entities.BarTableEntity;
+import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
-import web.backend.gothere.Repositories.Interfaces.BarTableRepository;
+import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
-import web.backend.gothere.Services.Models.BarTableDTO;
+import web.backend.gothere.Services.Models.TableDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
+import web.backend.gothere.Services.Models.ScheduleTableReservationDTO;
 
-public class BarTableService {
+public class TableService {
     @Autowired
-    private BarTableRepository barTableRepository;
+    private TableRepository tableRepository;
     @Autowired
     private ReservationBookRepository reservationBookRepository;
     @Autowired
@@ -29,52 +30,53 @@ public class BarTableService {
     @Autowired
     private BarRepository barRepository;
 
-    public List<BarTableDTO> getAll() {
-        return barTableRepository.findAll().stream().map(x -> modelMapper.map(x, BarTableDTO.class))
+    public List<TableDTO> getAll() {
+        List<TableDTO> tables =  tableRepository.findAll().stream().map(x -> modelMapper.map(x, TableDTO.class))
                 .collect(Collectors.toList());
+        return  deleteScheduleTable(tables);        
     }
 
-    public BarTableDTO add(BarTableDTO barTable) {
-        BarTableEntity entityToUpdate = modelMapper.map(barTable, BarTableEntity.class);
-        BarTableEntity result = barTableRepository.save(entityToUpdate);
-        return modelMapper.map(result, BarTableDTO.class);
+    public TableDTO add(TableDTO table) {
+        TableEntity entityToUpdate = modelMapper.map(table, TableEntity.class);
+        TableEntity result = tableRepository.save(entityToUpdate);
+        return modelMapper.map(result, TableDTO.class);
     }
 
-    public BarTableDTO update(Long id, BarTableDTO barTable) {
-        Optional<BarTableEntity> dataToUpdate = barTableRepository.findById(id);
+    public TableDTO update(Long id, TableDTO table) {
+        Optional<TableEntity> dataToUpdate = tableRepository.findById(id);
         if (dataToUpdate.isPresent()) {
 
-            BarTableEntity entityToUpdate = modelMapper.map(barTable, BarTableEntity.class);
-            entityToUpdate.setIdBarTable(id);
-            BarTableEntity result = barTableRepository.save(entityToUpdate);
-            return modelMapper.map(result, BarTableDTO.class);
+            TableEntity entityToUpdate = modelMapper.map(table, TableEntity.class);
+            entityToUpdate.setIdTable(id);
+            TableEntity result = tableRepository.save(entityToUpdate);
+            return modelMapper.map(result, TableDTO.class);
 
         }
         return null;
     }
 
-    public void delete(Long idBarTable) {
-        Optional<BarTableEntity> entityToDelete = barTableRepository.findById(idBarTable);
+    public void delete(Long idTable) {
+        Optional<TableEntity> entityToDelete = tableRepository.findById(idTable);
         if (entityToDelete.isPresent())
-            barTableRepository.delete(entityToDelete.get());
+            tableRepository.delete(entityToDelete.get());
     }
-    public List<BarTableDTO> getTableByBarAndAvailabilityDate(Long idBar, LocalDate date){
+    public List<TableDTO> getTableByBarAndAvailabilityDate(Long idBar, LocalDate date){
         Optional<BarEntity> bar = barRepository.findById(idBar);
         if(!bar.isPresent()){
             throw new ElementNotFoundException();
         }
         
-        List<BarTableDTO> barTables = getByBarId(idBar);
+        List<TableDTO> tables = getByBarId(idBar);
 
         //recorro la lista de mesas para comprobar si están libres
-        for(int i = 0 ; i < barTables.size(); i++){
-            Optional<BarTableEntity> table = barTableRepository.findById(barTables.get(i).getIdBarTable());
-            BarTableDTO actualTable = barTables.get(i);
+        for(int i = 0 ; i < tables.size(); i++){
+            Optional<TableEntity> table = tableRepository.findById(tables.get(i).getIdTable());
+            TableDTO actualTable = tables.get(i);
             if(!table.isPresent()){
                 break;
             }
             //recogemos las reservas por fecha y mesa
-            List<ReservationBookDTO> reservationBooks = reservationBookRepository.findByReservationDateAndScheduleTableReservationBarTable(date, table.get())
+            List<ReservationBookDTO> reservationBooks = reservationBookRepository.findByReservationDateAndScheduleTableReservationTable(date, table.get())
             .stream().map(x -> modelMapper.map(x, ReservationBookDTO.class))
             .collect(Collectors.toList());
             //si no hay reservas salimos
@@ -98,18 +100,27 @@ public class BarTableService {
             }
         }
 
-        return barTables;
+        return tables;
     }
-    public List<BarTableDTO> getByBarId(Long idBar){
+    public List<TableDTO> getByBarId(Long idBar){
         Optional<BarEntity> bar = barRepository.findById(idBar);
         if(!bar.isPresent()){
             throw new ElementNotFoundException();
         }
         
-        List<BarTableDTO> barTables =  barTableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, BarTableDTO.class))
+        List<TableDTO> tables =  tableRepository.findByBar(bar.get()).stream().map(x -> modelMapper.map(x, TableDTO.class))
         .collect(Collectors.toList());
-        return barTables;
+        return  deleteScheduleTable(tables);
 
+    }
+    private List<TableDTO> deleteScheduleTable(List<TableDTO> tables){
+        for(TableDTO table : tables){
+            List<ScheduleTableReservationDTO> schedules = table.getScheduleTableReservations();
+            for(ScheduleTableReservationDTO schedule : schedules){
+                 schedule.setTable(null);
+            }
+         }
+         return tables;
     }
 
 }

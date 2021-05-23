@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Table(name = "BarTables")
-@Entity(name = "BarTables")
-public class BarTableEntity {
+@Table(name = "Tables")
+@Entity(name = "Tables")
+public class TableEntity {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Long idBarTable;
+    private Long idTable;
     private int capacity;
     private boolean reservated;
     @ManyToOne
@@ -26,14 +26,14 @@ public class BarTableEntity {
     
     // TODO - Asociar con la tabla de reservas central
     
-    @OneToMany(mappedBy="barTable")
+    @OneToMany(mappedBy="table")
     private Set<ScheduleTableReservationEntity> ScheduleTableReservations;
 
 
-    public BarTableEntity() {
+    public TableEntity() {
     }
 
-    public BarTableEntity(int capacity, boolean reservated, BarEntity bar,
+    public TableEntity(int capacity, boolean reservated, BarEntity bar,
             Set<ScheduleTableReservationEntity> scheduleTableReservations) {
         this.capacity = capacity;
         this.reservated = reservated;
@@ -41,12 +41,12 @@ public class BarTableEntity {
         ScheduleTableReservations = scheduleTableReservations;
     }
 
-    public Long getIdBarTable() {
-        return this.idBarTable;
+    public Long getIdTable() {
+        return this.idTable;
     }
 
-    public void setIdBarTable(Long idBarTable) {
-        this.idBarTable = idBarTable;
+    public void setIdTable(Long idTable) {
+        this.idTable = idTable;
     }
 
     public int getCapacity() {
