@@ -10,6 +10,18 @@
     <div th:object="${bar}" class="bar-info">
         <h1 id="name" th:text="*{name}"></h1>
         <div class="info-wrapper">
+            <p class="title-section">Fotos: </p>
+            <div th:each="img : *{barImages}" th:object="${img}">
+                <div >
+                    <img  style="max-height: 100px;" th:src="*{imgUrl}" alt=" ">
+                </div>
+            </div>
+            <form th:action="@{image/save}" method="post" enctype="multipart/form-data">
+                <label>Añadir nueva foto: </label>
+                <input id="image" type="file" name="image" accept="image/png, image/jpeg" />
+                <input id="idBar" type="text" name="idBar" style="display:none" th:value="*{idbar}" />
+                 <button id="upload" type="submit">Subir nueva imagen</button>
+            </form>
             <p class="title-section">Descripción</p>
             <textarea id="description" type="text" th:text="*{description}"></textarea>
             <p class="title-section">Teléfono</p>
