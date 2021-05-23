@@ -7,15 +7,14 @@ public class BarImgsDTO {
       
     private Long idImgBar;
     private String imgUrl;
-    private BarEntity barEntity;
+    private BarDTO bar;
 
 
     public BarImgsDTO() {}
 
-    public BarImgsDTO(String imgUrl, BarEntity barEntity, Long idImgBar ) {
+    public BarImgsDTO(String imgUrl, BarDTO bar ) {
         this.imgUrl = imgUrl;
-        this.barEntity = barEntity;
-        this.idImgBar = idImgBar;
+        this.bar = bar;
     }
 
     public Long getIdImgBar() {
@@ -34,9 +33,12 @@ public class BarImgsDTO {
         this.imgUrl = imgUrl;
     }
 
- 
-
-    public void setBarEntity(BarEntity barEntity) {
-        this.barEntity = barEntity;
+    public BarDTO getBar() {
+        return bar;
     }
+
+    public void setBar(BarDTO bar) {
+        this.bar = bar;
+    }
+
 }
