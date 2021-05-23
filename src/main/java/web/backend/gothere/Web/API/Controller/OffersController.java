@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -30,14 +31,18 @@ public class OffersController {
 
     
     @GetMapping()
-    public List<OfferDTO> GetAllOffers() throws ResponseStatusException {
-        if(!offersService.getAll().isEmpty()){
-            return offersService.getAll();
+    public List<OfferDTO> GetAllOffers(@RequestParam(required=false, name = "latitude") Double latitude, 
+    @RequestParam(required=false,name = "length") Double length,
+    @RequestParam(required=false,name = "distance") Double distance
+    ) throws ResponseStatusException {
+        
+        if(!offersService.getAll(latitude, length, distance).isEmpty()){
+            return offersService.getAll(latitude, length, distance);
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-
+   
     @GetMapping("/{id}")
     public OfferDTO GetOffersById(@PathVariable("id") Long id) throws ResponseStatusException {
         return offersService.findbyOfferId(id);
