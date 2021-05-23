@@ -1,7 +1,5 @@
 window.onload = () => {
 
-    const BASE_URL = 'http://localhost:8080/'
-
     if (/admin\/home/.test(window.location.href)) {
         let button = document.querySelector("button.changes-button")
         button.addEventListener('click', function(event) {
@@ -19,7 +17,7 @@ window.onload = () => {
                 length: parseInt(document.querySelector('#length').value),
                 latitude: parseInt(document.querySelector('#latitude').value),
             }
-            fetch(BASE_URL + 'api/bars/' + idBar, {
+            fetch('/api/bars/' + idBar, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -28,7 +26,7 @@ window.onload = () => {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data, bar);
+                    console.log('Success:', data);
                     window.location = "/admin/home"
                 })
                 .catch((error) => {
