@@ -113,6 +113,7 @@ public class ReservationBookService {
         throw new ElementNotFoundException();
     }
     //TODO: Mejorar el control de errores siempre mando un 404 :)
+    //datos necearios user: con id usuario, horario con id horario
     public Long add(ReservationBookDTO reservation){
         //buscamos el usuario y lo seteamos
         Long idUser = reservation.getUser().getIdUser();
