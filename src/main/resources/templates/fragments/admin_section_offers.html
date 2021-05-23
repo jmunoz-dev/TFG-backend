@@ -11,7 +11,7 @@
     <div class="offers-wrapper">
         <div th:each="offer : ${offers}" th:object="${offer}" class="offer-card">
             <div class="info-offer">
-                <input type="text" style="display: none;" id="idOfer-`*{idOffer}`" th:value="*{idOffer}"></input>
+                <input type="text" style="display: none;" th:id="*{idOffer}" th:value="*{idOffer}"></input>
                 <h2 th:text="*{offerTitle}"></h2>
                 <p>Descripción</p>
                 <h2 th:text="*{offerDescription}"></h2>
@@ -22,8 +22,8 @@
                 <h2 th:text="*{endDate}"></h2>
             </div>
             <div class="icons-actions">
-                <div>Lapiz</div>
-                <div>Papelera</div>
+                <div class="edit-card"><img th:src="@{../images/svg/pencil-alt-solid.svg}"></div>
+                <div class="remove-card"><img th:src="@{../images/svg/trash-solid.svg}"></div>
             </div>
 
         </div>
@@ -31,7 +31,7 @@
 
     <div class="sidebar-actions">
         <button id="activation" class="action-button">Activar oferta</button>
-        <a th:href="@{/admin/offers/new}" class="action-button"> Crear nueva</a>
+        <a th:href="@{/admin/offers/new}" id="creation" class="action-button"> Crear nueva</a>
     </div>
 </body>
 
