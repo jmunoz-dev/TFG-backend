@@ -144,16 +144,115 @@
             border-top: 1px solid black;
             width: 100%;
             align-self: flex-end;
-             :first-child {
+            .edit-card {
                 padding: 5%;
                 width: 50%;
                 border-right: 1px solid black;
+                background-color: #3294f0;
+                border-bottom-left-radius: $main-button-radius;
+                outline: none;
+                overflow: hidden;
+                &:hover {
+                    background-color: darken($color: #3294f0, $amount: 10);
+                    img {
+                        transform: scale(0.8, 0.9);
+                    }
+                }
+                img {
+                    width: 35%;
+                }
             }
-             :last-child {
+            .remove-card {
                 padding: 5%;
                 width: 50%;
+                border-bottom-right-radius: $main-button-radius;
                 border-left: 1px solid black;
+                background-color: #c03636;
+                &:hover {
+                    background-color: darken($color: #c03636, $amount: 10);
+                    img {
+                        transform: scale(0.8, 0.8);
+                    }
+                }
+                img {
+                    width: 30%;
+                }
             }
         }
     }
+}
+
+.modal {
+    background-color: #ccce;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.shown {
+    display: block;
+}
+
+.modal-container {
+    position: relative;
+    background-color: white;
+    border: 1px solid black;
+    width: fit-content;
+    margin: auto;
+    top: 40%;
+    z-index: 2;
+    padding: 25px;
+}
+
+.modal-body {
+    padding: 5% 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .code-activation {
+        outline: none;
+        margin-top: 5px;
+        border-radius: 10px;
+        font-size: inherit;
+        font-weight: 500;
+        font-size: 23pt;
+        height: 45px;
+        width: 100%;
+        background-color: white;
+        border-color: black;
+        border-width: 1px;
+        padding-left: 15px;
+        padding-top: 5px;
+    }
+    .modal-submit {
+        background-color: darkred;
+        color: white;
+        border: 1px black solid;
+        border-radius: $main-button-radius;
+        padding: 10px;
+        margin-top: 15px;
+        width: 100%;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: large;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    padding: 2%;
+    font-size: x-large;
+    background: transparent;
+    font-weight: 600;
+    z-index: 3;
 }

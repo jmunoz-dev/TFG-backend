@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -268,15 +269,114 @@ p {
   width: 100%;
   align-self: flex-end;
 }
-.offers-wrapper .offer-card .icons-actions :first-child {
+.offers-wrapper .offer-card .icons-actions .edit-card {
   padding: 5%;
   width: 50%;
   border-right: 1px solid black;
+  background-color: #3294f0;
+  border-bottom-left-radius: 10px;
+  outline: none;
+  overflow: hidden;
 }
-.offers-wrapper .offer-card .icons-actions :last-child {
+.offers-wrapper .offer-card .icons-actions .edit-card:hover {
+  background-color: #107bdf;
+}
+.offers-wrapper .offer-card .icons-actions .edit-card:hover img {
+  transform: scale(0.8, 0.9);
+}
+.offers-wrapper .offer-card .icons-actions .edit-card img {
+  width: 35%;
+}
+.offers-wrapper .offer-card .icons-actions .remove-card {
   padding: 5%;
   width: 50%;
+  border-bottom-right-radius: 10px;
   border-left: 1px solid black;
+  background-color: #c03636;
+}
+.offers-wrapper .offer-card .icons-actions .remove-card:hover {
+  background-color: #982b2b;
+}
+.offers-wrapper .offer-card .icons-actions .remove-card:hover img {
+  transform: scale(0.8, 0.8);
+}
+.offers-wrapper .offer-card .icons-actions .remove-card img {
+  width: 30%;
+}
+
+.modal {
+  background-color: #ccce;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.shown {
+  display: block;
+}
+
+.modal-container {
+  position: relative;
+  background-color: white;
+  border: 1px solid black;
+  width: fit-content;
+  margin: auto;
+  top: 40%;
+  z-index: 2;
+  padding: 25px;
+}
+
+.modal-body {
+  padding: 5% 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.modal-body .code-activation {
+  outline: none;
+  margin-top: 5px;
+  border-radius: 10px;
+  font-size: inherit;
+  font-weight: 500;
+  font-size: 23pt;
+  height: 45px;
+  width: 100%;
+  background-color: white;
+  border-color: black;
+  border-width: 1px;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+.modal-body .modal-submit {
+  background-color: darkred;
+  color: white;
+  border: 1px black solid;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 15px;
+  width: 100%;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: large;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  padding: 2%;
+  font-size: x-large;
+  background: transparent;
+  font-weight: 600;
+  z-index: 3;
 }
 
 .super-cool-game {
