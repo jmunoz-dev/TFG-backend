@@ -172,6 +172,29 @@ p {
   font-size: large;
   font-family: "Roboto", sans-serif;
 }
+.admin_section_home .sidebar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  width: 15%;
+  height: fit-content;
+  margin: 0 auto;
+}
+.admin_section_home .sidebar-actions button,
+.admin_section_home .sidebar-actions a {
+  width: 100%;
+  height: fit-content;
+  background-color: darkred;
+  color: white;
+  border: 1px black solid;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 15px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: large;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
 
 .admin-menu-wrapper {
   display: flex;
@@ -205,6 +228,55 @@ p {
 .admin-menu-wrapper .active {
   background-color: #000;
   color: #FEA701;
+}
+.admin-menu-wrapper a.subsection-menu {
+  margin: 15px 0 10px 25px;
+  padding: 7px;
+  width: 100%;
+  text-decoration: none;
+  border: 1px black solid;
+  border-radius: 10px;
+  outline: none;
+}
+
+.offers-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 16px;
+  margin-left: 5%;
+  width: 60%;
+  font-family: "Roboto", sans-serif;
+}
+.offers-wrapper .offer-card {
+  border: 1px solid black;
+  border-radius: 10px;
+  outline: none;
+  width: 25%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.offers-wrapper .offer-card .info-offer {
+  padding: 15px;
+  width: 100%;
+}
+.offers-wrapper .offer-card .icons-actions {
+  display: flex;
+  text-align: center;
+  border-top: 1px solid black;
+  width: 100%;
+  align-self: flex-end;
+}
+.offers-wrapper .offer-card .icons-actions :first-child {
+  padding: 5%;
+  width: 50%;
+  border-right: 1px solid black;
+}
+.offers-wrapper .offer-card .icons-actions :last-child {
+  padding: 5%;
+  width: 50%;
+  border-left: 1px solid black;
 }
 
 .super-cool-game {
