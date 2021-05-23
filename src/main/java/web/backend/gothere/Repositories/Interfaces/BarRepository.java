@@ -14,10 +14,10 @@ public interface BarRepository
     extends JpaRepository<BarEntity,Long>{
    
         @Query(value = "SELECT b FROM Bars b WHERE" +
-        "((b.length < :length + " +Constants.BAR_SEARCH_RADIUS +" ) AND (b.length > :length - " + Constants.BAR_SEARCH_RADIUS+"))"
+        "((b.length < :length + :distance ) AND (b.length > :length - :distance))"
         +" AND " +
-        " ((b.latitude< :latitude + " +  Constants.BAR_SEARCH_RADIUS+") AND (b.latitude > :latitude - " + Constants.BAR_SEARCH_RADIUS + "))")
-        Collection<BarEntity> getByCoordinates(@Param("latitude") double latitude, @Param("length") double length);
+        " ((b.latitude< :latitude +  :distance) AND (b.latitude > :latitude -  :distance ))")
+        Collection<BarEntity> getByCoordinates(@Param("latitude") double latitude, @Param("length") double length, @Param("distance") double distance);
 
         @Query(value = "SELECT * FROM Bars b WHERE UPPER(b.name) LIKE %:name% OR UPPER(b.address) LIKE %:address% ORDER BY b.name LIMIT 10", nativeQuery = true)
         Collection<BarEntity> findByNameOrAddress(String name, String address);
