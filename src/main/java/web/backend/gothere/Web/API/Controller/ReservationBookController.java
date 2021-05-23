@@ -24,9 +24,9 @@ public class ReservationBookController {
     }
 
 
-    @GetMapping("/{idUser}")
-    public List<ReservationBookDTO> getByUserAndBar(@PathVariable("idUser") Long idUser, @RequestParam(required = false , value = "current") boolean current){
-        return reservationBookService.getByUser(idUser, current);
+    @GetMapping("/{userToken}")
+    public List<ReservationBookDTO> getByUserAndBar(@PathVariable("userToken") String userToken, @RequestParam(required = false , value = "current") boolean current){
+        return reservationBookService.getByUser(userToken, current);
     }
 
     @PostMapping("/new")
