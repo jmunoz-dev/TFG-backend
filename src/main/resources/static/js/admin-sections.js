@@ -35,7 +35,17 @@ window.onload = () => {
                     console.error('Error:', error);
                 });
         })
-
+        document.querySelector("#upload").addEventListener("click", (e) =>{
+            var maxSize = 1048575;
+            if(!document.querySelector("#image").files[0])
+                return
+             
+            if(document.querySelector("#image").files[0].size > maxSize){
+                e.preventDefault();
+                alert(`Archivo demasiado grande (el archivo no puede ser mayor a ${Math.floor( maxSize/1e6)} Mb)`)
+            }
+            
+        })
         let deleteImgButtons = document.querySelectorAll('[id^="delete-img-"]')
         deleteImgButtons.forEach(item => {
             item.addEventListener('click', function(event) {
