@@ -35,5 +35,31 @@ window.onload = () => {
                     console.error('Error:', error);
                 });
         })
+
+        let deleteImgButtons = document.querySelectorAll('[id^="delete-img-"]')
+        deleteImgButtons.forEach(item => {
+            item.addEventListener('click', function(event) {
+               
+                var idSplited = event.target.id.split("-")
+                let idImgBar = idSplited[2]
+                 if (!confirm("Estás seguro de que quieres eliminar esta imagen (Esta acción es irreversible)")){
+                     return
+                 }
+                  
+                  fetch('/admin/image/delete/' + idImgBar, {
+                      method: 'DELETE'
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      console.log('Success:', data);
+                      window.location = "/admin/home"
+                      
+                  })
+                  .catch((error) => {
+                      console.error('Error:', error);
+                  });
+              })
+        } )
+        
     }
 }
