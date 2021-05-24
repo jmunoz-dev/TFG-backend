@@ -8,7 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -155,14 +157,33 @@ public class AdminViewController {
     }
 
     @PostMapping("/image/save")
-    public ModelAndView saveUser( @RequestParam("idBar") Long idBar,
+    public ModelAndView saveImage(@CookieValue( required = false, value="adminlogin") String cookie, @RequestParam("idBar") Long idBar,
             @RequestParam("image") MultipartFile multipartFile) throws IOException {
          
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-       
-        barImgsService.add(fileName, idBar, multipartFile);
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+    
+        barImgsService.add(idBar, multipartFile);
         
+        return new ModelAndView("redirect:/admin/home");
+    }
+
+    @DeleteMapping("/image/delete/{idImgBar}")
+    public ModelAndView deleteImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idImgBar") Long idImgBar) throws IOException {
          
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+       
+       barImgsService.deleteById(idImgBar);
+
         return new ModelAndView("redirect:/admin/home");
     }
       
