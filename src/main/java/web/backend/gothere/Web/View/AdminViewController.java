@@ -157,7 +157,7 @@ public class AdminViewController {
     }
 
     @PostMapping("/image/save")
-    public ModelAndView saveImage(@CookieValue( required = false, value="adminlogin") String cookie, @RequestParam("idBar") Long idBar,
+    public ModelAndView saveImage(@CookieValue( required = false, value="adminlogin") String cookie, 
             @RequestParam("image") MultipartFile multipartFile) throws IOException {
          
         if(cookie == null){
@@ -166,7 +166,7 @@ public class AdminViewController {
         if(!isBarOwner(cookie)){
             return new ModelAndView("redirect:/admin");
         }
-    
+        Long idBar = userService.getUserByToken(cookie).getIdBar();
         barImgsService.add(idBar, multipartFile);
         
         return new ModelAndView("redirect:/admin/home");
