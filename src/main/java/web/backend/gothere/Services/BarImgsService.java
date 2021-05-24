@@ -1,5 +1,6 @@
 package web.backend.gothere.Services;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -39,15 +41,24 @@ public class BarImgsService {
         }
     }
 
-    public BarImgsDTO add(String fileName, Long idBar, MultipartFile multipartFile){
+    public BarImgsDTO add( Long idBar, MultipartFile multipartFile){
         Optional<BarEntity> bar = barRepository.findById(idBar);
         if(!bar.isPresent()){
             return null;
+        } 
+        int imgNumber;
+        try{
+            imgNumber = findImgsByBarId(idBar).size();
+        }catch(Exception ex){
+            imgNumber = 0;
         }
+        String originalName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String fileName = FileUploadUtil.getFileName(originalName, bar.get().getName() + " " +imgNumber);
+        
         BarImgsDTO barImage = new BarImgsDTO("/images/bars/" + bar.get().getIdBar() + "/" + fileName, modelMapper.map( bar.get(), BarDTO.class));
         try {
-            String uploadDir = "src/main/resources/static/images/bars/" + bar.get().getIdBar();
- 
+            String uploadDir = "src/main/resources/static/images/bars/"  + bar.get().getIdBar();
+
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
             BarImgsEntity entityToInsert = modelMapper.map(barImage, BarImgsEntity.class);
             //TODO esto está mal, lo hice así por que me cogia el id del bar como null
@@ -55,7 +66,6 @@ public class BarImgsService {
             barImgsRepository.save(entityToInsert);
             return barImage;
         } catch (Exception e) {
-            System.out.println( e.getCause());
             return null;
         }
         
@@ -105,6 +115,12 @@ public class BarImgsService {
     public void deleteById(Long id) throws ResponseStatusException{
         Optional<BarImgsEntity> entityToDelete = barImgsRepository.findById(id);
         if(entityToDelete.isPresent()){
+            String url = entityToDelete.get().getImgUrl();
+            try{
+                FileUploadUtil.deleteFile("src/main/resources/static"  + url);
+            }catch(IOException ioe){
+                throw new ResponseStatusException(HttpStatus.NOT_MODIFIED, "Error deletting file");
+            }
             barImgsRepository.delete(entityToDelete.get());
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting data");
