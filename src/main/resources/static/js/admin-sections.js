@@ -56,6 +56,7 @@ window.onload = () => {
                       
                   })
                   .catch((error) => {
+                      alert("no se ha podido eliminar la imagen")
                       console.error('Error:', error);
                   });
               })
