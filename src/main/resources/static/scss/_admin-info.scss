@@ -209,10 +209,13 @@
     top: 40%;
     z-index: 2;
     padding: 25px;
+    h1 {
+        text-align: center;
+    }
 }
 
 .modal-body {
-    padding: 5% 0;
+    margin: 5% 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -224,6 +227,7 @@
         font-weight: 500;
         font-size: 23pt;
         height: 45px;
+        text-align: center;
         width: 100%;
         background-color: white;
         border-color: black;
@@ -236,12 +240,20 @@
         color: white;
         border: 1px black solid;
         border-radius: $main-button-radius;
-        padding: 10px;
-        margin-top: 15px;
+        padding: 15px;
+        margin-top: 35px;
         width: 100%;
         text-decoration: none;
         font-weight: 600;
-        font-size: large;
+        font-size: x-large;
+    }
+    .codeErrormsg {
+        display: block;
+        width: fit-content;
+        text-align: center;
+        margin: 5px auto 15px;
+        font-size: xx-large;
+        color: red;
     }
 }
 

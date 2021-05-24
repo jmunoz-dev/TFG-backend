@@ -60,14 +60,18 @@ window.onload = () => {
         buttonShowModal.addEventListener('click', function(event) {
             document.querySelector('#modal-one').classList.toggle('hidden')
             document.querySelector('#modal-one').classList.toggle('shown')
+            if (document.querySelector("div.codeErrormsg") != null) {
+                document.querySelector("div.codeErrormsg").remove()
+            }
         })
 
         buttonActivate.addEventListener('click', function(event) {
-            let codeValue = document.querySelector("input#code-activation").value
+            let codeValue = document.querySelector("input#code-activation")
+            let codeErrorOffer = `<div class="codeErrormsg"><p>El código no es correcto</p></div>`
             let offer = {
                 //TODO: construir objeto oferta
             }
-            fetch('/api/userOffers/' + codeValue, {
+            fetch('/api/userOffers/' + codeValue.value, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -76,16 +80,19 @@ window.onload = () => {
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 404) {
-                        alert('No se ha podido activar. Aquí mejor modificar modal y que salga algun ok o algo asi')
+                        if (document.querySelector("div.codeErrormsg") != null) {
+                            document.querySelector("div.codeErrormsg").remove()
+                        }
+                        codeValue.insertAdjacentHTML('beforebegin', codeErrorOffer)
+
                     }
                     if (data.status === 200) {
                         alert('Activada correctamente')
                     }
-                    window.location = "/admin/offers"
                 })
                 .catch((error) => {
                     console.error('Error:', error);
-                    alert('No aceptada')
+                    alert('Algo ha salido mal')
                 });
 
 
