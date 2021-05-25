@@ -6,13 +6,14 @@ public class SimpleUserOfferDTO {
     public OfferDTO offer;
     
     private boolean used;
-
+    private String code;
     public SimpleUserOfferDTO() {
     }
 
-    public SimpleUserOfferDTO(OfferDTO offer, boolean used) {
+    public SimpleUserOfferDTO(OfferDTO offer, boolean used, String code) {
         this.offer = offer;
         this.used = used;
+        this.code = code;
     }
   
     public OfferDTO getOffer() {
@@ -31,6 +32,14 @@ public class SimpleUserOfferDTO {
         this.used = used;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
   
 }
 
