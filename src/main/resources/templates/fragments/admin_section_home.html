@@ -15,7 +15,7 @@
             <div th:each="img : *{barImages}" th:object="${img}">
                 <div>
                     <button th:id="*{'delete-img-' + idImgBar}">Delete</button>
-                    <img  style="max-height: 100px;" th:src="${T(web.backend.gothere.Constants).STORAGE_URL} + ${img.imgUrl}" alt=" ">
+                    <img  style="max-height: 100px;" th:src="'https://gotherestorage.blob.core.windows.net' + ${img.imgUrl}" alt=" ">
                 </div>
             </div>
             <form th:action="@{image/save}" method="post" enctype="multipart/form-data">
