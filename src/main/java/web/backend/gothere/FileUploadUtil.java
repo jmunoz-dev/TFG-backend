@@ -8,29 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
  
 public class FileUploadUtil {
      
-    public static void saveFile(String uploadDir, String fileName,
-            MultipartFile multipartFile) throws IOException {
-        Path uploadPath = Paths.get(uploadDir);
-         
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-        try (InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException ioe) {        
-            throw new IOException("Could not save image file: " + fileName, ioe);
-        }      
-    }
-    public static void deleteFile(String directory) throws IOException {
-        Path path = Paths.get(directory);
-         
-        try{
-            Files.delete(path);
-        }catch(IOException ioe){
-            throw new IOException("Could not delete image file: " + directory, ioe);
-        }  
-    }
     public static String getFileName(String originalName, String newName){
 
         String[] parts = originalName.split("\\.");
