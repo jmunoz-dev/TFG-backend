@@ -116,7 +116,7 @@ public class UserOffersService {
         if (entityToUpdate.isPresent()) {
             UserOfferDTO temp = modelMapper.map(entityToUpdate.get(), UserOfferDTO.class);
             if (temp.isUsed() || LocalDate.now().isAfter(temp.getOffer().getEndDate())) {
-                return null;
+                throw new ResponseStatusException(HttpStatus.CONFLICT);
             }
             temp.setUsed(true);
             UserOfferRepository.save(modelMapper.map(temp, UserOfferEntity.class));
@@ -132,26 +132,30 @@ public class UserOffersService {
         if(bar.isPresent() && user.isPresent()){
            List<UserOfferDTO> userOffersList = UserOfferRepository.findByUserAndOfferBar(user.get(), bar.get()).stream()
            .map(x -> modelMapper.map(x, UserOfferDTO.class)).collect(Collectors.toList());
+
             ArrayList<SimpleUserOfferDTO> offers = new ArrayList<SimpleUserOfferDTO>();
 
            List<OfferDTO>  barOffersList = OfferRepository.findByBar(bar.get()).stream()
            .map(x -> modelMapper.map(x, OfferDTO.class)).collect(Collectors.toList());
 
-           barOffersList.forEach(barOffer -> {
+           for(OfferDTO barOffer : barOffersList){
                if(barOffer.getEndDate().isBefore(LocalDate.now()) || barOffer.getStartDate().isAfter(LocalDate.now())){
-                   return;
+                   break;
                }
-                userOffersList.forEach(userOffer -> {
+
+               boolean isUserOffer =  false;
+               for(UserOfferDTO userOffer : userOffersList){
                     if(barOffer.getIdOffer() == userOffer.getOffer().getIdOffer()){
-                        offers.add(new SimpleUserOfferDTO(barOffer, userOffer.isUsed()));
-                    }else{
-                        offers.add(new SimpleUserOfferDTO(barOffer, false));
-                    }   
-                });
-                if(userOffersList.isEmpty()){
-                    offers.add(new SimpleUserOfferDTO(barOffer, false));
-                }
-           });
+                        isUserOffer = true;
+                        offers.add(new SimpleUserOfferDTO(barOffer, userOffer.isUsed(), userOffer.getCode()));
+                        break;
+                    } 
+               }
+               if(!isUserOffer){
+                    offers.add(new SimpleUserOfferDTO(barOffer, false, null));
+               }
+            }     
+               
            return offers;
         }
         return null;
