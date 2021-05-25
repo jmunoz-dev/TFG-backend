@@ -50,6 +50,8 @@ window.onload = () => {
             </div>`;
         document.querySelector('body').insertAdjacentHTML('beforeend', modal_popup)
 
+        let buttonCorrect = `<div class="modal-correct-close"> Cerrar</div>`
+
         let buttonShowModal = document.querySelector("button#activation")
         let buttonActivate = document.querySelector("button#modal-submit")
         let buttonCloseModal = document.querySelector("button#close-modal")
@@ -68,6 +70,7 @@ window.onload = () => {
         buttonActivate.addEventListener('click', function(event) {
             let codeValue = document.querySelector("input#code-activation")
             let codeErrorOffer = `<div class="codeErrormsg"><p>El código no es correcto</p></div>`
+            let codeSuccessOffer = `<div class="codeSuccessmsg"><p>Activado correctamente</p></div>`
             let offer = {
                 //TODO: construir objeto oferta
             }
@@ -85,9 +88,16 @@ window.onload = () => {
                         }
                         codeValue.insertAdjacentHTML('beforebegin', codeErrorOffer)
 
-                    }
-                    if (data.status === 200) {
-                        alert('Activada correctamente')
+                    } else {
+                        if (document.querySelector("div.codeErrormsg") != null) {
+                            document.querySelector("div.codeErrormsg").remove()
+                        }
+                        codeValue.insertAdjacentHTML('beforebegin', data.offerTitle)
+                        codeValue.insertAdjacentHTML('beforebegin', data.offerPrice)
+                        codeValue.insertAdjacentHTML('beforebegin', codeSuccessOffer)
+                        buttonActivate.style.display = "none"
+                        buttonActivate.insertAdjacentHTML('beforebegin', buttonCorrect)
+                        console.log('a')
                     }
                 })
                 .catch((error) => {

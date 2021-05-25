@@ -255,6 +255,18 @@
         font-size: xx-large;
         color: red;
     }
+    .codeSuccessmsg {
+        display: block;
+        width: fit-content;
+        text-align: center;
+        margin: 5px auto 15px;
+        font-size: xx-large;
+        color: green;
+    }
+    .modal-correct-close {
+        @extend .modal-submit;
+        background-color: green;
+    }
 }
 
 .modal-close {
