@@ -35,5 +35,42 @@ window.onload = () => {
                     console.error('Error:', error);
                 });
         })
+        document.querySelector("#upload").addEventListener("click", (e) =>{
+            var maxSize = 1048575;
+            if(!document.querySelector("#image").files[0])
+                return
+             
+            if(document.querySelector("#image").files[0].size > maxSize){
+                e.preventDefault();
+                alert(`Archivo demasiado grande (el archivo no puede ser mayor a ${Math.floor( maxSize/1e6)} Mb)`)
+            }
+            
+        })
+        let deleteImgButtons = document.querySelectorAll('[id^="delete-img-"]')
+        deleteImgButtons.forEach(item => {
+            item.addEventListener('click', function(event) {
+               
+                var idSplited = event.target.id.split("-")
+                let idImgBar = idSplited[2]
+                 if (!confirm("Estás seguro de que quieres eliminar esta imagen (Esta acción es irreversible)")){
+                     return
+                 }
+                  
+                  fetch('/admin/image/delete/' + idImgBar, {
+                      method: 'DELETE'
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      console.log('Success:', data);
+                      window.location = "/admin/home"
+                      
+                  })
+                  .catch((error) => {
+                      alert("no se ha podido eliminar la imagen")
+                      console.error('Error:', error);
+                  });
+              })
+        } )
+        
     }
 }

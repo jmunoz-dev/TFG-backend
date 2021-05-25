@@ -146,5 +146,13 @@ public class BarEntity {
     public void setUser(UserEntity user) {
         this.user = user;
     }
+
+    public Set<BarImgsEntity> getBarImages() {
+        return barImages;
+    }
+
+    public void setBarImages(Set<BarImgsEntity> barImages) {
+        this.barImages = barImages;
+    }
    
 }
