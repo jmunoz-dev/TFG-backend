@@ -17,6 +17,7 @@ import web.backend.gothere.Repositories.Entities.ScheduleEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
 import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;
+import web.backend.gothere.Repositories.Entities.UserOfferEntity;
 import web.backend.gothere.Repositories.Entities.UserRole;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
 import web.backend.gothere.Repositories.Interfaces.TableRepository;
@@ -173,7 +174,8 @@ public class InitDB {
             reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.of(2023,8,24), false, scheduleTableReservationR.findById(15L).get()));
             reservationBookR.save(new ReservationBookEntity( userR.findById(1L).get(),LocalDate.of(2021,05,23), false, scheduleTableReservationR.findById(16L).get()));
            
-            
+            userofferR.save(new UserOfferEntity(user1, offerR.findById(1L).get()));
+            userofferR.findById(1L).get().setCode("ABCD");
         };
     }
 }
