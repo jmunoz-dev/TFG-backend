@@ -6,6 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import web.backend.gothere.Services.BarImgsService;
 import web.backend.gothere.Services.BarService;
 import web.backend.gothere.Services.TableService;
 import web.backend.gothere.Services.ConfirmationTokenService;
@@ -27,6 +28,10 @@ public class DI {
     @Bean
     UserService createUserService(){
         return new UserService();
+    }
+    @Bean
+    BarImgsService createBarImgsService(){
+        return new BarImgsService();
     }
     @Bean
     UserOffersService createUserOffersService(){

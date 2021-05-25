@@ -10,6 +10,20 @@
     <div th:object="${bar}" class="bar-info">
         <h1 id="name" th:text="*{name}"></h1>
         <div class="info-wrapper">
+            <p class="title-section">Fotos: </p>
+            <div th:if="!*{#lists.size(barImages)}">Tu bar todavía no tiene fotos ¡Añade una! : </div>
+            <div th:each="img : *{barImages}" th:object="${img}">
+                <div>
+                    <button th:id="*{'delete-img-' + idImgBar}">Delete</button>
+                    <img  style="max-height: 100px;" th:src="${T(web.backend.gothere.Constants).STORAGE_URL} + ${img.imgUrl}" alt=" ">
+                </div>
+            </div>
+            <form th:action="@{image/save}" method="post" enctype="multipart/form-data">
+                <label>Añadir nueva foto: </label>
+                <input id="image" required type="file" name="image" accept="image/png, image/jpeg" />
+                <input id="idBar" type="text" name="idBar" style="display:none" th:value="*{idbar}" />
+                 <button id="upload" type="submit">Subir imagen selecionada</button>
+            </form>
             <p class="title-section">Descripción</p>
             <textarea id="description" type="text" th:text="*{description}"></textarea>
             <p class="title-section">Teléfono</p>
