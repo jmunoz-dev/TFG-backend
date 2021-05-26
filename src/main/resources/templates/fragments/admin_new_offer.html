@@ -1,0 +1,24 @@
+<html xmlns="http://www.thymeleaf.org">
+
+<body>
+    <div class="admin-menu-wrapper">
+        <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
+        <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
+        <a th:href="@{/admin/offers/new}" class="subsection-menu active"> Crear nueva</a>
+        <a th:href="@{/admin/tables}" class="page-section-menu">Mesas</a>
+        <a th:href="@{/admin/reservations}" class="page-section-menu">Reservas</a>
+    </div>
+    <div class="offers-wrapper">
+        <div th:each="user : ${user}" th:object="${user}" class="user-card">
+            <div class="user-offer">
+                <p>hola</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-actions">
+        <button id="saveOffer" class="action-button">Activar oferta</button>
+    </div>
+</body>
+
+</html>

@@ -156,6 +156,58 @@ public class AdminViewController {
         
     }
 
+    @GetMapping("/offers/new")
+    public ModelAndView newOfferPage(@CookieValue( required = false, value="adminlogin") String cookie ){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        UserDTO user = userService.getUserByToken(cookie);
+        
+        ModelAndView mv = new ModelAndView("admin/add_offer");
+        mv.addObject("user",user);
+
+        return mv;
+    }
+    @GetMapping("/tables/new")
+    public ModelAndView newTablePage(@CookieValue( required = false, value="adminlogin") String cookie ){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        UserDTO user = userService.getUserByToken(cookie);
+        
+        ModelAndView mv = new ModelAndView("admin/add_table");
+        mv.addObject("user",user);
+
+        return mv;
+    }
+    @GetMapping("/reservations/new")
+    public ModelAndView newReservationPage(@CookieValue( required = false, value="adminlogin") String cookie ){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        UserDTO user = userService.getUserByToken(cookie);
+        
+        ModelAndView mv = new ModelAndView("admin/add_reservations");
+        mv.addObject("user",user);
+
+        return mv;
+    }
+
     @PostMapping("/image/save")
     public ModelAndView saveImage(@CookieValue( required = false, value="adminlogin") String cookie, 
             @RequestParam("image") MultipartFile multipartFile) throws IOException {

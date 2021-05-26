@@ -6,6 +6,7 @@
         <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
         <a th:href="@{/admin/tables}" class="page-section-menu">Mesas</a>
         <a th:href="@{/admin/reservations}" class="page-section-menu active">Reservas</a>
+        <a th:href="@{/admin/reservations/new}" class="subsection-menu">Agregar nueva</a>
     </div>
     <div th:each="res : ${reservations}" th:object="${res}">
         <div class="m-4 card">
