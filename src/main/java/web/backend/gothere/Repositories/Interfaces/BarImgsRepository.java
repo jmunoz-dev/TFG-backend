@@ -11,6 +11,6 @@ import web.backend.gothere.Services.Models.BarImgsDTO;
 public interface BarImgsRepository 
     extends JpaRepository<BarImgsEntity,Long>{
 
-    Collection<BarImgsDTO> findByBar(BarEntity barEntity);
+    Collection<BarImgsEntity> findByBar(BarEntity barEntity);
     
 }

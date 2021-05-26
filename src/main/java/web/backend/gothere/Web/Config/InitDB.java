@@ -123,7 +123,7 @@ public class InitDB {
             UserEntity userTest = new UserEntity("aa", "aa", "aa", encryptedPassword , "1234");
             userTest.setUserRole(UserRole.BAR);
             BarEntity barTest = new BarEntity();
-            barTest.setName("namePOA");
+            barTest.setName("La viña de Martín");
             barTest.setAllowedCapacity(100);
             barTest.setCurrentCapacity(2);
             barTest.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget ultricies est. Nam porta mi ");

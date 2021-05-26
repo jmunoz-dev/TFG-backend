@@ -1,23 +1,33 @@
 package web.backend.gothere.Web.View;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import web.backend.gothere.FileUploadUtil;
 import web.backend.gothere.Repositories.Entities.UserRole;
+import web.backend.gothere.Services.BarImgsService;
 import web.backend.gothere.Services.BarService;
 import web.backend.gothere.Services.TableService;
 import web.backend.gothere.Services.OffersService;
 import web.backend.gothere.Services.ReservationBookService;
 import web.backend.gothere.Services.UserService;
 import web.backend.gothere.Services.Models.TableDTO;
+import web.backend.gothere.Services.Models.BarDTO;
 import web.backend.gothere.Services.Models.OfferDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
 import web.backend.gothere.Services.Models.UserDTO;
@@ -31,14 +41,16 @@ public class AdminViewController {
     private final OffersService offerService;
     private final ReservationBookService reservationBookService;
     private final TableService tableService;
+    private final BarImgsService barImgsService;
     
 
-    public AdminViewController(UserService userService, BarService barService, OffersService offerService, ReservationBookService reservationBookService, TableService tableService) {
+    public AdminViewController(UserService userService, BarService barService, OffersService offerService, ReservationBookService reservationBookService, TableService tableService,  BarImgsService barImgsService) {
         this.userService = userService;
         this.barService = barService;
         this.offerService = offerService;
         this.reservationBookService = reservationBookService;
         this.tableService = tableService;
+        this.barImgsService = barImgsService;
     }
 
     @GetMapping("")
@@ -196,6 +208,36 @@ public class AdminViewController {
         return mv;
     }
 
+    @PostMapping("/image/save")
+    public ModelAndView saveImage(@CookieValue( required = false, value="adminlogin") String cookie, 
+            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+         
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+        Long idBar = userService.getUserByToken(cookie).getIdBar();
+        barImgsService.add(idBar, multipartFile);
+        
+        return new ModelAndView("redirect:/admin/home");
+    }
+
+    @DeleteMapping("/image/delete/{idImgBar}")
+    public ModelAndView deleteImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idImgBar") Long idImgBar) throws IOException {
+         
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+       
+       barImgsService.deleteById(idImgBar);
+
+        return new ModelAndView("redirect:/admin/home");
+    }
       
 
 }
