@@ -37,7 +37,7 @@ window.onload = () => {
 
     if (/admin\/offers/.test(window.location.href)) {
 
-        let modal_popup =
+        let modal_popup_Code =
             `<div class="modal hidden" id="modal-one">
             <div class="modal-container">
                 <h1>Activar código</h1>
@@ -48,9 +48,9 @@ window.onload = () => {
             <button id="close-modal" class="modal-close modal-exit">X</button>
             </div>
             </div>`;
-        document.querySelector('body').insertAdjacentHTML('beforeend', modal_popup)
+        document.querySelector('body').insertAdjacentHTML('beforeend', modal_popup_Code)
 
-        let buttonCorrect = `<div class="modal-correct-close"> Cerrar</div>`
+        let buttonCorrect = `<div class="modal-correct-close" onclick="closeSuccess()">Cerrar</div>`
 
         let buttonShowModal = document.querySelector("button#activation")
         let buttonActivate = document.querySelector("button#modal-submit")
@@ -71,9 +71,8 @@ window.onload = () => {
             let codeValue = document.querySelector("input#code-activation")
             let codeErrorOffer = `<div class="codeErrormsg"><p>El código no es correcto</p></div>`
             let codeSuccessOffer = `<div class="codeSuccessmsg"><p>Activado correctamente</p></div>`
-            let offer = {
-                //TODO: construir objeto oferta
-            }
+            let codeAlertOffer = `<div class="codeAlertOffer"><p>La oferta no es correcta o ya se ha activado</p></div>`
+
             fetch('/api/userOffers/' + codeValue.value, {
                     method: 'PUT',
                     headers: {
@@ -88,7 +87,8 @@ window.onload = () => {
                         }
                         codeValue.insertAdjacentHTML('beforebegin', codeErrorOffer)
 
-                    } else {
+                    }
+                    if (data.status === 200) {
                         if (document.querySelector("div.codeErrormsg") != null) {
                             document.querySelector("div.codeErrormsg").remove()
                         }
@@ -97,7 +97,10 @@ window.onload = () => {
                         codeValue.insertAdjacentHTML('beforebegin', codeSuccessOffer)
                         buttonActivate.style.display = "none"
                         buttonActivate.insertAdjacentHTML('beforebegin', buttonCorrect)
-                        console.log('a')
+
+                    }
+                    if (data === 405) {
+
                     }
                 })
                 .catch((error) => {
@@ -118,4 +121,42 @@ window.onload = () => {
 
 
     }
+}
+
+function deleteOffer(id) {
+    allowDelete = window.confirm('¿Estás seguro que deseas eliminar esta oferta?')
+    if (allowDelete) {
+        fetch('/api/offers/' + id, {
+                method: 'DELETE',
+            })
+            .then(res => res.json())
+            .then(res => console.log(res))
+    }
+}
+
+function editOffer(id) {
+
+    let data = retrieveOffer(id)
+
+
+
+
+}
+
+function retrieveOffer(id) {
+    let offer = null
+    let newOffer = null;
+
+    fetch('api/offers/' + id)
+        .then(function(response) {
+            offer = response.json();
+        })
+        .catch(function(err) {
+            console.error(err);
+        });
+
+}
+
+function closeSuccess() {
+    document.querySelector('#modal-one').innerHTML(modal_popup)
 }

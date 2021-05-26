@@ -78,6 +78,8 @@
 .admin-menu-wrapper {
     display: flex;
     flex-wrap: wrap;
+    position: sticky;
+    top: 50px;
     width: 10%;
     margin-left: 5%;
     height: min-content;
@@ -201,6 +203,7 @@
 }
 
 .modal-container {
+    border-radius: 25px;
     position: relative;
     background-color: white;
     border: 1px solid black;
@@ -208,7 +211,7 @@
     margin: auto;
     top: 40%;
     z-index: 2;
-    padding: 25px;
+    padding: 40px;
     h1 {
         text-align: center;
     }
@@ -220,6 +223,7 @@
     flex-wrap: wrap;
     justify-content: center;
     .code-activation {
+        cursor: text;
         outline: none;
         margin-top: 5px;
         border-radius: 10px;
@@ -236,6 +240,7 @@
         padding-top: 5px;
     }
     .modal-submit {
+        cursor: pointer;
         background-color: darkred;
         color: white;
         border: 1px black solid;
@@ -270,13 +275,17 @@
 }
 
 .modal-close {
+    cursor: pointer;
     position: absolute;
     top: 0;
     right: 0;
     border: none;
     padding: 2%;
-    font-size: x-large;
+    font-size: 28pt;
     background: transparent;
     font-weight: 600;
     z-index: 3;
+    &:hover {
+        color: black;
+    }
 }
