@@ -168,24 +168,44 @@ a.subsection-menu {
 }
 
 .offers-wrapper {
+    .title {
+        width: 100%;
+        margin-bottom: 35px;
+    }
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 16px;
     margin-left: 5%;
     width: 60%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto',
+    sans-serif;
     .offer-card {
-        border: 1px solid black;
+        border: 1px solid #000;
         border-radius: $main-button-radius;
         outline: none;
         width: 25%;
         display: flex;
         flex-wrap: wrap;
         margin-bottom: 30px;
-        .info-offer {
-            padding: 15px;
+        .wrapper-info {
             width: 100%;
+            padding: 20px;
+            .offer-info {
+                h2 {
+                    font-size: 15px;
+                    width: 100%;
+                }
+                p {
+                    margin: 10px 0;
+                    width: 100%;
+                    text-align: right;
+                }
+                padding: 10px 10px;
+                &.odd {
+                    background-color: #fff2da;
+                }
+            }
         }
         .icons-actions {
             display: flex;
@@ -262,6 +282,18 @@ a.subsection-menu {
     h1 {
         text-align: center;
     }
+    .offerData {
+        width: 100%;
+        text-align: center;
+        .offer-title {
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+        .offer-price {
+            margin-top: 20px;
+            font-size: xxx-large;
+        }
+    }
 }
 
 .modal-body {
@@ -307,6 +339,9 @@ a.subsection-menu {
         font-size: xx-large;
         color: red;
     }
+    .codeAlertOffer {
+        @extend .codeErrormsg;
+    }
     .codeSuccessmsg {
         display: block;
         width: fit-content;
@@ -317,7 +352,9 @@ a.subsection-menu {
     }
     .modal-correct-close {
         @extend .modal-submit;
+        text-align: center;
         background-color: green;
+        font-size: xx-large;
     }
 }
 
@@ -334,5 +371,46 @@ a.subsection-menu {
     z-index: 3;
     &:hover {
         color: black;
+    }
+}
+
+.reservations-wrapper {
+    @extend .offers-wrapper;
+    form {
+        width: 100%;
+        margin-bottom: 20px
+    }
+    .title {
+        width: 100%;
+        margin-bottom: 20px
+    }
+    &>div {
+        width: 25%;
+        margin-bottom: 20px;
+        border: 2px solid rgb(161, 161, 161);
+        padding: 20px;
+        border-radius: 20px;
+    }
+    .reservation-card {
+        .line {
+            width: 100%;
+            height: 10px;
+            background-color: red;
+        }
+        .reservation-info {
+            padding: 10px 10px;
+            &.inpar {
+                background-color: #fff2da;
+            }
+            p {
+                margin: 10px 0;
+                width: 100%;
+                text-align: right;
+            }
+            h2 {
+                font-size: 15px;
+                width: 100%;
+            }
+        }
     }
 }

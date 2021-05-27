@@ -169,7 +169,7 @@ public class ReservationBookService {
                 }
 
                 //filtramos por número de teléfono
-               if(phone != null){
+               if(phone != null && phone.length() > 0){
                     for(int j = 0; j< reservationsTemp.size(); j++){
                         if(reservationsTemp.get(j).getUser().getPhoneNumber().equals(phone)){
                             reservations.add(reservationsTemp.get(j));
