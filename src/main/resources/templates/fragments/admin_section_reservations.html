@@ -20,7 +20,7 @@
             <input type="tlf" name="phone">
             <button type="submit">Filtrar</button>
         </form>
-        
+        <p th:if="!*{#lists.size(reservations)}">No hay resultados</p>
     <div th:each="res : ${reservations}" th:object="${res}">
         <div class="reservation-card">
          
