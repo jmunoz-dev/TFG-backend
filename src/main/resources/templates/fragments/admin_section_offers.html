@@ -9,6 +9,7 @@
         <a th:href="@{/admin/reservations}" class="page-section-menu">Reservas</a>
     </div>
     <div class="offers-wrapper">
+        <h2 class="title">OFERTAS</h2>
         <div th:each="offer : ${offers}" th:object="${offer}" class="offer-card">
             <div class="wrapper-info">
                 <input type="text" style="display: none;" th:id="*{idOffer}" th:value="*{idOffer}"></input>
