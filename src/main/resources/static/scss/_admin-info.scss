@@ -262,6 +262,18 @@ a.subsection-menu {
     h1 {
         text-align: center;
     }
+    .offerData {
+        width: 100%;
+        text-align: center;
+        .offer-title {
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+        .offer-price {
+            margin-top: 20px;
+            font-size: xxx-large;
+        }
+    }
 }
 
 .modal-body {
@@ -307,6 +319,9 @@ a.subsection-menu {
         font-size: xx-large;
         color: red;
     }
+    .codeAlertOffer {
+        @extend .codeErrormsg;
+    }
     .codeSuccessmsg {
         display: block;
         width: fit-content;
@@ -317,7 +332,9 @@ a.subsection-menu {
     }
     .modal-correct-close {
         @extend .modal-submit;
+        text-align: center;
         background-color: green;
+        font-size: xx-large;
     }
 }
 
