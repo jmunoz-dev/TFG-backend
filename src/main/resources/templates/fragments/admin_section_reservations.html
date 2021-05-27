@@ -1,6 +1,7 @@
 <html xmlns="http://www.thymeleaf.org">
 
 <body>
+    
     <div class="admin-menu-wrapper">
         <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
         <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
@@ -8,22 +9,48 @@
         <a th:href="@{/admin/reservations}" class="page-section-menu active">Reservas</a>
         <a th:href="@{/admin/reservations/new}" class="subsection-menu">Agregar nueva</a>
     </div>
+    
+    <div class="reservations-wrapper">
+        <h2 class="title">RESERVAS</h2>
+        <h4 class="title">Filtrar:</h4>
+        <form action="">
+            <label for="date">Fecha</label>
+            <input type="date" name="date">
+            <label for="phone">Teléfono</label>
+            <input type="tlf" name="phone">
+            <button type="submit">Filtrar</button>
+        </form>
+        
     <div th:each="res : ${reservations}" th:object="${res}">
-        <div class="m-4 card">
+        <div class="reservation-card">
+         
             <!-- Buscador por num de telf y feche -->
-            <p>Id Reserva</p>
-            <h2 th:text="*{idReservationBook}"></h2>
-            <p>Numero mesa</p>
-            <h2 th:text="*{scheduleTableReservation.table.idTable}"></h2>
-            <p>Fecha reserva:</p>
-            <h2 th:text="*{reservationDate}"></h2>
-            <p>Hora de la reserva </p>
-            <h2 th:text="*{scheduleTableReservation.schedule.checkInHour}"></h2> -
-            <h2 th:text="*{scheduleTableReservation.schedule.checkOutHour}"></h2>
+            <div class="reservation-info inpar">
+                <h2>Id Reserva</h2>
+                <p th:text="*{idReservationBook}"></p>
+            </div>
+            <div class="reservation-info">
+                <h2 class="user">Usuario: </h2>
+                <p th:text="'Nombre: ' + *{user.name}"></p> 
+                <p th:text="'Tlf: ' + *{user.phoneNumber}"></p>
+            </div>
+            <div class="reservation-info inpar">
+                <h2>Numero mesa</h2>
+                <p th:text="*{scheduleTableReservation.table.idTable}"></p>
+            </div>
+            <div class="reservation-info">
+                <h2>Fecha reserva:</h2>
+                <p th:text="*{reservationDate}"></p>
+            </div>
+            <div class="reservation-info inpar">
+                <h2>Hora de la reserva </h2>
+                <p th:text="'de ' + *{scheduleTableReservation.schedule.checkInHour} + ' a ' + *{scheduleTableReservation.schedule.checkOutHour}">
+            </div>
             <!--  -->
         </div>
-        -----------------------------------------------------
+        <!-- ----------------------------------------------------- -->
     </div>
+</div>
 </body>
 
 </html>
