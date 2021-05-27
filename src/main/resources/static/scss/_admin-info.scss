@@ -168,13 +168,18 @@ a.subsection-menu {
 }
 
 .offers-wrapper {
+    .title {
+        width: 100%;
+        margin-bottom: 35px;
+    }
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 16px;
     margin-left: 5%;
     width: 60%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto',
+    sans-serif;
     .offer-card {
         border: 1px solid #000;
         border-radius: $main-button-radius;
