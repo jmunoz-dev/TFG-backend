@@ -10,16 +10,31 @@
     </div>
     <div class="offers-wrapper">
         <div th:each="offer : ${offers}" th:object="${offer}" class="offer-card">
-            <div class="info-offer">
+            <div class="wrapper-info">
                 <input type="text" style="display: none;" th:id="*{idOffer}" th:value="*{idOffer}"></input>
-                <h2 th:text="*{offerTitle}"></h2>
-                <p>Descripción</p>
-                <h2 th:text="*{offerDescription}"></h2>
-                <p>Precio</p>
-                <h2 th:text="*{offerPrice}"></h2>
-                <p>Inicio - fin</p>
-                <h2 th:text="*{startDate}"></h2> -
-                <h2 th:text="*{endDate}"></h2>
+                <div class="offer-info odd">
+                    <h2>Título</h2>
+                    <p th:text="*{offerTitle}"></p>
+                </div>
+                <div class="offer-info even">
+                    <h2>Descripción</h2>
+                    <p th:text="*{offerTitle}"></p>
+                </div>
+                <div class="offer-info odd">
+                    <h2>Precio</h2>
+                    <p th:text="*{offerDescription}"></p>
+                </div>
+
+                <div class="offer-info even">
+                    <h2>Precio</h2>
+                    <p th:text="*{offerPrice}"></p>
+                </div>
+
+                <div class="offer-info odd">
+                    <h2>Duración</h2>
+                    <p th:text="*{startDate}"></p>
+                    <p th:text="*{endDate}"></p>
+                </div>
             </div>
             <div class="icons-actions">
                 <div class="edit-card" th:onclick="'javascript:editSaveOffer(' + *{idOffer} + ')'"><img th:src="@{../images/svg/pencil-alt-solid.svg}"></div>
