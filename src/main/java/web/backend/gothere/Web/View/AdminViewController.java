@@ -108,7 +108,7 @@ public class AdminViewController {
     @GetMapping("/reservations")
     public ModelAndView barReservationsPage(@CookieValue( required = false, value="adminlogin") String cookie, 
         @RequestParam (required = false, value= "phone") String phone,
-        @RequestParam( required = false, value="date")@DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date){
+        @RequestParam( required = false, value="date")@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date){
         
         ModelAndView mv2 = new ModelAndView("redirect:/admin");
         if(cookie == null){
