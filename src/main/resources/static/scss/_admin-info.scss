@@ -176,16 +176,31 @@ a.subsection-menu {
     width: 60%;
     font-family: 'Roboto', sans-serif;
     .offer-card {
-        border: 1px solid black;
+        border: 1px solid #000;
         border-radius: $main-button-radius;
         outline: none;
         width: 25%;
         display: flex;
         flex-wrap: wrap;
         margin-bottom: 30px;
-        .info-offer {
-            padding: 15px;
+        .wrapper-info {
             width: 100%;
+            padding: 20px;
+            .offer-info {
+                h2 {
+                    font-size: 15px;
+                    width: 100%;
+                }
+                p {
+                    margin: 10px 0;
+                    width: 100%;
+                    text-align: right;
+                }
+                padding: 10px 10px;
+                &.odd {
+                    background-color: #fff2da;
+                }
+            }
         }
         .icons-actions {
             display: flex;
@@ -351,5 +366,46 @@ a.subsection-menu {
     z-index: 3;
     &:hover {
         color: black;
+    }
+}
+
+.reservations-wrapper {
+    @extend .offers-wrapper;
+    form {
+        width: 100%;
+        margin-bottom: 20px
+    }
+    .title {
+        width: 100%;
+        margin-bottom: 20px
+    }
+    &>div {
+        width: 25%;
+        margin-bottom: 20px;
+        border: 2px solid rgb(161, 161, 161);
+        padding: 20px;
+        border-radius: 20px;
+    }
+    .reservation-card {
+        .line {
+            width: 100%;
+            height: 10px;
+            background-color: red;
+        }
+        .reservation-info {
+            padding: 10px 10px;
+            &.inpar {
+                background-color: #fff2da;
+            }
+            p {
+                margin: 10px 0;
+                width: 100%;
+                text-align: right;
+            }
+            h2 {
+                font-size: 15px;
+                width: 100%;
+            }
+        }
     }
 }
