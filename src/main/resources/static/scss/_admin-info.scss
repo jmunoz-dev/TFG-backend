@@ -337,11 +337,33 @@ a.subsection-menu {
     }
 }
 .reservations-wrapper{
-  
+    
     @extend .offers-wrapper;
+    input, label{
+        padding: 5px;
+        font-size: 20px;
+    }
     form {
         width: 100%;
-        margin-bottom: 20px
+        margin-bottom: 20px;
+        padding: 20px;
+        button{
+            margin-left: 10px;
+            background-color: black;
+            color: $base-yellow-color;
+            height: 90%;
+            border: none;
+            cursor: pointer;
+            border-radius: $main-button-radius;
+            font-size: 16px;
+            width: 200px;
+            letter-spacing: 5px;
+            font-weight: bold;
+            transition:  .2s background-color;
+            &:hover{
+                background-color: rgb(54, 54, 54);
+            }
+        }
     }
     .title{
         width: 100%;
@@ -373,6 +395,11 @@ a.subsection-menu {
         font-weight: bold;
         display: flex;
         align-items: center;
+        transition:  .2s background-color;
+        &:hover{
+            background-color: rgb(253, 63, 63);
+            
+        }
         p{
             margin-left: 20px;
             pointer-events: none;
@@ -411,7 +438,7 @@ a.subsection-menu {
                 background-color: #fff2da;
             }
           
-            p{
+            a,p{
                 margin: 10px 0;
                 width: 100%;
                 text-align: right;
