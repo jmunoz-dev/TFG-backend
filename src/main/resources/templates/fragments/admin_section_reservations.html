@@ -22,8 +22,9 @@
         </form>
         <p th:if="!*{#lists.size(reservations)}">No hay resultados</p>
     <div th:each="res : ${reservations}" th:object="${res}">
-        <div class="reservation-card">
-         
+        <div th:if="*{canceled}" class="offer-canceled">CANCELADA</div>
+        <div th:class="'reservation-card ' + *{canceled ? 'caceled-card' : ''}">
+            
             <!-- Buscador por num de telf y feche -->
             <div class="reservation-info inpar">
                 <h2>Id Reserva</h2>
@@ -47,6 +48,10 @@
                 <p th:text="'de ' + *{scheduleTableReservation.schedule.checkInHour} + ' a ' + *{scheduleTableReservation.schedule.checkOutHour}">
             </div>
             <!--  -->
+            <div th:id="'cancel-reservation-' + *{idReservationBook}" class="cancel-card">
+                <img th:src="@{../images/svg/cancel.svg}"> 
+                <p>CANCELAR</p>
+            </div>
         </div>
         <!-- ----------------------------------------------------- -->
     </div>
