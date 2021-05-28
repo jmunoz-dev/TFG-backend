@@ -169,8 +169,39 @@ window.onload = () => {
 
 
     }
+    if (/admin\/reservations/.test(window.location.href)) {
+        console.log("estoy en reservas")
+        let cancelReservationButtons = document.querySelectorAll('[id^="cancel-reservation-"]')
+        console.log("estoy en reservas", cancelReservationButtons)
+        cancelReservationButtons.forEach(button => {
+            console.log(button)
+            button.addEventListener('click', function(event) {
+               
+                var idSplited = event.target.id.split("-")
+                let idReservation = idSplited[2]
+                console.log("id:" ,idReservation, "split:", idSplited)
+                cancelReservation(idReservation)
+            })
+        })
+    }
 }
-
+function cancelReservation(id){
+    console.log("id:" ,id)
+    allowDelete = window.confirm('¿Estás seguro que deseas cancelar esta reserva?')
+    if (allowDelete) {
+        fetch('/api/reservations/cancel/' + Number(id), {
+                method: 'PUT',
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(res.status == 400){
+                    alert("oferta no encontrada")
+                }else{
+                    location.reload()
+                }
+            }).catch(e => console.log(e))
+    }
+}
 function deleteOffer(id) {
     allowDelete = window.confirm('¿Estás seguro que deseas eliminar esta oferta?')
     if (allowDelete) {
