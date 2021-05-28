@@ -67,21 +67,21 @@ public class InitDB {
         
                
              //mesas
-            barTableR.save(new TableEntity(4,false,barR.findById(1L).get(),null));
-            barTableR.save(new TableEntity(5,false,barR.findById(1L).get(),null));
-            barTableR.save(new TableEntity(8,false,barR.findById(1L).get(),null));
-            barTableR.save(new TableEntity(3,false,barR.findById(2L).get(),null));
-            barTableR.save(new TableEntity(2,false,barR.findById(2L).get(),null));
-            barTableR.save(new TableEntity(1,false,barR.findById(2L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(2L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(2L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(3L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(4L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(5L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(6L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(7L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(8L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(7L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(1L).get(),null, "1"));
+            barTableR.save(new TableEntity(5,false,barR.findById(1L).get(),null, "2"));
+            barTableR.save(new TableEntity(8,false,barR.findById(1L).get(),null, "3"));
+            barTableR.save(new TableEntity(3,false,barR.findById(2L).get(),null, "4"));
+            barTableR.save(new TableEntity(2,false,barR.findById(2L).get(),null, "5"));
+            barTableR.save(new TableEntity(1,false,barR.findById(2L).get(),null, "6"));
+            barTableR.save(new TableEntity(4,false,barR.findById(2L).get(),null, "7"));
+            barTableR.save(new TableEntity(4,false,barR.findById(2L).get(),null, "8"));
+            barTableR.save(new TableEntity(4,false,barR.findById(3L).get(),null, "1"));
+            barTableR.save(new TableEntity(4,false,barR.findById(4L).get(),null, "2"));
+            barTableR.save(new TableEntity(4,false,barR.findById(5L).get(),null, "1"));
+            barTableR.save(new TableEntity(4,false,barR.findById(6L).get(),null, "1"));
+            barTableR.save(new TableEntity(4,false,barR.findById(7L).get(),null, "1"));
+            barTableR.save(new TableEntity(4,false,barR.findById(8L).get(),null, "1"));
+            barTableR.save(new TableEntity(4,false,barR.findById(7L).get(),null, "1"));
 
             //horarios mesas
             scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(1L).get(), scheduleR.findById(1L).get()));
@@ -136,21 +136,21 @@ public class InitDB {
             confirmationTokenR.save(new ConfirmationTokenEntity(userTest));
 
             //mesas
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(5,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(8,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(3,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(2,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(1,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
-            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null, "1"));
+            barTableR.save(new TableEntity(5,false,barR.findById(10L).get(),null, "2"));
+            barTableR.save(new TableEntity(8,false,barR.findById(10L).get(),null,"4"));
+            barTableR.save(new TableEntity(3,false,barR.findById(10L).get(),null,"5"));
+            barTableR.save(new TableEntity(2,false,barR.findById(10L).get(),null,"10"));
+            barTableR.save(new TableEntity(1,false,barR.findById(10L).get(),null,"8"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"5"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"2"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"4"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"9"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"6"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"7"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"11"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"3"));
+            barTableR.save(new TableEntity(4,false,barR.findById(10L).get(),null,"12"));
 
             scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(16L).get(), scheduleR.findById(1L).get()));
             scheduleTableReservationR.save(new ScheduleTableReservationEntity(barTableR.findById(17L).get(), scheduleR.findById(2L).get()));

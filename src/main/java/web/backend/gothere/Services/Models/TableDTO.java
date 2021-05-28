@@ -8,18 +8,18 @@ public class TableDTO {
     private int capacity;
     private boolean reservated;
     private BarDTO bar;
+    private String num;
     private List<ScheduleTableReservationDTO> scheduleTableReservations;
 
     public TableDTO() {
     }
 
-  
-
-    public TableDTO( int capacity, boolean reservated, BarDTO bar, List<ScheduleTableReservationDTO> scheduleTableReservations) {
+    public TableDTO( int capacity, boolean reservated, BarDTO bar, List<ScheduleTableReservationDTO> scheduleTableReservations, String num) {
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
         this.scheduleTableReservations = scheduleTableReservations;
+        this.num = num;
     }
 
     public List<ScheduleTableReservationDTO> getScheduleTableReservations() {
@@ -67,6 +67,14 @@ public class TableDTO {
 
     public void setBar(BarDTO bar) {
         this.bar = bar;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
     }
 
    
