@@ -34,7 +34,7 @@ public class ReservationBookController {
         return reservationBookService.add(reservation);
     }
     @PutMapping("/cancel/{idR}")
-    public ReservationBookDTO cancelReservationBook(@PathVariable Long idR){
-        return reservationBookService.setCanceled(idR);
+    public Long cancelReservationBook(@PathVariable Long idR){
+        return reservationBookService.setCanceled(idR).getIdReservationBook();
     }
 }
