@@ -185,27 +185,49 @@ function deleteOffer(id) {
 }
 
 function editOffer(id) {
+    let modal_two = document.querySelector("#modal-two")
+    if (modal_two != null) { modal_two.remove() }
+    fetch('/api/offers/' + id)
+        .then(response => response.json())
+        .then(data => {
+            let modal_edit_offer =
+                `<div class="modal shown" id="modal-two">
+                <div class="modal-container">
+                    <h1 id="title-popup">Editar oferta</h1>
+                    <div class="modal-body">
+                        <h2>Imagen</h2>
+                        <input  class="code-activation" value="${data.offerImage}" name="offerImage" />
+                        <h2>Título</h2>
+                        <input class="code-activation" value="${data.offerTitle}"name="offerTitle" />
+                        <h2>Descripción</h2>
+                        <input class="code-activation" value="${data.offerDescription}" name="offerDescription" />
+                        <h2>Precio</h2>
+                        <input class="code-activation" value="${data.offerPrice}" name="offerPrice" />
+                        <h2>Fecha inicio</h2>
+                        <input type="date" class="code-activation" value="${data.startDate}" name="startDate" />
+                        <h2>Fecha fin</h2>
+                        <input type="date" class="code-activation" value="${data.endDate}" name="endDate" />
+                        <div>
+                        <button id="button-modal-close" class="modal-submit">Guardar cambios</button>
+                        <button id="modal-submit" class="modal-submit modal-exit">Cerrar</button>
+                        </div>
+                    </div>        
+                <button id="close-modal" class="modal-close modal-exit">X</button>
+                </div>
+                </div>`;
+            document.querySelector('body').insertAdjacentHTML('beforeend', modal_edit_offer)
+            let xCloseModal = document.querySelectorAll(".modal-exit")
+            xCloseModal.forEach(button => button.addEventListener('click', closeModal));
 
-    let data = retrieveOffer(id)
-
-
-
-
-}
-
-function retrieveOffer(id) {
-    let offer = null
-    let newOffer = null;
-
-    fetch('api/offers/' + id)
-        .then(function(response) {
-            offer = response.json();
-        })
-        .catch(function(err) {
-            console.error(err);
+            function closeModal(e) {
+                document.querySelector('#modal-two').classList.toggle('hidden')
+                document.querySelector('#modal-two').classList.toggle('shown')
+            }
         });
 
 }
+
+
 
 function closeSuccess() {
     location.reload()

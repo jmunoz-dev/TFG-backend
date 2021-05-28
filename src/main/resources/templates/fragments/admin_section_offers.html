@@ -14,15 +14,15 @@
             <div class="wrapper-info">
                 <input type="text" style="display: none;" th:id="*{idOffer}" th:value="*{idOffer}"></input>
                 <div class="offer-info odd">
+                    <h2>Imagen</h2>
+                    <p th:text="*{offerImage}"></p>
+                </div>
+                <div class="offer-info even">
                     <h2>Título</h2>
                     <p th:text="*{offerTitle}"></p>
                 </div>
-                <div class="offer-info even">
-                    <h2>Descripción</h2>
-                    <p th:text="*{offerTitle}"></p>
-                </div>
                 <div class="offer-info odd">
-                    <h2>Precio</h2>
+                    <h2>Descripción</h2>
                     <p th:text="*{offerDescription}"></p>
                 </div>
 
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="icons-actions">
-                <div class="edit-card" th:onclick="'javascript:editSaveOffer(' + *{idOffer} + ')'"><img th:src="@{../images/svg/pencil-alt-solid.svg}"></div>
+                <div class="edit-card" th:onclick="'javascript:editOffer(' + *{idOffer} + ')'"><img th:src="@{../images/svg/pencil-alt-solid.svg}"></div>
                 <div class="remove-card" th:onclick="'javascript:deleteOffer(' + *{idOffer} +')'"><img th:src="@{../images/svg/trash-solid.svg}"></div>
             </div>
 
