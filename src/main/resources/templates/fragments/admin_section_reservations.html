@@ -27,8 +27,8 @@
             
             <!-- Buscador por num de telf y feche -->
             <div class="reservation-info inpar">
-                <h2>Id Reserva</h2>
-                <p th:text="*{idReservationBook}"></p>
+                <h2>Número mesa</h2>
+                <p th:text="*{scheduleTableReservation.table.num}"></p>
             </div>
             <div class="reservation-info">
                 <h2 class="user">Usuario: </h2>
@@ -36,15 +36,11 @@
                 <p><a th:text="'Llamar: ' + *{user.phoneNumber}" th:href="'tel:+34' + *{user.phoneNumber}"></a></p>
             </div>
             <div class="reservation-info inpar">
-                <h2>Numero mesa</h2>
-                <p th:text="*{scheduleTableReservation.table.idTable}"></p>
-            </div>
-            <div class="reservation-info">
                 <h2>Fecha reserva:</h2>
                 <p th:text="*{reservationDate}"></p>
             </div>
-            <div class="reservation-info inpar">
-                <h2>Hora de la reserva </h2>
+            <div class="reservation-info">
+                <h2>Hora de la reserva: </h2>
                 <p th:text="'de ' + *{scheduleTableReservation.schedule.checkInHour} + ' a ' + *{scheduleTableReservation.schedule.checkOutHour}">
             </div>
             <!--  -->
