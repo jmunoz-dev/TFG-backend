@@ -4,6 +4,7 @@
     width: 100%;
     margin-top: 5%;
     font-family: 'Roboto', sans-serif;
+    margin-bottom: 100px;
     .bar-info {
         margin-top: 16px;
         margin-left: 8%;
@@ -36,6 +37,9 @@
     .submit-changes {
         margin: 16px auto 0;
         width: 10%;
+        height: fit-content;
+        position: sticky;
+        top: 50px;
         button {
             background-color: darkred;
             color: white;
@@ -56,6 +60,8 @@
         width: 15%;
         height: fit-content;
         margin: 0 auto;
+        position: sticky;
+        top: 50px;
         button,
         a {
             width: 100%;
@@ -180,6 +186,39 @@ a.subsection-menu {
     width: 60%;
     font-family: 'Roboto',
     sans-serif;
+    .new-offer-card {
+        width: 90%;
+        margin: auto;
+        form {
+            h2 {
+                font-size: 15px;
+                margin-top: 20px;
+                padding-bottom: 5px;
+            }
+            input {
+                height: 25px;
+                border-radius: $main-button-radius;
+                border-width: 1px;
+                width: 100%;
+                padding-left: 10px;
+                &:focus-visible {
+                    outline: none;
+                    border: 2px solid #fea701;
+                }
+            }
+            .price-wrapper {
+                width: 100%;
+                position: relative;
+                span {
+                    position: absolute;
+                    top: 0;
+                    right: 0px;
+                    font-size: 20px;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
     .offer-card {
         border: 1px solid #000;
         border-radius: $main-button-radius;

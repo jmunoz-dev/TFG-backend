@@ -9,10 +9,30 @@
         <a th:href="@{/admin/reservations}" class="page-section-menu">Reservas</a>
     </div>
     <div class="offers-wrapper">
-        <div th:each="user : ${user}" th:object="${user}" class="user-card">
-            <div class="user-offer">
-                <p>hola</p>
-            </div>
+        <h2 class="title">Nueva oferta</h2>
+        <div th:object="${bar}" class="new-offer-card">
+
+            <form>
+                <input type="hidden" th:value="*{idbar}"></input>
+                <h2>Título</h2>
+                <input type="text" th:name="offerTitle" class="even"></input>
+                <h2>Descripción</h2>
+                <input type="text" th:name="offerDescription" class="odd"></input>
+                <h2>Precio</h2>
+                <div class="price-wrapper">
+                    <input type="text" th:name="offerPrice"></input>
+                    <span> €</span>
+                </div>
+                <h2>Puntos minimos para activar</h2>
+                <input type="text" th:name="offerMinimumPoints" class="odd"></input>
+                <h2>Puntos que otorga la oferta</h2>
+                <input type="text" th:name="offerRewardsPoints" class="odd"></input>
+                <h2>Fecha inicio</h2>
+                <input id="date" type="date"></input>
+                <h2>Fecha final</h2>
+                <input type="date" class="odd"></input>
+            </form>
+
         </div>
     </div>
 

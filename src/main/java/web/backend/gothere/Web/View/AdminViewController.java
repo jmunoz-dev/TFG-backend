@@ -167,9 +167,9 @@ public class AdminViewController {
             return mv2;
         }
         UserDTO user = userService.getUserByToken(cookie);
-        
+        BarDTO bar = barService.getBarById(user.getIdBar());
         ModelAndView mv = new ModelAndView("admin/add_offer");
-        mv.addObject("user",user);
+        mv.addObject("bar", bar);
 
         return mv;
     }
