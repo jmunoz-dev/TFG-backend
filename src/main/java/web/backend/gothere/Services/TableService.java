@@ -1,9 +1,12 @@
 package web.backend.gothere.Services;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -13,9 +16,13 @@ import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
+import web.backend.gothere.Repositories.Entities.ScheduleEntity;
+import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
 import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
+import web.backend.gothere.Repositories.Interfaces.ScheduleRepository;
+import web.backend.gothere.Repositories.Interfaces.ScheduleTableReservationRepository;
 import web.backend.gothere.Services.Models.TableDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
 import web.backend.gothere.Services.Models.ScheduleTableReservationDTO;
@@ -29,15 +36,28 @@ public class TableService {
     private ModelMapper modelMapper;
     @Autowired
     private BarRepository barRepository;
-
+    
     public List<TableDTO> getAll() {
         List<TableDTO> tables =  tableRepository.findAll().stream().map(x -> modelMapper.map(x, TableDTO.class))
                 .collect(Collectors.toList());
         return  deleteScheduleTable(tables);        
     }
+    public TableDTO getById(Long id) {
+        Optional<TableEntity> result = tableRepository.findById(id);
+        if (result.isPresent()) {
+            return modelMapper.map(result, TableDTO.class);
+        }
+        return null;
+    }
 
     public TableDTO add(TableDTO table) {
         TableEntity entityToUpdate = modelMapper.map(table, TableEntity.class);
+        Optional<BarEntity> bar =barRepository.findById(table.getBar().getIdbar());
+        if(!bar.isPresent()){
+            return null;
+        }
+        entityToUpdate.setBar(bar.get());
+       
         TableEntity result = tableRepository.save(entityToUpdate);
         return modelMapper.map(result, TableDTO.class);
     }
