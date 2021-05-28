@@ -2,7 +2,7 @@ package web.backend.gothere.Services.Models;
 
 import java.util.List;
 
-public class TableDTO {
+public class TableDTO implements Comparable<TableDTO>{
 
     private Long idTable;
     private int capacity;
@@ -77,6 +77,9 @@ public class TableDTO {
         this.num = num;
     }
 
-   
+   @Override
+   public int compareTo(TableDTO t){
+       return Integer.parseInt(this.getNum()) - Integer.parseInt(t.getNum());
+   }
 
 }
