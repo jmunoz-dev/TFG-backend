@@ -33,7 +33,7 @@
             <div class="reservation-info">
                 <h2 class="user">Usuario: </h2>
                 <p th:text="'Nombre: ' + *{user.name}"></p> 
-                <p th:text="'Tlf: ' + *{user.phoneNumber}"></p>
+                <p><a th:text="'Llamar: ' + *{user.phoneNumber}" th:href="'tel:+34' + *{user.phoneNumber}"></a></p>
             </div>
             <div class="reservation-info inpar">
                 <h2>Numero mesa</h2>
