@@ -2,6 +2,8 @@ package web.backend.gothere.Web.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,11 +27,13 @@ import web.backend.gothere.Services.BarService;
 import web.backend.gothere.Services.TableService;
 import web.backend.gothere.Services.OffersService;
 import web.backend.gothere.Services.ReservationBookService;
+import web.backend.gothere.Services.SchedulesService;
 import web.backend.gothere.Services.UserService;
 import web.backend.gothere.Services.Models.TableDTO;
 import web.backend.gothere.Services.Models.BarDTO;
 import web.backend.gothere.Services.Models.OfferDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
+import web.backend.gothere.Services.Models.ScheduleDTO;
 import web.backend.gothere.Services.Models.UserDTO;
 
 @Controller
@@ -42,15 +46,17 @@ public class AdminViewController {
     private final ReservationBookService reservationBookService;
     private final TableService tableService;
     private final BarImgsService barImgsService;
+    private final SchedulesService schedulesService;
     
 
-    public AdminViewController(UserService userService, BarService barService, OffersService offerService, ReservationBookService reservationBookService, TableService tableService,  BarImgsService barImgsService) {
+    public AdminViewController(UserService userService, BarService barService, OffersService offerService, ReservationBookService reservationBookService, TableService tableService,  BarImgsService barImgsService, SchedulesService schedulesService) {
         this.userService = userService;
         this.barService = barService;
         this.offerService = offerService;
         this.reservationBookService = reservationBookService;
         this.tableService = tableService;
         this.barImgsService = barImgsService;
+        this.schedulesService = schedulesService;
     }
 
     @GetMapping("")
@@ -144,7 +150,28 @@ public class AdminViewController {
        UserDTO user = userService.getUserByToken(cookie);
        
         List<TableDTO> tables = tableService.getByBarId(user.getIdBar());
+        Collections.sort(tables);
         mv.addObject("tables",tables);
+
+        return mv;
+    }
+    @GetMapping("/tables/edit/{idTable}")
+    public ModelAndView tablesEdit(@CookieValue( required = false, value="adminlogin") String cookie,
+     @PathVariable Long idTable ){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+    
+        ModelAndView mv = new ModelAndView("admin/tables");
+       
+        TableDTO table = tableService.getById(idTable);
+        
+        mv.addObject("table",table);
 
         return mv;
     }
@@ -186,7 +213,9 @@ public class AdminViewController {
         UserDTO user = userService.getUserByToken(cookie);
         
         ModelAndView mv = new ModelAndView("admin/add_table");
-        mv.addObject("user",user);
+        List<ScheduleDTO> scheduleList = schedulesService.getAll();
+        mv.addObject("barId",user.getIdBar());
+        mv.addObject("scheduleList",scheduleList);
 
         return mv;
     }
