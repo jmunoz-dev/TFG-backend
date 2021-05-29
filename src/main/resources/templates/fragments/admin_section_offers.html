@@ -15,6 +15,7 @@
                 <input type="text" style="display: none;" th:id="*{idOffer}" th:value="*{idOffer}"></input>
                 <div class="offer-info odd">
                     <h2>Imagen</h2>
+                    <img style="max-height: 125px;padding: 10px;" th:src="'https://gotherestorage.blob.core.windows.net' + *{offerImage}" alt=" ">
                     <p th:text="*{offerImage}"></p>
                 </div>
                 <div class="offer-info even">

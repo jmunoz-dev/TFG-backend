@@ -81,7 +81,7 @@ public class OffersService {
         
             String originalName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             String fileName = FileUploadUtil.getFileName(originalName, offer.getBar().getName() + " " +"offer"+offer.getIdOffer());
-            
+       
             try {
 
                 BlobContainerClient container = new BlobContainerClientBuilder()
@@ -94,6 +94,7 @@ public class OffersService {
                 blob.upload(multipartFile.getInputStream(),multipartFile.getSize(),true);
     
                 OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
+                entityToInsert.setOfferImage("/images/offers/bar"+offer.getBar().getIdbar() + "/" + fileName);
                 offersRepository.save(entityToInsert);
                 return offer;
             } catch (Exception e) {

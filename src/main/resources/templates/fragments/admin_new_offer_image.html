@@ -11,7 +11,7 @@
     <div class="offers-wrapper">
         <h2 class="title">Nueva imagen para oferta</h2>
         <div th:object="${offer}" class="new-offer-card">
-            <form th:action="@{image/offer/save/+*{idOffer}}" method="post" enctype="multipart/form-data">
+            <form th:action="@{'/admin/image/offer/save/'+*{idOffer}}" method="post" enctype="multipart/form-data">
                 <!-- <label th:if="*{#lists.size(barImages)}">Añadir más fotos: </label> -->
                 <input class="page-section-menu active" id="image" required type="file" name="image" accept="image/png, image/jpeg" />
                 <!-- <input id="idBar" type="text" name="idBar" style="display:none" th:value="*{idbar}" /> -->
