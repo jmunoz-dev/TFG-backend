@@ -177,21 +177,17 @@ window.onload = () => {
                
                 var idSplited = event.target.id.split("-")
                 let idReservation = idSplited[2]
-                console.log("id:" ,idReservation, "split:", idSplited)
                 cancelReservation(idReservation)
             })
         })
     }
     if (/admin\/tables/.test(window.location.href)) {
-        console.log("estoy en mesas")
         let deleteTableButtons = document.querySelectorAll('[id^="detele-table-"]')
-        console.log("estoy en mesas", deleteTableButtons)
         deleteTableButtons.forEach(button => {
            
             button.addEventListener('click', function(event) {
                 var idSplited = event.target.id.split("-")
                 let idTable = idSplited[2]
-                console.log("id:" ,idTable, "split:", idSplited)
                 deteleTable(idTable)
             })
         })
@@ -259,15 +255,17 @@ function cancelReservation(id){
     }
 }
 function deteleTable(id){
-    console.log("id:" ,id)
-    allowDelete = window.confirm('¿Estás seguro que deseas eliminar esta mesa?')
+    allowDelete = window.confirm('Puede haber reservas futuras asociadas a esta mesa, si la eliminas estas reservas serán canceladas \n ¿Estás seguro que deseas eliminar esta mesa?')
     if (allowDelete) {
         fetch('/api/tables/' + Number(id), {
                 method: 'DELETE',
             })
             .then(() => {
                     location.reload()
-            }).catch(e => console.log(e))
+            }).catch(e => {
+                console.log(e)
+                alert("se ha producido un error")
+            })
     }
 }
 function createTable(table){
