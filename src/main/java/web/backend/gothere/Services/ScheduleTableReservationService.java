@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import web.backend.gothere.Repositories.Entities.ScheduleEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
@@ -40,5 +42,15 @@ public class ScheduleTableReservationService {
         entityToUpdate.setTable(table.get());
         ScheduleTableReservationEntity result = scheduleTableReservationRepository.save(entityToUpdate);
         return modelMapper.map(result, ScheduleTableReservationDTO.class);
+    }
+    public void delete(Long id) {
+        Optional<ScheduleTableReservationEntity> entityToDelete = scheduleTableReservationRepository.findById(id);
+        entityToDelete.get().setTable(null);
+        entityToDelete.get().setSchedule(null);
+        if(entityToDelete.isPresent()){
+            scheduleTableReservationRepository.save(entityToDelete.get());;
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting data");
+        }
     }
 }
