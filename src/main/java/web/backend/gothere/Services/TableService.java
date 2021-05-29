@@ -36,7 +36,7 @@ public class TableService {
     private ModelMapper modelMapper;
     @Autowired
     private BarRepository barRepository;
-    
+
     public List<TableDTO> getAll() {
         List<TableDTO> tables =  tableRepository.findAll().stream().map(x -> modelMapper.map(x, TableDTO.class))
                 .collect(Collectors.toList());
@@ -79,8 +79,9 @@ public class TableService {
         Optional<TableEntity> entityToDelete = tableRepository.findById(idTable);
         if (!entityToDelete.isPresent())
             throw new ElementNotFoundException();
-
-        for ( ScheduleTableReservationEntity schedule : entityToDelete.get().getScheduleTableReservations() ) {
+        Set<ScheduleTableReservationEntity> schedules = new HashSet<>();
+        schedules.addAll(entityToDelete.get().getScheduleTableReservations());
+        for ( ScheduleTableReservationEntity schedule :  schedules) {
             schedule.setTable(null);
             entityToDelete.get().getScheduleTableReservations().remove(schedule);
         }
