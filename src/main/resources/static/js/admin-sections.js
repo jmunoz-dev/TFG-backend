@@ -248,9 +248,9 @@ function editOffer(id) {
                         <input type="date" class="code-activation" value="${data.startDate}" name="startDate" />
                         <h2>Fecha fin</h2>
                         <input type="date" class="code-activation" value="${data.endDate}" name="endDate" />
-                        <div>
-                        <button id="button-modal-save" class="modal-submit">Guardar cambios</button>
-                        <button id="modal-submit" class="modal-submit modal-exit">Cerrar</button>
+                        <div class="edit-offer-actions">
+                            <button id="button-modal-save" class="modal-submit">Guardar cambios</button>
+                            <button id="modal-submit" class="modal-submit modal-exit">Cerrar</button>
                         </div>
                     </div>        
                 <button id="close-modal" class="modal-close modal-exit">X</button>

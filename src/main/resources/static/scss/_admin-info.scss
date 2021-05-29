@@ -324,11 +324,12 @@ a.subsection-menu {
 }
 
 .modal-container {
+    margin: auto;
+    width: 50%;
     border-radius: 25px;
     position: relative;
     background-color: white;
     border: 1px solid black;
-    width: fit-content;
     margin: auto;
     top: 40%;
     z-index: 2;
@@ -346,6 +347,19 @@ a.subsection-menu {
         .offer-price {
             margin-top: 20px;
             font-size: xxx-large;
+        }
+    }
+}
+
+#modal-two {
+    .modal-container {
+        .edit-offer-actions {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            button {
+                width: 45%;
+            }
         }
     }
 }
