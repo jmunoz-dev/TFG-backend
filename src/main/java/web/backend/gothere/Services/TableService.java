@@ -47,7 +47,7 @@ public class TableService {
     public TableDTO getById(Long id) {
         Optional<TableEntity> result = tableRepository.findById(id);
         if (result.isPresent()) {
-            return modelMapper.map(result, TableDTO.class);
+            return modelMapper.map(result.get(), TableDTO.class);
         }
         return null;
     }
@@ -68,9 +68,10 @@ public class TableService {
         Optional<TableEntity> dataToUpdate = tableRepository.findById(id);
         if (dataToUpdate.isPresent()) {
 
-            TableEntity entityToUpdate = modelMapper.map(table, TableEntity.class);
-            entityToUpdate.setIdTable(id);
-            TableEntity result = tableRepository.save(entityToUpdate);
+            dataToUpdate.get().setIdTable(id);
+            dataToUpdate.get().setCapacity(table.getCapacity());
+            dataToUpdate.get().setNum(table.getNum());
+            TableEntity result = tableRepository.save(dataToUpdate.get());
             return modelMapper.map(result, TableDTO.class);
 
         }
