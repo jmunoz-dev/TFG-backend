@@ -265,13 +265,8 @@ function deteleTable(id){
         fetch('/api/tables/' + Number(id), {
                 method: 'DELETE',
             })
-            .then(res => res.json())
-            .then(res => {
-                if(res.status == 400){
-                    alert("mesa no encontrada")
-                }else{
-                    console.log(res)
-                }
+            .then(() => {
+                    location.reload()
             }).catch(e => console.log(e))
     }
 }
