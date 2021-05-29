@@ -220,16 +220,16 @@ a.subsection-menu {
         }
     }
     .offer-card {
-        border: 1px solid #000;
+        box-shadow: -5px 3px 11px 2px #888;
         border-radius: $main-button-radius;
         outline: none;
-        width: 25%;
+        width: 30%;
         display: flex;
         flex-wrap: wrap;
         margin-bottom: 30px;
         .wrapper-info {
             width: 100%;
-            padding: 20px;
+            padding: 20px 20px 0;
             .offer-info {
                 .price-info-wrapper {
                     display: block;
@@ -258,32 +258,36 @@ a.subsection-menu {
         .icons-actions {
             display: flex;
             text-align: center;
-            border-top: 1px solid black;
             width: 100%;
+            padding: 20px 20px;
             align-self: flex-end;
+            color: white;
+            font-weight: 600;
             .edit-card {
-                padding: 5%;
+                line-height: 40pt;
                 width: 50%;
-                border-right: 1px solid black;
+                margin-left: 5px;
                 background-color: #3294f0;
-                border-bottom-left-radius: $main-button-radius;
+                border-radius: $main-button-radius;
                 outline: none;
                 overflow: hidden;
                 &:hover {
                     background-color: darken($color: #3294f0, $amount: 10);
                     img {
-                        transform: scale(0.8, 0.9);
+                        transform: scale(0.8, 0.8);
                     }
                 }
                 img {
-                    width: 35%;
+                    margin-right: 8px;
+                    vertical-align: middle;
+                    width: 20%;
                 }
             }
             .remove-card {
-                padding: 5%;
+                line-height: 40pt;
+                margin-right: 5px;
                 width: 50%;
-                border-bottom-right-radius: $main-button-radius;
-                border-left: 1px solid black;
+                border-radius: $main-button-radius;
                 background-color: #c03636;
                 &:hover {
                     background-color: darken($color: #c03636, $amount: 10);
@@ -292,7 +296,9 @@ a.subsection-menu {
                     }
                 }
                 img {
-                    width: 30%;
+                    margin-right: 8px;
+                    vertical-align: middle;
+                    width: 20%;
                 }
             }
         }
