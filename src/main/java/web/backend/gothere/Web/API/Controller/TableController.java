@@ -38,6 +38,11 @@ public class TableController {
         return tableService.getAll();
     }
 
+    @GetMapping("/{idTable}")
+    public TableDTO GetTableById( @PathVariable("id") Long idtable) {
+        return tableService.getById(idtable);
+    }
+
     @PostMapping
     public TableDTO AddTable(@RequestBody TableDTO table) {
         return tableService.add(table);
@@ -51,10 +56,16 @@ public class TableController {
         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
+    @DeleteMapping("/schedule/{id}")
+    public ResponseEntity<HttpStatus> DeleteSchedules(@PathVariable("id") Long id) {
+       scheduleTableReservationService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     // update
     @PutMapping("/{id}")
-    public TableDTO UpdateTable(@RequestBody TableDTO table, @PathVariable("id") Long idtable) {
-        return tableService.update(idtable, table);
+    public Long UpdateTable(@RequestBody TableDTO table, @PathVariable("id") Long idtable) {
+        return tableService.update(idtable, table).getIdTable();
     }
 
     // DELETEAR
