@@ -302,7 +302,7 @@ public class AdminViewController {
         OfferDTO offerToSaveImg = offerService.findbyOfferId(idOffer);
         offerService.addOfferImage(offerToSaveImg, multipartFile);
         
-        return new ModelAndView("redirect:/admin/offers/");
+        return new ModelAndView("redirect:/admin/offers");
     }
 
 }
