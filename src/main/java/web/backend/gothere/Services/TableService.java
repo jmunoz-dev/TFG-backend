@@ -77,8 +77,15 @@ public class TableService {
 
     public void delete(Long idTable) {
         Optional<TableEntity> entityToDelete = tableRepository.findById(idTable);
-        if (entityToDelete.isPresent())
-            tableRepository.delete(entityToDelete.get());
+        if (!entityToDelete.isPresent())
+            throw new ElementNotFoundException();
+
+        for ( ScheduleTableReservationEntity schedule : entityToDelete.get().getScheduleTableReservations() ) {
+            schedule.setTable(null);
+            entityToDelete.get().getScheduleTableReservations().remove(schedule);
+        }
+
+        tableRepository.delete(entityToDelete.get());
     }
     public List<TableDTO> getTableByBarAndAvailabilityDate(Long idBar, LocalDate date){
         Optional<BarEntity> bar = barRepository.findById(idBar);
