@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import web.backend.gothere.Repositories.Entities.BarEntity;
+import web.backend.gothere.Repositories.Interfaces.BarRepository;
+import web.backend.gothere.Services.BarService;
 import web.backend.gothere.Services.OffersService;
+import web.backend.gothere.Services.Models.BarDTO;
 import web.backend.gothere.Services.Models.OfferDTO;
 
 
@@ -24,9 +28,11 @@ import web.backend.gothere.Services.Models.OfferDTO;
 @RequestMapping("api/offers")
 public class OffersController {
     private final OffersService offersService;
+    private final BarService barService;
 
-    OffersController (OffersService offersService) {
+    OffersController (OffersService offersService, BarService barService) {
         this.offersService = offersService;
+        this.barService = barService;
     }
 
     
@@ -55,9 +61,12 @@ public class OffersController {
 
 
     @PostMapping()
-    public  ResponseEntity<HttpStatus> postOffer(@RequestBody OfferDTO offer) {
+    public  ResponseEntity<HttpStatus> addOffer(@RequestBody OfferDTO offer) {
         try {
-            offersService.add(offer);
+            BarDTO bar = barService.getBarById(offer.getBar().getIdbar());
+            OfferDTO offerToAdd = offer;
+            offerToAdd.setBar(bar);
+            offersService.add(offerToAdd);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
