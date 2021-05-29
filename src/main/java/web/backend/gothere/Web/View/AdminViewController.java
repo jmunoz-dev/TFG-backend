@@ -167,10 +167,11 @@ public class AdminViewController {
             return mv2;
         }
     
-        ModelAndView mv = new ModelAndView("admin/tables");
+        ModelAndView mv = new ModelAndView("admin/tables_edit");
        
         TableDTO table = tableService.getById(idTable);
-        
+        List<ScheduleDTO> scheduleList = schedulesService.getAll();
+        mv.addObject("scheduleList",scheduleList);
         mv.addObject("table",table);
 
         return mv;
