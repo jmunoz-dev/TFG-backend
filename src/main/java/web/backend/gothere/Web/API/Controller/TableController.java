@@ -42,8 +42,8 @@ public class TableController {
     public TableDTO AddTable(@RequestBody TableDTO table) {
         return tableService.add(table);
     }
+
     @PutMapping("/schedule")
-    @PostMapping
     public ResponseEntity<HttpStatus> AddSchedules(@RequestBody ScheduleTableReservationDTO table) {
         if( scheduleTableReservationService.add(table) != null){
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -59,8 +59,8 @@ public class TableController {
 
     // DELETEAR
     @DeleteMapping("/{id}")
-    public void DeleteTable(@PathVariable("id") Long idbar) {
-        tableService.delete(idbar);
+    public void DeleteTable(@PathVariable("id") Long idTable) {
+        tableService.delete(idTable);
     }
     //por bar y fecha (esta es la importante para el listado de front)
     @GetMapping("/{iBar}/{date}")
