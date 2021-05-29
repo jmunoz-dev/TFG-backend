@@ -231,6 +231,15 @@ a.subsection-menu {
             width: 100%;
             padding: 20px;
             .offer-info {
+                .price-info-wrapper {
+                    display: block;
+                    text-align: right;
+                    margin: 10px 0;
+                    h2,
+                    p {
+                        display: inline;
+                    }
+                }
                 h2 {
                     font-size: 15px;
                     width: 100%;
