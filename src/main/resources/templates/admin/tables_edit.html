@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/admin-sections.js}"></script>
+    <title>Tables</title>
+</head>
+
+<body>
+    <header th:insert="~{fragments/header.html :: body} "></header>
+    <div class="admin_wrapper">
+    <div th:insert="~{fragments/admin_menu.html :: body} "> </div>
+    <div th:insert="~{fragments/admin_section_edit_table.html :: body}" class="admin_section_home"></div>
+    </div>
+
+</body>
+
+</html>
