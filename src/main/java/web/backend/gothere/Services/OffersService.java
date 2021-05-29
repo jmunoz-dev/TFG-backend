@@ -26,41 +26,39 @@ public class OffersService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<OfferDTO> getAll(Double latitude,Double length, Double distance) throws ResponseStatusException {
+    public List<OfferDTO> getAll(Double latitude, Double length, Double distance) throws ResponseStatusException {
         List<OfferDTO> offersList = new ArrayList<OfferDTO>();
-        if(latitude == null || length == null || distance == null){
-            offersList= offersRepository.findAll().stream()
-            .map(x -> modelMapper.map(x, OfferDTO.class))
-            .collect(Collectors.toList());
-            if(!offersList.isEmpty()){
+        if (latitude == null || length == null || distance == null) {
+            offersList = offersRepository.findAll().stream().map(x -> modelMapper.map(x, OfferDTO.class))
+                    .collect(Collectors.toList());
+            if (!offersList.isEmpty()) {
                 return offersList;
-            }else{
+            } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
             }
         }
         distance = transformDistance(distance);
 
         List<BarDTO> barList = barRepository.getByCoordinates(latitude, length, distance).stream()
-        .map(x -> modelMapper.map(x, BarDTO.class))
-        .collect(Collectors.toList());
-        
+                .map(x -> modelMapper.map(x, BarDTO.class)).collect(Collectors.toList());
+
         for (BarDTO barDTO : barList) {
-            try{
+            try {
                 offersList.addAll(findOffersByBarId(barDTO.getIdbar()));
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 continue;
             }
-            
+
         }
 
-        if(!offersList.isEmpty()){
+        if (!offersList.isEmpty()) {
             return offersList;
-        }else{
+        } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
         }
     }
 
-    public OfferDTO add(OfferDTO offer){
+    public OfferDTO add(OfferDTO offer) {
         try {
             OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
             offersRepository.save(entityToInsert);
@@ -68,14 +66,12 @@ public class OffersService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
-        
-       
     }
 
-    public Optional<OfferDTO> update(Long id, OfferDTO offer){
+    public Optional<OfferDTO> update(Long id, OfferDTO offer) {
         Optional<OfferEntity> dataToUpdate = offersRepository.findById(id);
-        if(dataToUpdate.isPresent()){
-            if(dataToUpdate.get().getIdOffer() == id){
+        if (dataToUpdate.isPresent()) {
+            if (dataToUpdate.get().getIdOffer() == id) {
                 OfferEntity entityToUpdate = modelMapper.map(offer, OfferEntity.class);
                 entityToUpdate.setIdOffer(id);
                 OfferEntity result = offersRepository.save(entityToUpdate);
@@ -85,42 +81,41 @@ public class OffersService {
         return Optional.empty();
     }
 
-    public OfferDTO findbyOfferId(Long id) throws ResponseStatusException{
+    public OfferDTO findbyOfferId(Long id) throws ResponseStatusException {
         Optional<OfferEntity> entity = offersRepository.findById(id);
-        if(entity.isPresent()){
+        if (entity.isPresent()) {
             return modelMapper.map(entity.get(), OfferDTO.class);
-        }else{
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
-    public List<OfferDTO> findOffersByBarId(Long id) throws ResponseStatusException{
+    public List<OfferDTO> findOffersByBarId(Long id) throws ResponseStatusException {
 
         Optional<BarEntity> bar = barRepository.findById(id);
-        if(!bar.isPresent()){
+        if (!bar.isPresent()) {
             throw new ElementNotFoundException();
         }
         List<OfferDTO> offersList = offersRepository.findByBar(bar.get()).stream()
-        .map(x -> modelMapper.map(x, OfferDTO.class))
-        .collect(Collectors.toList());
+                .map(x -> modelMapper.map(x, OfferDTO.class)).collect(Collectors.toList());
 
-        if(!offersList.isEmpty()){
+        if (!offersList.isEmpty()) {
             return offersList;
-        }else{
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No data found");
         }
     }
 
-
-    public void deleteById(Long id) throws ResponseStatusException{
+    public void deleteById(Long id) throws ResponseStatusException {
         Optional<OfferEntity> entityToDelete = offersRepository.findById(id);
-        if(entityToDelete.isPresent()){
+        if (entityToDelete.isPresent()) {
             offersRepository.delete(entityToDelete.get());
-        }else{
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting data");
         }
     }
-    static Double transformDistance(Double distance){
-        return (Double)distance/100;
+
+    static Double transformDistance(Double distance) {
+        return (Double) distance / 100;
     }
 }
