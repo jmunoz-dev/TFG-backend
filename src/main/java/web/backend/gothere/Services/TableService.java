@@ -36,6 +36,8 @@ public class TableService {
     private ModelMapper modelMapper;
     @Autowired
     private BarRepository barRepository;
+    @Autowired
+    private ReservationBookService reservationBookService;
 
     public List<TableDTO> getAll() {
         List<TableDTO> tables =  tableRepository.findAll().stream().map(x -> modelMapper.map(x, TableDTO.class))
@@ -79,6 +81,15 @@ public class TableService {
         Optional<TableEntity> entityToDelete = tableRepository.findById(idTable);
         if (!entityToDelete.isPresent())
             throw new ElementNotFoundException();
+       List<ReservationBookDTO> reservations = reservationBookService.getAllByBar(entityToDelete.get().getBar().getIdBar(), null, null);
+        for(ReservationBookDTO res : reservations){
+            if(res.getReservationDate().isAfter(LocalDate.now().minusDays(1)) 
+            && res.getScheduleTableReservation().getTable().getIdTable() == idTable
+            && !res.isCanceled()){
+                reservationBookService.setCanceled(res.getIdReservationBook());
+            }
+        }
+
         Set<ScheduleTableReservationEntity> schedules = new HashSet<>();
         schedules.addAll(entityToDelete.get().getScheduleTableReservations());
         for ( ScheduleTableReservationEntity schedule :  schedules) {
