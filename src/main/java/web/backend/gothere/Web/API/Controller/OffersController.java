@@ -54,15 +54,15 @@ public class OffersController {
     }
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> addOffer(@RequestBody OfferDTO offer) {
+    public Long addOffer(@RequestBody OfferDTO offer) {
         try {
             BarDTO bar = barService.getBarById(offer.getBar().getIdbar());
             OfferDTO offerToAdd = offer;
             offerToAdd.setBar(bar);
-            offersService.add(offerToAdd);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            OfferDTO response = offersService.add(offerToAdd);
+            return response.getIdOffer();
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return null;
         }
     }
 

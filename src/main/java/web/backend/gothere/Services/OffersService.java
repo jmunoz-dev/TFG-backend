@@ -5,12 +5,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.azure.storage.blob.BlobClient;
+import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.BlobContainerClientBuilder;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import web.backend.gothere.Constants;
+import web.backend.gothere.FileUploadUtil;
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Entities.OfferEntity;
@@ -62,21 +69,36 @@ public class OffersService {
     public OfferDTO add(OfferDTO offer) {
         try {
             OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
-            offersRepository.save(entityToInsert);
-            return offer;
+            OfferEntity result = offersRepository.save(entityToInsert);
+            
+            return modelMapper.map(result, OfferDTO.class);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
     }
 
     public OfferDTO addOfferImage(OfferDTO offer, MultipartFile multipartFile) {
-        try {
-            OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
-            offersRepository.save(entityToInsert);
-            return offer;
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT);
-        }
+        
+            String originalName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            String fileName = FileUploadUtil.getFileName(originalName, offer.getBar().getName() + " " +"offer"+offer.getIdOffer());
+            
+            try {
+
+                BlobContainerClient container = new BlobContainerClientBuilder()
+                        .connectionString(Constants.CON_STR_AZURE)
+                        .containerName("images/offers/bar" + offer.getBar().getIdbar())
+                        .buildClient();
+        
+        
+                BlobClient blob=container.getBlobClient(fileName);
+                blob.upload(multipartFile.getInputStream(),multipartFile.getSize(),true);
+    
+                OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
+                offersRepository.save(entityToInsert);
+                return offer;
+            } catch (Exception e) {
+                return null;
+            }
     }
 
     public Optional<OfferDTO> update(Long id, OfferDTO offer) {

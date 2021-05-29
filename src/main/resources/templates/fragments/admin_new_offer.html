@@ -11,12 +11,6 @@
     <div class="offers-wrapper">
         <h2 class="title">Nueva oferta</h2>
         <div th:object="${bar}" class="new-offer-card">
-            <form th:action="@{image/offer/save}" method="post" enctype="multipart/form-data">
-                <!-- <label th:if="*{#lists.size(barImages)}">Añadir más fotos: </label> -->
-                <input class="page-section-menu active" id="image" required type="file" name="image" accept="image/png, image/jpeg" />
-                <input id="idBar" type="text" name="idBar" style="display:none" th:value="*{idbar}" />
-                <button id="upload" type="submit">Subir imagen selecionada</button>
-            </form>
             <form>
                 <input type="hidden" th:value="*{idbar}" id="idbar"></input>
                 <h2>Título</h2>

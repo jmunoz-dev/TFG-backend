@@ -255,8 +255,8 @@ public class AdminViewController {
         return new ModelAndView("redirect:/admin/home");
     }
     
-    @PutMapping("/image/{idOffer}/offer/edit")
-    public ModelAndView saveOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
+    @DeleteMapping("/image/offer/{idOffer}")
+    public ModelAndView deleteOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
             @RequestParam("image") MultipartFile multipartFile, @PathVariable("idOffer") Long idOffer) throws IOException {
          
         if(cookie == null){
@@ -272,9 +272,26 @@ public class AdminViewController {
         return new ModelAndView("redirect:/admin/offer/"+idOffer+"/edit");
     }
 
-    @PostMapping("/image/offer/save")
+    @GetMapping("/offer/{idOffer}/add/image")
+    public ModelAndView editNewOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        ModelAndView mv = new ModelAndView("admin/add_offer_image");
+        mv.addObject("offer", offer);
+
+        return mv;
+    }
+
+    @PostMapping("/image/offer/save/{idOffer}")
     public ModelAndView saveOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
-            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+            @RequestParam("image") MultipartFile multipartFile, @PathVariable("idOffer") Long idOffer) throws IOException {
          
         if(cookie == null){
             return new ModelAndView("redirect:/admin");
@@ -282,10 +299,10 @@ public class AdminViewController {
         if(!isBarOwner(cookie)){
             return new ModelAndView("redirect:/admin");
         }
-        Long idBar = userService.getUserByToken(cookie).getIdBar();
-        // barImgsService.add(idBar, multipartFile);
+        OfferDTO offerToSaveImg = offerService.findbyOfferId(idOffer);
+        offerService.addOfferImage(offerToSaveImg, multipartFile);
         
-        return new ModelAndView("redirect:/admin/offer/new");
+        return new ModelAndView("redirect:/admin/offer/");
     }
 
 }

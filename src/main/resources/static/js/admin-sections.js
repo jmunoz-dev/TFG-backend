@@ -118,10 +118,10 @@ window.onload = () => {
                         },
                         body: JSON.stringify(offer),
                     })
-                    .then(response => response.text())
+                    .then(response => response.json())
                     .then(data => {
                         console.log('Success');
-                        window.location = "/admin/offers"
+                        window.location = `/admin/offer/${data}/add/image`
                     })
                     .catch((error) => {
                         console.error('Error:', error);
@@ -248,7 +248,7 @@ function deleteOffer(id) {
     }
 }
 
-function editInNewPAge(id) {
+function editInNewPage(id) {
     location.href = `offer/${id}/edit`
 }
 

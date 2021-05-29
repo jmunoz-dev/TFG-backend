@@ -1,0 +1,28 @@
+<html xmlns="http://www.thymeleaf.org">
+
+<body>
+    <div class="admin-menu-wrapper">
+        <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
+        <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
+        <a th:href="@{/admin/offers/new}" class="subsection-menu active"> Crear nueva</a>
+        <a th:href="@{/admin/tables}" class="page-section-menu">Mesas</a>
+        <a th:href="@{/admin/reservations}" class="page-section-menu">Reservas</a>
+    </div>
+    <div class="offers-wrapper">
+        <h2 class="title">Nueva imagen para oferta</h2>
+        <div th:object="${offer}" class="new-offer-card">
+            <form th:action="@{image/offer/save/+*{idOffer}}" method="post" enctype="multipart/form-data">
+                <!-- <label th:if="*{#lists.size(barImages)}">Añadir más fotos: </label> -->
+                <input class="page-section-menu active" id="image" required type="file" name="image" accept="image/png, image/jpeg" />
+                <!-- <input id="idBar" type="text" name="idBar" style="display:none" th:value="*{idbar}" /> -->
+                <button id="upload" type="submit">Subir imagen selecionada</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="sidebar-actions">
+        <button id="creationOffer" class="action-button">Guardar imagen</button>
+    </div>
+</body>
+
+</html>
