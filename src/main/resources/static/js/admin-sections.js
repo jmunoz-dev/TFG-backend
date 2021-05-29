@@ -230,6 +230,8 @@ function editOffer(id) {
                 <div class="modal-container">
                     <h1 id="title-popup">Editar oferta</h1>
                     <div class="modal-body">
+                        <input type="hidden" value="${data.idOffer}" id="idOffer" />
+                        <input type="hidden" value="${data.bar.idbar}" id="idbar" />
                         <h2>Imagen</h2>
                         <input  class="code-activation" value="${data.offerImage}" name="offerImage" />
                         <h2>Título</h2>
@@ -238,12 +240,16 @@ function editOffer(id) {
                         <input class="code-activation" value="${data.offerDescription}" name="offerDescription" />
                         <h2>Precio</h2>
                         <input class="code-activation" value="${data.offerPrice}" name="offerPrice" />
+                        <h2>offerMinimunPoints</h2>
+                        <input class="code-activation" value="${data.offerMinimunPoints}" name="offerMinimunPoints" />
+                        <h2>offerRewardsPoints</h2>
+                        <input class="code-activation" value="${data.offerRewardsPoints}" name="offerRewardsPoints" />
                         <h2>Fecha inicio</h2>
                         <input type="date" class="code-activation" value="${data.startDate}" name="startDate" />
                         <h2>Fecha fin</h2>
                         <input type="date" class="code-activation" value="${data.endDate}" name="endDate" />
                         <div>
-                        <button id="button-modal-close" class="modal-submit">Guardar cambios</button>
+                        <button id="button-modal-save" class="modal-submit">Guardar cambios</button>
                         <button id="modal-submit" class="modal-submit modal-exit">Cerrar</button>
                         </div>
                     </div>        
@@ -253,12 +259,48 @@ function editOffer(id) {
             document.querySelector('body').insertAdjacentHTML('beforeend', modal_edit_offer)
             let xCloseModal = document.querySelectorAll(".modal-exit")
             xCloseModal.forEach(button => button.addEventListener('click', closeModal));
-
-            function closeModal(e) {
-                document.querySelector('#modal-two').classList.toggle('hidden')
-                document.querySelector('#modal-two').classList.toggle('shown')
-            }
+            let saveData = document.querySelector("#button-modal-save")
+            saveData.addEventListener('click', saveChanges);
         });
+
+    function closeModal(e) {
+        document.querySelector('#modal-two').classList.toggle('hidden')
+        document.querySelector('#modal-two').classList.toggle('shown')
+    }
+
+    function saveChanges() {
+        let offer = {
+            bar: {
+                idbar: document.querySelector('#idbar').value
+            },
+            idOffer: document.querySelector('#idOffer').value,
+            offerImage: document.querySelector('input[name="offerImage"').value,
+            offerTitle: document.querySelector('input[name="offerTitle"').value,
+            offerDescription: document.querySelector('input[name="offerDescription"').value,
+            offerPrice: document.querySelector('input[name="offerPrice"').value,
+            offerMinimunPoints: parseInt(document.querySelector('input[name="offerMinimunPoints"').value),
+            offerRewardsPoints: parseInt(document.querySelector('input[name="offerRewardsPoints"').value),
+            startDate: document.querySelector('input[name="startDate"').value,
+            endDate: document.querySelector('input[name="endDate"').value,
+        }
+
+        fetch('/api/offers/' + idOffer.value, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(offer),
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                location.reload()
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    }
 
 }
 
