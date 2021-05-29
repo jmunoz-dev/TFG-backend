@@ -198,12 +198,41 @@ window.onload = () => {
             document.querySelector('#modal-one').classList.toggle('hidden')
             document.querySelector('#modal-one').classList.toggle('shown')
         })
-
-
-
-
-
     }
+
+    document.querySelector('button#updateOffer').addEventListener('click', function() {
+        let offer = {
+            bar: {
+                idbar: document.querySelector('#idbar').value
+            },
+            idOffer: document.querySelector('#idOffer').value,
+            offerImage: document.querySelector('input[name="offerImage"').value,
+            offerTitle: document.querySelector('input[name="offerTitle"').value,
+            offerDescription: document.querySelector('input[name="offerDescription"').value,
+            offerPrice: document.querySelector('input[name="offerPrice"').value,
+            offerMinimunPoints: parseInt(document.querySelector('input[name="offerMinimunPoints"').value),
+            offerRewardsPoints: parseInt(document.querySelector('input[name="offerRewardsPoints"').value),
+            startDate: document.querySelector('input[name="startDate"').value,
+            endDate: document.querySelector('input[name="endDate"').value,
+        }
+
+        fetch('/api/offers/' + idOffer.value, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(offer),
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                location.href = '/admin/offers'
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    })
 }
 
 function deleteOffer(id) {
@@ -217,6 +246,10 @@ function deleteOffer(id) {
                 location.reload()
             })
     }
+}
+
+function editInNewPAge(id) {
+    location.href = `offer/${id}/edit`
 }
 
 function editOffer(id) {
@@ -303,6 +336,7 @@ function editOffer(id) {
     }
 
 }
+
 
 
 

@@ -3,16 +3,19 @@
 <body>
     <div class="admin-menu-wrapper">
         <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
-        <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
-        <a th:href="@{/admin/offers/new}" class="subsection-menu active"> Editar oferta</a>
+        <a th:href="@{/admin/offers}" class="page-section-menu">Ofertas</a>
+        <a th:href="@{/admin/offers}" class="subsection-menu active">Editar oferta</a>
         <a th:href="@{/admin/tables}" class="page-section-menu">Mesas</a>
         <a th:href="@{/admin/reservations}" class="page-section-menu">Reservas</a>
     </div>
     <div class="offers-wrapper">
         <h2 class="title">Editar oferta</h2>
         <div th:object="${offer}" class="new-offer-card">
+
             <form>
                 <input type="hidden" th:value="*{bar.idbar}" id="idbar"></input>
+                <input type="hidden" th:value="*{idOffer}" id="idOffer" name="idOffer"></input>
+                <input type="hidden" th:value="*{offerImage}" id="offerImage" name="offerImage"></input>
                 <h2>Título</h2>
                 <input type="text" th:name="offerTitle" th:value="*{offerTitle}" class="even"></input>
                 <h2>Descripción</h2>
@@ -36,7 +39,7 @@
     </div>
 
     <div class="sidebar-actions">
-        <button id="creationOffer" class="action-button">Guardar oferta</button>
+        <button id="updateOffer" class="action-button">Guardar cambios</button>
     </div>
 </body>
 
