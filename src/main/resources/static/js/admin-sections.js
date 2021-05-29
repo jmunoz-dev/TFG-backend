@@ -118,9 +118,9 @@ window.onload = () => {
                         },
                         body: JSON.stringify(offer),
                     })
-                    .then(response => response.json())
+                    .then(response => response.text())
                     .then(data => {
-                        console.log('Success:', data);
+                        console.log('Success');
                         window.location = "/admin/offers"
                     })
                     .catch((error) => {
