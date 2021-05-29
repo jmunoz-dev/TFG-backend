@@ -93,16 +93,51 @@ window.onload = () => {
         let buttonActivate = document.querySelector("button#modal-submit")
         let buttonCloseModal = document.querySelector("button#close-modal")
 
-        let buttonCreateNew = document.querySelector("button#creation")
+        let buttonCreateNew = document.querySelector("button#creationOffer")
 
+        if (buttonCreateNew != null) {
+            buttonCreateNew.addEventListener('click', function(e) {
+                let idbar = parseInt(document.querySelector('#idbar').value)
+                let offer = {
+                    bar: {
+                        idbar: idbar
+                    },
+                    idOffer: 0,
+                    offerTitle: document.querySelector('input[name="offerTitle"').value,
+                    offerDescription: document.querySelector('input[name="offerDescription"').value,
+                    offerPrice: document.querySelector('input[name="offerPrice"').value,
+                    offerMinimunPoints: parseInt(document.querySelector('input[name="offerMinimunPoints"').value),
+                    offerRewardsPoints: parseInt(document.querySelector('input[name="offerRewardsPoints"').value),
+                    startDate: document.querySelector('input[name="startDate"').value,
+                    endDate: document.querySelector('input[name="endDate"').value,
+                }
+                fetch('/api/offers/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(offer),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        window.location = "/admin/offers"
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            })
+        }
 
-        buttonShowModal.addEventListener('click', function(event) {
-            document.querySelector('#modal-one').classList.toggle('hidden')
-            document.querySelector('#modal-one').classList.toggle('shown')
-            if (document.querySelector("div.codeErrormsg") != null) {
-                document.querySelector("div.codeErrormsg").remove()
-            }
-        })
+        if (buttonShowModal != null) {
+            buttonShowModal.addEventListener('click', function(event) {
+                document.querySelector('#modal-one').classList.toggle('hidden')
+                document.querySelector('#modal-one').classList.toggle('shown')
+                if (document.querySelector("div.codeErrormsg") != null) {
+                    document.querySelector("div.codeErrormsg").remove()
+                }
+            })
+        }
 
         buttonActivate.addEventListener('click', function(event) {
             let codeValue = document.querySelector("input#code-activation")
