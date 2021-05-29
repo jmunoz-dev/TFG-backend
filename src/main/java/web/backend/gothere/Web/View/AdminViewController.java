@@ -272,4 +272,20 @@ public class AdminViewController {
         return new ModelAndView("redirect:/admin/offer/"+idOffer+"/edit");
     }
 
+    @PostMapping("/image/offer/save")
+    public ModelAndView saveOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
+            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+         
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+        Long idBar = userService.getUserByToken(cookie).getIdBar();
+        // barImgsService.add(idBar, multipartFile);
+        
+        return new ModelAndView("redirect:/admin/offer/new");
+    }
+
 }
