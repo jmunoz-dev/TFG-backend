@@ -170,6 +170,21 @@ public class AdminViewController {
         BarDTO bar = barService.getBarById(user.getIdBar());
         ModelAndView mv = new ModelAndView("admin/add_offer");
         mv.addObject("bar", bar);
+        return mv;
+    }
+    @GetMapping("/offer/{idOffer}/edit")
+    public ModelAndView editOfferPage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        ModelAndView mv = new ModelAndView("admin/edit_offer");
+        mv.addObject("offer", offer);
 
         return mv;
     }
@@ -238,6 +253,21 @@ public class AdminViewController {
 
         return new ModelAndView("redirect:/admin/home");
     }
-      
+    
+    // @PostMapping("/image/offer/save")
+    // public ModelAndView saveOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
+    //         @RequestParam("image") MultipartFile multipartFile) throws IOException {
+         
+    //     if(cookie == null){
+    //         return new ModelAndView("redirect:/admin");
+    //     }
+    //     if(!isBarOwner(cookie)){
+    //         return new ModelAndView("redirect:/admin");
+    //     }
+    //     Long idBar = userService.getUserByToken(cookie).getIdBar();
+    //     offerService.addImage(idOffer, multipartFile);
+        
+    //     return new ModelAndView("redirect:/admin/offers");
+    // }
 
 }
