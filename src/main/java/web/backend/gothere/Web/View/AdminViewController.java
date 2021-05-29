@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -254,20 +255,21 @@ public class AdminViewController {
         return new ModelAndView("redirect:/admin/home");
     }
     
-    // @PostMapping("/image/offer/save")
-    // public ModelAndView saveOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
-    //         @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    @PutMapping("/image/{idOffer}/offer/edit")
+    public ModelAndView saveOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
+            @RequestParam("image") MultipartFile multipartFile, @PathVariable("idOffer") Long idOffer) throws IOException {
          
-    //     if(cookie == null){
-    //         return new ModelAndView("redirect:/admin");
-    //     }
-    //     if(!isBarOwner(cookie)){
-    //         return new ModelAndView("redirect:/admin");
-    //     }
-    //     Long idBar = userService.getUserByToken(cookie).getIdBar();
-    //     offerService.addImage(idOffer, multipartFile);
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+        Long idBar = userService.getUserByToken(cookie).getIdBar();
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        offerService.addOfferImage(offer, multipartFile);
         
-    //     return new ModelAndView("redirect:/admin/offers");
-    // }
+        return new ModelAndView("redirect:/admin/offer/"+idOffer+"/edit");
+    }
 
 }

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import web.backend.gothere.Exceptions.ElementNotFoundException;
@@ -59,6 +60,16 @@ public class OffersService {
     }
 
     public OfferDTO add(OfferDTO offer) {
+        try {
+            OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
+            offersRepository.save(entityToInsert);
+            return offer;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        }
+    }
+
+    public OfferDTO addOfferImage(OfferDTO offer, MultipartFile multipartFile) {
         try {
             OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
             offersRepository.save(entityToInsert);
