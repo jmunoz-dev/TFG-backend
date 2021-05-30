@@ -255,22 +255,7 @@ public class AdminViewController {
         return new ModelAndView("redirect:/admin/home");
     }
     
-    @DeleteMapping("/image/offer/{idOffer}")
-    public ModelAndView deleteOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
-            @RequestParam("image") MultipartFile multipartFile, @PathVariable("idOffer") Long idOffer) throws IOException {
-         
-        if(cookie == null){
-            return new ModelAndView("redirect:/admin");
-        }
-        if(!isBarOwner(cookie)){
-            return new ModelAndView("redirect:/admin");
-        }
-        Long idBar = userService.getUserByToken(cookie).getIdBar();
-        OfferDTO offer = offerService.findbyOfferId(idOffer);
-        offerService.addOfferImage(offer, multipartFile);
-        
-        return new ModelAndView("redirect:/admin/offer/"+idOffer+"/edit");
-    }
+    
 
     @GetMapping("/offer/{idOffer}/add/image")
     public ModelAndView editNewOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer){
@@ -303,6 +288,22 @@ public class AdminViewController {
         offerService.addOfferImage(offerToSaveImg, multipartFile);
         
         return new ModelAndView("redirect:/admin/offers");
+    }
+
+    @DeleteMapping("/image/offer/{idOffer}/delete")
+    public ModelAndView deleteOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer) throws IOException {
+         
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+        Long idBar = userService.getUserByToken(cookie).getIdBar();
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        offerService.deleteOfferImage(offer);
+        
+        return new ModelAndView("redirect:/admin/offer/"+idOffer+"/edit");
     }
 
 }

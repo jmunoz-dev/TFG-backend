@@ -102,6 +102,30 @@ public class OffersService {
             }
     }
 
+    public void deleteOfferImage(OfferDTO offer) throws ResponseStatusException{
+        Optional<OfferEntity> entityToDelete = offersRepository.findById(offer.getIdOffer());
+        if(entityToDelete.isPresent()){
+            String url = entityToDelete.get().getOfferImage();
+            int pos = url.lastIndexOf("/");
+            String fileName = url.substring(pos + 1, url.length());
+            url = url.substring(1, pos);
+            try{
+                 BlobContainerClient container = new BlobContainerClientBuilder()
+                    .connectionString(Constants.CON_STR_AZURE)
+                    .containerName(url)
+                    .buildClient();
+
+                BlobClient blob=container.getBlobClient(fileName);
+                blob.delete();
+                entityToDelete.get().setOfferImage(null);
+            }catch(Exception ioe){
+                throw new ResponseStatusException(HttpStatus.NOT_MODIFIED, "Error deletting file");
+            }
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding data");
+        }
+    }
+
     public Optional<OfferDTO> update(Long id, OfferDTO offer) {
         Optional<OfferEntity> dataToUpdate = offersRepository.findById(id);
         if (dataToUpdate.isPresent()) {

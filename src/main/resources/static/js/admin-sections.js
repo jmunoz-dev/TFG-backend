@@ -233,6 +233,31 @@ window.onload = () => {
             });
 
     })
+
+    let deleteImgButton = document.querySelector('button[id^="delete-offer-img-"]')
+
+    deleteImgButton.addEventListener('click', function(event) {
+
+        var idSplited = event.target.id.split("-")
+        let idOffer = idSplited[3]
+        if (!confirm("Estás seguro de que quieres eliminar esta imagen (Esta acción es irreversible)")) {
+            return
+        }
+
+        fetch('/admin/image/offer/' + idOffer + '/delete', {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.location = '/admin/offer/' + idOffer + '/edit'
+
+            })
+            .catch((error) => {
+                alert("No se ha podido eliminar la imagen")
+                console.error('Error:', error);
+            });
+    })
 }
 
 function deleteOffer(id) {
