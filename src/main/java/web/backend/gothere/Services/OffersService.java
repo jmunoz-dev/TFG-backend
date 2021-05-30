@@ -118,6 +118,9 @@ public class OffersService {
                 BlobClient blob=container.getBlobClient(fileName);
                 blob.delete();
                 entityToDelete.get().setOfferImage(null);
+                OfferEntity entityToInsert = modelMapper.map(offer, OfferEntity.class);
+                entityToInsert.setOfferImage(null);
+                offersRepository.save(entityToInsert);
             }catch(Exception ioe){
                 throw new ResponseStatusException(HttpStatus.NOT_MODIFIED, "Error deletting file");
             }
