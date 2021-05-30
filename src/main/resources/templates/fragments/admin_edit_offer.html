@@ -11,7 +11,7 @@
     <div class="offers-wrapper">
         <h2 class="title">Editar oferta</h2>
         <div th:object="${offer}" class="new-offer-card">
-            <div class="offer-img-wrapper">
+            <div th:if="*{offerImage} != 'null'" class="offer-img-wrapper">
                 <img th:src="'https://gotherestorage.blob.core.windows.net' + *{offerImage}" alt="">
                 <button class="delete-img-btn" th:id="*{'delete-offer-img-' + idOffer}">X</button>
             </div>
