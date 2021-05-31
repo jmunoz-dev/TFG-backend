@@ -3,7 +3,7 @@ package web.backend.gothere.Services.Models;
 import java.util.Date;
 
 public class UserDTO {
-    private  Long idUser;
+    private Long idUser;
     private String email;
     private String name;
     private String lastName;

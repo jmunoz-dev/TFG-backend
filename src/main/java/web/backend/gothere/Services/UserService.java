@@ -177,11 +177,11 @@ public class UserService implements UserDetailsService{
     }
     public UserDTO getUserByToken(String token){
         Optional<ConfirmationTokenEntity> userToken =
-         confirmationTokenService.findConfirmationTokenByToken(token);
-         if(userToken.isPresent()){
-             return modelMapper.map( userToken.get().getUser(), UserDTO.class);
-         }
-         throw new ElementNotFoundException();
+            confirmationTokenService.findConfirmationTokenByToken(token);
+        if(userToken.isPresent()){
+            return modelMapper.map( userToken.get().getUser(), UserDTO.class);
+        }
+        throw new ElementNotFoundException();
     }
 
 }

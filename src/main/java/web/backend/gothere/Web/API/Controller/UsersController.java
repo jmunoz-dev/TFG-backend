@@ -32,6 +32,12 @@ public class UsersController {
     public  UserDTO getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
+
+    @GetMapping("")
+    public UserDTO getByToken(@RequestParam("user") String token) {
+        return userService.getUserByToken(token);
+    }
+
     @PostMapping(value="/sign-up")
     public boolean createUser(@RequestBody UserDTO user, HttpServletResponse response){
         UserDTO newUser = userService.signUpUser(user);
