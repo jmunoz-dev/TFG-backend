@@ -8,7 +8,7 @@ public class UserOfferDTO {
     public OfferDTO offer;
 
     public String code;
-    
+
     private boolean used;
 
     public UserOfferDTO() {
@@ -21,7 +21,7 @@ public class UserOfferDTO {
         this.code = code;
         this.used = used;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -62,5 +62,4 @@ public class UserOfferDTO {
         this.used = used;
     }
 
-  
 }

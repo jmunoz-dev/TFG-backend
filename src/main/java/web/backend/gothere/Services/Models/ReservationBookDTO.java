@@ -1,7 +1,6 @@
 package web.backend.gothere.Services.Models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class ReservationBookDTO implements Comparable<ReservationBookDTO>{
 
