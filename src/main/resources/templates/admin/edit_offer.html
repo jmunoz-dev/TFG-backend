@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
-
-</html>
+<html xmlns="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,16 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/css/style.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/admin-sections.js}"></script>
-    <title>Reservations</title>
+    <title>Admin</title>
 </head>
 
 <body>
     <header th:insert="~{fragments/header.html :: body} "></header>
-    <div class="admin_wrapper">
-    <div th:insert="~{fragments/admin_menu.html :: body} "> </div>
-    <div th:insert="~{fragments/admin_section_reservations.html :: body}" class="admin_section_home"></div>
+    <div class="admin-wrapper">
+        <!-- Hero img  -->
+        <div th:insert="~{fragments/admin_menu.html :: body} "></div>
+
+        <!-- SidebarMenu and Bar info -->
+        <div th:insert="~{fragments/admin_edit_offer.html :: body}" class="admin_section_home"></div>
+
     </div>
-
 </body>
-
-</html>

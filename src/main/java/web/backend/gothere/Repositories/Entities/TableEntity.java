@@ -20,6 +20,7 @@ public class TableEntity {
     private Long idTable;
     private int capacity;
     private boolean reservated;
+    private String num;
     @ManyToOne
     @JoinColumn(name="idBar")
     private BarEntity bar;
@@ -34,11 +35,12 @@ public class TableEntity {
     }
 
     public TableEntity(int capacity, boolean reservated, BarEntity bar,
-            Set<ScheduleTableReservationEntity> scheduleTableReservations) {
+            Set<ScheduleTableReservationEntity> scheduleTableReservations, String num) {
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
-        ScheduleTableReservations = scheduleTableReservations;
+        this.ScheduleTableReservations = scheduleTableReservations;
+        this.num = num;
     }
 
     public Long getIdTable() {
@@ -84,5 +86,14 @@ public class TableEntity {
     public void setBar(BarEntity bar) {
         this.bar = bar;
     }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+    
     
 }

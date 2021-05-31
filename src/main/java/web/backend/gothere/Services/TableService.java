@@ -1,9 +1,10 @@
 package web.backend.gothere.Services;
 
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -11,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Repositories.Entities.BarEntity;
+import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
 import web.backend.gothere.Repositories.Entities.TableEntity;
-import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
-import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
-import web.backend.gothere.Services.Models.TableDTO;
+import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
 import web.backend.gothere.Services.Models.ScheduleTableReservationDTO;
+import web.backend.gothere.Services.Models.TableDTO;
 
 public class TableService {
     @Autowired
@@ -29,15 +30,30 @@ public class TableService {
     private ModelMapper modelMapper;
     @Autowired
     private BarRepository barRepository;
+    @Autowired
+    private ReservationBookService reservationBookService;
 
     public List<TableDTO> getAll() {
         List<TableDTO> tables =  tableRepository.findAll().stream().map(x -> modelMapper.map(x, TableDTO.class))
                 .collect(Collectors.toList());
         return  deleteScheduleTable(tables);        
     }
+    public TableDTO getById(Long id) {
+        Optional<TableEntity> result = tableRepository.findById(id);
+        if (result.isPresent()) {
+            return modelMapper.map(result.get(), TableDTO.class);
+        }
+        return null;
+    }
 
     public TableDTO add(TableDTO table) {
         TableEntity entityToUpdate = modelMapper.map(table, TableEntity.class);
+        Optional<BarEntity> bar =barRepository.findById(table.getBar().getIdbar());
+        if(!bar.isPresent()){
+            return null;
+        }
+        entityToUpdate.setBar(bar.get());
+       
         TableEntity result = tableRepository.save(entityToUpdate);
         return modelMapper.map(result, TableDTO.class);
     }
@@ -46,9 +62,10 @@ public class TableService {
         Optional<TableEntity> dataToUpdate = tableRepository.findById(id);
         if (dataToUpdate.isPresent()) {
 
-            TableEntity entityToUpdate = modelMapper.map(table, TableEntity.class);
-            entityToUpdate.setIdTable(id);
-            TableEntity result = tableRepository.save(entityToUpdate);
+            dataToUpdate.get().setIdTable(id);
+            dataToUpdate.get().setCapacity(table.getCapacity());
+            dataToUpdate.get().setNum(table.getNum());
+            TableEntity result = tableRepository.save(dataToUpdate.get());
             return modelMapper.map(result, TableDTO.class);
 
         }
@@ -57,8 +74,25 @@ public class TableService {
 
     public void delete(Long idTable) {
         Optional<TableEntity> entityToDelete = tableRepository.findById(idTable);
-        if (entityToDelete.isPresent())
-            tableRepository.delete(entityToDelete.get());
+        if (!entityToDelete.isPresent())
+            throw new ElementNotFoundException();
+       List<ReservationBookDTO> reservations = reservationBookService.getAllByBar(entityToDelete.get().getBar().getIdBar(), null, null);
+        for(ReservationBookDTO res : reservations){
+            if(res.getReservationDate().isAfter(LocalDate.now().minusDays(1)) 
+            && res.getScheduleTableReservation().getTable().getIdTable() == idTable
+            && !res.isCanceled()){
+                reservationBookService.setCanceled(res.getIdReservationBook());
+            }
+        }
+
+        Set<ScheduleTableReservationEntity> schedules = new HashSet<>();
+        schedules.addAll(entityToDelete.get().getScheduleTableReservations());
+        for ( ScheduleTableReservationEntity schedule :  schedules) {
+            schedule.setTable(null);
+            entityToDelete.get().getScheduleTableReservations().remove(schedule);
+        }
+
+        tableRepository.delete(entityToDelete.get());
     }
     public List<TableDTO> getTableByBarAndAvailabilityDate(Long idBar, LocalDate date){
         Optional<BarEntity> bar = barRepository.findById(idBar);

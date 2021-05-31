@@ -13,6 +13,8 @@ import web.backend.gothere.Services.ConfirmationTokenService;
 import web.backend.gothere.Services.EmailSenderService;
 import web.backend.gothere.Services.OffersService;
 import web.backend.gothere.Services.ReservationBookService;
+import web.backend.gothere.Services.ScheduleTableReservationService;
+import web.backend.gothere.Services.SchedulesService;
 import web.backend.gothere.Services.UserOffersService;
 import web.backend.gothere.Services.UserService;
 
@@ -60,6 +62,14 @@ public class DI {
     @Bean
     EmailSenderService createEmailSenderService(){
         return new EmailSenderService();
+    }
+    @Bean
+    SchedulesService createScheduleService(){
+        return new SchedulesService();
+    }
+    @Bean
+    ScheduleTableReservationService createScheduleTableReservationService(){
+        return new ScheduleTableReservationService();
     }
     @Bean
     ModelMapper createModelMapper(){

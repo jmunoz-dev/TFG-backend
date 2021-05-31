@@ -4,6 +4,7 @@
     width: 100%;
     margin-top: 5%;
     font-family: 'Roboto', sans-serif;
+    margin-bottom: 100px;
     .bar-info {
         margin-top: 16px;
         margin-left: 8%;
@@ -36,6 +37,9 @@
     .submit-changes {
         margin: 16px auto 0;
         width: 10%;
+        height: fit-content;
+        position: sticky;
+        top: 50px;
         button {
             background-color: darkred;
             color: white;
@@ -56,6 +60,8 @@
         width: 15%;
         height: fit-content;
         margin: 0 auto;
+        position: sticky;
+        top: 50px;
         button,
         a {
             width: 100%;
@@ -180,18 +186,60 @@ a.subsection-menu {
     width: 60%;
     font-family: 'Roboto',
     sans-serif;
+    .new-offer-card {
+        width: 90%;
+        margin: auto;
+        form {
+            h2 {
+                font-size: 15px;
+                margin-top: 20px;
+                padding-bottom: 5px;
+            }
+            input {
+                height: 25px;
+                border-radius: $main-button-radius;
+                border-width: 1px;
+                width: 100%;
+                padding-left: 10px;
+                &:focus-visible {
+                    outline: none;
+                    border: 2px solid #fea701;
+                }
+            }
+            .price-wrapper {
+                width: 100%;
+                position: relative;
+                span {
+                    position: absolute;
+                    top: 0;
+                    right: 0px;
+                    font-size: 20px;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
     .offer-card {
-        border: 1px solid #000;
+        box-shadow: -5px 3px 11px 2px #888;
         border-radius: $main-button-radius;
         outline: none;
-        width: 25%;
+        width: 30%;
         display: flex;
         flex-wrap: wrap;
         margin-bottom: 30px;
         .wrapper-info {
             width: 100%;
-            padding: 20px;
+            padding: 20px 20px 0;
             .offer-info {
+                .price-info-wrapper {
+                    display: block;
+                    text-align: right;
+                    margin: 10px 0;
+                    h2,
+                    p {
+                        display: inline;
+                    }
+                }
                 h2 {
                     font-size: 15px;
                     width: 100%;
@@ -208,34 +256,39 @@ a.subsection-menu {
             }
         }
         .icons-actions {
+            cursor: pointer;
             display: flex;
             text-align: center;
-            border-top: 1px solid black;
             width: 100%;
+            padding: 20px 20px;
             align-self: flex-end;
+            color: white;
+            font-weight: 600;
             .edit-card {
-                padding: 5%;
+                line-height: 40pt;
                 width: 50%;
-                border-right: 1px solid black;
+                margin-left: 5px;
                 background-color: #3294f0;
-                border-bottom-left-radius: $main-button-radius;
+                border-radius: $main-button-radius;
                 outline: none;
                 overflow: hidden;
                 &:hover {
                     background-color: darken($color: #3294f0, $amount: 10);
                     img {
-                        transform: scale(0.8, 0.9);
+                        transform: scale(0.8, 0.8);
                     }
                 }
                 img {
-                    width: 35%;
+                    margin-right: 8px;
+                    vertical-align: middle;
+                    width: 20%;
                 }
             }
             .remove-card {
-                padding: 5%;
+                line-height: 40pt;
+                margin-right: 5px;
                 width: 50%;
-                border-bottom-right-radius: $main-button-radius;
-                border-left: 1px solid black;
+                border-radius: $main-button-radius;
                 background-color: #c03636;
                 &:hover {
                     background-color: darken($color: #c03636, $amount: 10);
@@ -244,7 +297,9 @@ a.subsection-menu {
                     }
                 }
                 img {
-                    width: 30%;
+                    margin-right: 8px;
+                    vertical-align: middle;
+                    width: 20%;
                 }
             }
         }
@@ -270,11 +325,12 @@ a.subsection-menu {
 }
 
 .modal-container {
+    margin: auto;
+    width: 50%;
     border-radius: 25px;
     position: relative;
     background-color: white;
     border: 1px solid black;
-    width: fit-content;
     margin: auto;
     top: 40%;
     z-index: 2;
@@ -292,6 +348,19 @@ a.subsection-menu {
         .offer-price {
             margin-top: 20px;
             font-size: xxx-large;
+        }
+    }
+}
+
+#modal-two {
+    .modal-container {
+        .edit-offer-actions {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            button {
+                width: 45%;
+            }
         }
     }
 }
@@ -376,18 +445,90 @@ a.subsection-menu {
 
 .reservations-wrapper {
     @extend .offers-wrapper;
+    input,
+    label {
+        padding: 5px;
+        font-size: 20px;
+    }
     form {
         width: 100%;
-        margin-bottom: 20px
+        margin-bottom: 20px;
+        padding: 20px;
+        button {
+            margin-left: 10px;
+            background-color: black;
+            color: $base-yellow-color;
+            height: 90%;
+            border: none;
+            cursor: pointer;
+            border-radius: $main-button-radius;
+            font-size: 16px;
+            width: 200px;
+            letter-spacing: 5px;
+            font-weight: bold;
+            transition: .2s background-color;
+            &:hover {
+                background-color: rgb(54, 54, 54);
+            }
+        }
     }
     .title {
         width: 100%;
         margin-bottom: 20px
     }
+    .offer-canceled {
+        box-shadow: 2px 2px 5px #888888;
+        position: absolute;
+        font-size: 16px;
+        top: 30px;
+        z-index: 1022;
+        color: white;
+        transform: rotate(-45deg);
+        left: -65px;
+        background-color: red;
+        width: 205px;
+        text-align: center;
+        font-weight: bold;
+        padding: 10px;
+    }
+    .cancel-card {
+        cursor: pointer;
+        background-color: red;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 20px;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        transition: .2s background-color;
+        &:hover {
+            background-color: rgb(253, 63, 63);
+        }
+        p {
+            margin-left: 20px;
+            pointer-events: none;
+        }
+        img {
+            pointer-events: none;
+            max-width: 30px;
+        }
+    }
+    .caceled-card {
+        filter: grayscale(100%);
+        &>.cancel-card {
+            background-color: rgb(253, 63, 63);
+            cursor: not-allowed !important;
+        }
+    }
+    &>div {
+        position: relative;
+        overflow: hidden;
+    }
     &>div {
         width: 25%;
         margin-bottom: 20px;
-        border: 2px solid rgb(161, 161, 161);
+        box-shadow: -3px 4px 7px 0px #888888;
         padding: 20px;
         border-radius: 20px;
     }
@@ -402,6 +543,7 @@ a.subsection-menu {
             &.inpar {
                 background-color: #fff2da;
             }
+            a,
             p {
                 margin: 10px 0;
                 width: 100%;
@@ -411,6 +553,54 @@ a.subsection-menu {
                 font-size: 15px;
                 width: 100%;
             }
+        }
+    }
+}
+
+.tables-wrapper {
+    @extend .reservations-wrapper;
+    .buttons {
+        display: flex;
+    }
+    .delete-card-50 {
+        @extend .cancel-card;
+        width: 50%;
+        margin-right: 10px;
+        img {
+            pointer-events: none;
+            max-width: 20px;
+        }
+    }
+    .edit-card-50 {
+        @extend .cancel-card;
+        margin-left: 10px;
+        width: 50%;
+        background-color: #008CBA;
+        &:hover {
+            background-color: #019ed3;
+        }
+        img {
+            pointer-events: none;
+            max-width: 20px;
+        }
+    }
+    .table-info {
+        @extend .reservation-info;
+        h2 {
+            margin-bottom: 10px;
+        }
+        li {
+            list-style: none;
+            text-align: right;
+        }
+    }
+    .table-card {
+        @extend .reservation-card;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        .schedule {
+            flex-grow: 1;
         }
     }
 }

@@ -1,9 +1,8 @@
 package web.backend.gothere.Services.Models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public class ReservationBookDTO {
+public class ReservationBookDTO implements Comparable<ReservationBookDTO>{
 
     private Long idReservationBook;
     private UserDTO user;
@@ -62,6 +61,11 @@ public class ReservationBookDTO {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+    
+    @Override
+    public int compareTo(ReservationBookDTO r){
+        return this.getReservationDate().compareTo(r.getReservationDate()) * -1;
     }
 
 }

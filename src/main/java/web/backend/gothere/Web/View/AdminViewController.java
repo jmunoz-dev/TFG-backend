@@ -2,6 +2,8 @@ package web.backend.gothere.Web.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,11 +28,13 @@ import web.backend.gothere.Services.BarService;
 import web.backend.gothere.Services.TableService;
 import web.backend.gothere.Services.OffersService;
 import web.backend.gothere.Services.ReservationBookService;
+import web.backend.gothere.Services.SchedulesService;
 import web.backend.gothere.Services.UserService;
 import web.backend.gothere.Services.Models.TableDTO;
 import web.backend.gothere.Services.Models.BarDTO;
 import web.backend.gothere.Services.Models.OfferDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
+import web.backend.gothere.Services.Models.ScheduleDTO;
 import web.backend.gothere.Services.Models.UserDTO;
 
 @Controller
@@ -42,15 +47,17 @@ public class AdminViewController {
     private final ReservationBookService reservationBookService;
     private final TableService tableService;
     private final BarImgsService barImgsService;
+    private final SchedulesService schedulesService;
     
 
-    public AdminViewController(UserService userService, BarService barService, OffersService offerService, ReservationBookService reservationBookService, TableService tableService,  BarImgsService barImgsService) {
+    public AdminViewController(UserService userService, BarService barService, OffersService offerService, ReservationBookService reservationBookService, TableService tableService,  BarImgsService barImgsService, SchedulesService schedulesService) {
         this.userService = userService;
         this.barService = barService;
         this.offerService = offerService;
         this.reservationBookService = reservationBookService;
         this.tableService = tableService;
         this.barImgsService = barImgsService;
+        this.schedulesService = schedulesService;
     }
 
     @GetMapping("")
@@ -144,7 +151,29 @@ public class AdminViewController {
        UserDTO user = userService.getUserByToken(cookie);
        
         List<TableDTO> tables = tableService.getByBarId(user.getIdBar());
+        Collections.sort(tables);
         mv.addObject("tables",tables);
+
+        return mv;
+    }
+    @GetMapping("/tables/edit/{idTable}")
+    public ModelAndView tablesEdit(@CookieValue( required = false, value="adminlogin") String cookie,
+     @PathVariable Long idTable ){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+    
+        ModelAndView mv = new ModelAndView("admin/tables_edit");
+       
+        TableDTO table = tableService.getById(idTable);
+        List<ScheduleDTO> scheduleList = schedulesService.getAll();
+        mv.addObject("scheduleList",scheduleList);
+        mv.addObject("table",table);
 
         return mv;
     }
@@ -167,9 +196,24 @@ public class AdminViewController {
             return mv2;
         }
         UserDTO user = userService.getUserByToken(cookie);
-        
+        BarDTO bar = barService.getBarById(user.getIdBar());
         ModelAndView mv = new ModelAndView("admin/add_offer");
-        mv.addObject("user",user);
+        mv.addObject("bar", bar);
+        return mv;
+    }
+    @GetMapping("/offer/{idOffer}/edit")
+    public ModelAndView editOfferPage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        ModelAndView mv = new ModelAndView("admin/edit_offer");
+        mv.addObject("offer", offer);
 
         return mv;
     }
@@ -186,7 +230,9 @@ public class AdminViewController {
         UserDTO user = userService.getUserByToken(cookie);
         
         ModelAndView mv = new ModelAndView("admin/add_table");
-        mv.addObject("user",user);
+        List<ScheduleDTO> scheduleList = schedulesService.getAll();
+        mv.addObject("barId",user.getIdBar());
+        mv.addObject("scheduleList",scheduleList);
 
         return mv;
     }
@@ -238,6 +284,56 @@ public class AdminViewController {
 
         return new ModelAndView("redirect:/admin/home");
     }
-      
+    
+    
+
+    @GetMapping("/offer/{idOffer}/add/image")
+    public ModelAndView editNewOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        ModelAndView mv = new ModelAndView("admin/add_offer_image");
+        mv.addObject("offer", offer);
+
+        return mv;
+    }
+
+    @PostMapping("/image/offer/save/{idOffer}")
+    public ModelAndView saveOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
+            @RequestParam("image") MultipartFile multipartFile, @PathVariable("idOffer") Long idOffer) throws IOException {
+         
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+        OfferDTO offerToSaveImg = offerService.findbyOfferId(idOffer);
+        offerService.addOfferImage(offerToSaveImg, multipartFile);
+        
+        return new ModelAndView("redirect:/admin/offers");
+    }
+
+    @DeleteMapping("/image/offer/{idOffer}/delete")
+    public ModelAndView deleteOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer) throws IOException {
+         
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+        Long idBar = userService.getUserByToken(cookie).getIdBar();
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        offerService.deleteOfferImage(offer);
+        
+        return new ModelAndView("redirect:/admin/offer/"+idOffer+"/edit");
+    }
 
 }

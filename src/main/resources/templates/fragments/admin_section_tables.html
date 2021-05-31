@@ -8,15 +8,39 @@
         <a th:href="@{/admin/tables/new}" class="subsection-menu">Agregar nueva</a>
         <a th:href="@{/admin/reservations}" class="page-section-menu ">Reservas</a>
     </div>
-    <div th:each="table : ${tables}" th:object="${table}">
-        <div class="m-4 card">
-            <p>Numero mesa</p>
-            <h2 th:text="*{idTable}"></h2>
-            <p>capacidad</p>
-            <h2 th:text="*{capacity}"></h2>
-
+    <div class="tables-wrapper">
+        <h2 class="title">MESAS</h2>
+        <p th:if="!*{#lists.size(tables)}">No hay mesas añadidas</p>
+        <div th:each="table : ${tables}" th:object="${table}">
+            <div class="table-card">
+                <div class="table-info inpar">
+                    <h2>Número mesa</h2>
+                    <p th:text="*{num}"></p>
+                </div>
+                <div class="table-info">
+                    <h2>Capacidad</h2>
+                    <p th:text="*{capacity}"></p>
+                </div>
+                <div class="table-info inpar schedule">
+                    <h2>Lista de horarios</h2>
+                    <p th:if="!*{#lists.size(scheduleTableReservations)}">No hay horarios definidos.</p>
+                    <ul th:each="schedule : *{scheduleTableReservations}" th:object="${schedule}">
+                        <li th:text="*{schedule.checkInHour} + ' - ' + *{schedule.checkOutHour}"></li>
+                    </ul>
+                </div>
+                <div class="buttons">
+                    <div th:id="'detele-table-' + *{idTable}" class="delete-card-50">
+                        <img th:src="@{../images/svg/trash-solid.svg}"> 
+                        <p>BORRAR</p>
+                    </div>
+                    <a th:href="'tables/edit/' + *{idTable}" th:id="'edit-table-' + *{idTable}" class="edit-card-50">
+                        <img th:src="@{../images/svg/pencil-alt-solid.svg}"> 
+                        <p>EDITAR</p>
+                    </a>
+                </div>
+            </div>
         </div>
-        -----------------------------------------------------
+        
     </div>
 </body>
 
