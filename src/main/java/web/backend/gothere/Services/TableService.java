@@ -1,8 +1,6 @@
 package web.backend.gothere.Services;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -14,18 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Repositories.Entities.BarEntity;
-import web.backend.gothere.Repositories.Entities.TableEntity;
-import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
-import web.backend.gothere.Repositories.Entities.ScheduleEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;
+import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
-import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
-import web.backend.gothere.Repositories.Interfaces.ScheduleRepository;
-import web.backend.gothere.Repositories.Interfaces.ScheduleTableReservationRepository;
-import web.backend.gothere.Services.Models.TableDTO;
+import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
 import web.backend.gothere.Services.Models.ScheduleTableReservationDTO;
+import web.backend.gothere.Services.Models.TableDTO;
 
 public class TableService {
     @Autowired

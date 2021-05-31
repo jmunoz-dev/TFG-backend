@@ -2,7 +2,7 @@ package web.backend.gothere.Services.Models;
 
 import java.util.List;
 
-public class TableDTO implements Comparable<TableDTO>{
+public class TableDTO implements Comparable<TableDTO> {
 
     private Long idTable;
     private int capacity;
@@ -14,7 +14,8 @@ public class TableDTO implements Comparable<TableDTO>{
     public TableDTO() {
     }
 
-    public TableDTO( int capacity, boolean reservated, BarDTO bar, List<ScheduleTableReservationDTO> scheduleTableReservations, String num) {
+    public TableDTO(int capacity, boolean reservated, BarDTO bar,
+            List<ScheduleTableReservationDTO> scheduleTableReservations, String num) {
         this.capacity = capacity;
         this.reservated = reservated;
         this.bar = bar;
@@ -54,12 +55,9 @@ public class TableDTO implements Comparable<TableDTO>{
         return this.reservated;
     }
 
-  
     public void setReservated(boolean reservated) {
         this.reservated = reservated;
     }
-
-
 
     public BarDTO getBar() {
         return bar;
@@ -77,9 +75,9 @@ public class TableDTO implements Comparable<TableDTO>{
         this.num = num;
     }
 
-   @Override
-   public int compareTo(TableDTO t){
-       return Integer.parseInt(this.getNum()) - Integer.parseInt(t.getNum());
-   }
+    @Override
+    public int compareTo(TableDTO t) {
+        return Integer.parseInt(this.getNum()) - Integer.parseInt(t.getNum());
+    }
 
 }

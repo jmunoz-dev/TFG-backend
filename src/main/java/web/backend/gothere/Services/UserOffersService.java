@@ -2,20 +2,18 @@ package web.backend.gothere.Services;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import net.bytebuddy.asm.Advice.Return;
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Exceptions.OfferCodeException;
-import web.backend.gothere.Exceptions.UserAlreadyExistException;
 import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Entities.OfferEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;

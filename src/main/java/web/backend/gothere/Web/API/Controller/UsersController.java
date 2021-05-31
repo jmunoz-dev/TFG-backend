@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
 @RequestMapping("api/users")
 @RestController
 public class UsersController {
@@ -23,45 +22,52 @@ public class UsersController {
 
     private final ConfirmationTokenService confirmationTokenService;
 
-    UsersController(UserService userService, ConfirmationTokenService confirmationTokenService){
+    UsersController(UserService userService, ConfirmationTokenService confirmationTokenService) {
         this.userService = userService;
         this.confirmationTokenService = confirmationTokenService;
     }
 
-    @GetMapping(value="/{id}")
-    public  UserDTO getUserById(@PathVariable("id") Long id) {
+    @GetMapping(value = "/{id}")
+    public UserDTO getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
-    @PostMapping(value="/sign-up")
-    public boolean createUser(@RequestBody UserDTO user, HttpServletResponse response){
+
+    @GetMapping("")
+    public UserDTO getByToken(@RequestParam("user") String token) {
+        return userService.getUserByToken(token);
+    }
+
+    @PostMapping(value = "/sign-up")
+    public boolean createUser(@RequestBody UserDTO user, HttpServletResponse response) {
         UserDTO newUser = userService.signUpUser(user);
-        if(newUser != null){
+        if (newUser != null) {
             Cookie ck = new Cookie("Login", confirmationTokenService.findConfirmationTokenByUser(newUser));
             ck.setMaxAge(60 * 60 * 24 * 365 * 10);
             response.addCookie(ck);
         }
         return true;
-     
+
     }
-    @PutMapping(value="/edit")
-    public UserDTO editUser(@RequestParam("token") String token,@RequestBody UserDTO user, HttpServletResponse response){
-        if(confirmationTokenService.findConfirmationTokenByToken(token).isPresent()){
+
+    @PutMapping(value = "/edit")
+    public UserDTO editUser(@RequestParam("token") String token, @RequestBody UserDTO user,
+            HttpServletResponse response) {
+        if (confirmationTokenService.findConfirmationTokenByToken(token).isPresent()) {
             Long userId = confirmationTokenService.findConfirmationTokenByToken(token).get().getUser().getIdUser();
             return userService.updateUser(userId, user);
         }
         return null;
     }
 
-    
-    @PostMapping(value="/reset-email")
-    public void sendEmailReset(@RequestParam("email") String email){
+    @PostMapping(value = "/reset-email")
+    public void sendEmailReset(@RequestParam("email") String email) {
         userService.sendPasswordReset(email);
     }
 
-    @PostMapping(value="/sign-in")
-    public Cookie loginUser(@RequestBody UserDTO user, HttpServletResponse response){
+    @PostMapping(value = "/sign-in")
+    public Cookie loginUser(@RequestBody UserDTO user, HttpServletResponse response) {
         UserDTO userToLog = userService.signInUser(user);
-        if(userToLog != null){
+        if (userToLog != null) {
             Cookie ck = new Cookie("Login", confirmationTokenService.findConfirmationTokenByUser(userToLog));
             ck.setMaxAge(60 * 60 * 24 * 365 * 10);
             ck.setPath("/");
@@ -70,11 +76,11 @@ public class UsersController {
         }
         return null;
     }
-    
-    @PostMapping(value="/sign-in-bar")
-    public boolean loginBarUser(@RequestBody UserDTO user, HttpServletResponse response){
+
+    @PostMapping(value = "/sign-in-bar")
+    public boolean loginBarUser(@RequestBody UserDTO user, HttpServletResponse response) {
         UserDTO userToLog = userService.signInUser(user);
-        if(userToLog != null){
+        if (userToLog != null) {
             Cookie ck = new Cookie("adminlogin", confirmationTokenService.findConfirmationTokenByUser(userToLog));
             ck.setMaxAge(60 * 60 * 24 * 365 * 10);
             ck.setPath("/admin");
@@ -83,10 +89,11 @@ public class UsersController {
         }
         return false;
     }
-    @PostMapping(value="/sign-up-bar")
-    public boolean createBarUser(@RequestBody UserDTO user, HttpServletResponse response){
+
+    @PostMapping(value = "/sign-up-bar")
+    public boolean createBarUser(@RequestBody UserDTO user, HttpServletResponse response) {
         UserDTO userToLog = userService.signUpUser(user);
-        if(userToLog != null){
+        if (userToLog != null) {
             Cookie ck = new Cookie("adminlogin", confirmationTokenService.findConfirmationTokenByUser(userToLog));
             ck.setMaxAge(60 * 60 * 24 * 365 * 10);
             ck.setPath("/admin");
