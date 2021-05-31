@@ -20,6 +20,12 @@
                     </div>
                 </div>
             </div>
+            <form th:action="@{image/save}" method="post" enctype="multipart/form-data">
+                <label th:if="*{#lists.size(barImages)}">Añadir más fotos: </label>
+                <input class="page-section-menu active" id="image" required type="file" name="image" accept="image/png, image/jpeg" />
+                <input id="idBar" type="text" name="idBar" style="display:none" th:value="*{idbar}" />
+                <button id="upload" type="submit">Subir imagen selecionada</button>
+            </form>
             <p class="title-section">Descripción</p>
             <textarea id="description" type="text" th:text="*{description}"></textarea>
             <p class="title-section">Teléfono</p>
