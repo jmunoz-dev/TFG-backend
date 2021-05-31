@@ -170,20 +170,142 @@ window.onload = () => {
 
     }
     if (/admin\/reservations/.test(window.location.href)) {
-        console.log("estoy en reservas")
+  
         let cancelReservationButtons = document.querySelectorAll('[id^="cancel-reservation-"]')
-        console.log("estoy en reservas", cancelReservationButtons)
         cancelReservationButtons.forEach(button => {
-            console.log(button)
             button.addEventListener('click', function(event) {
                
                 var idSplited = event.target.id.split("-")
                 let idReservation = idSplited[2]
-                console.log("id:" ,idReservation, "split:", idSplited)
                 cancelReservation(idReservation)
             })
         })
     }
+    if (/admin\/tables/.test(window.location.href)) {
+        let deleteTableButtons = document.querySelectorAll('[id^="detele-table-"]')
+        deleteTableButtons.forEach(button => {
+           
+            button.addEventListener('click', function(event) {
+                var idSplited = event.target.id.split("-")
+                let idTable = idSplited[2]
+                deteleTable(idTable)
+            })
+        })
+    }
+    if (/admin\/tables\/edit/.test(window.location.href)) {
+        let saveAttr = document.querySelector('#edit-table-save')
+        saveAttr.addEventListener('click', function(event) {
+            event.preventDefault()
+            console.log("click")
+            let num = document.forms['table-attr'].num.value
+            let capacity = document.forms['table-attr'].capacity.value
+            let idTable = document.querySelector("#tableId").value
+            let table = {
+                'num' : num,
+                'capacity' : Number(capacity)
+            }
+            editTableAtributes(idTable, table)
+        })
+
+        let deleteSchButtons = document.querySelectorAll('[id^="delete-schedule-"]')
+        deleteSchButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                var idSplited = event.target.id.split("-")
+                let idSchedule = idSplited[2]
+                deleteSchedule(idSchedule)
+            })
+        })
+        let newSchedule = document.querySelector('#new-schedule')
+        newSchedule.addEventListener('click', function(event) {
+            event.preventDefault();
+            let idSchedule = document.forms['add-schedule'].schedule.value
+            let idTable =  document.forms['add-schedule'].tableId.value
+            if(!idSchedule ){
+                alert("completa todos los campos")
+                return
+            }
+            let schedule = {
+                'schedule':{
+                    'idSchedule' : Number (idSchedule)
+                },
+                'table':{
+                    'idTable' : Number (idTable)
+                }
+            }
+            addSchedule(schedule)
+        })
+    
+    }
+    if (/admin\/tables\/new/.test(window.location.href)) {
+        console.log("estoy en new mesa")
+        let newButton = document.querySelector('#new-table')
+        let newSchedule = document.querySelector('#new-schedule')
+        newButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            let num = document.forms['add-table'].num.value
+            let capacity = document.forms['add-table'].capacity.value
+            let idBar = document.forms['add-table'].barId.value
+            if(!num || !capacity || !idBar){
+                alert("completa todos los campos")
+                return
+            }
+            let table = {
+                'bar':{
+                    'idbar' : Number (idBar)
+                },
+                'capacity' : Number (capacity),
+                'num' : num
+            }
+           createTable(table)
+        })
+
+        newSchedule.addEventListener('click', function(event) {
+            event.preventDefault();
+            let idSchedule = document.forms['add-schedule'].schedule.value
+            let idTable =  document.forms['add-schedule'].tableId.value
+            if(!idSchedule ){
+                alert("completa todos los campos")
+                return
+            }
+            let schedule = {
+                'schedule':{
+                    'idSchedule' : Number (idSchedule)
+                },
+                'table':{
+                    'idTable' : Number (idTable)
+                }
+            }
+            addSchedule(schedule)
+        })
+    
+    }
+    
+}
+function deleteSchedule(idSchedule){
+    fetch('/api/tables/schedule/' + Number(idSchedule), {
+        method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+        
+    }).catch(e => console.log(e))
+}
+function editTableAtributes(idTable, table){
+    
+    fetch('/api/tables/' + Number(idTable), {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(table)
+        })
+        .then(res => res.json())
+        .then(res => {
+            location.reload()
+            
+        }).catch(e => console.log(e))
+    
 }
 function cancelReservation(id){
     console.log("id:" ,id)
@@ -201,6 +323,58 @@ function cancelReservation(id){
                 }
             }).catch(e => console.log(e))
     }
+}
+function deteleTable(id){
+    allowDelete = window.confirm('Puede haber reservas futuras asociadas a esta mesa, si la eliminas estas reservas serán canceladas \n ¿Estás seguro que deseas eliminar esta mesa?')
+    if (allowDelete) {
+        fetch('/api/tables/' + Number(id), {
+                method: 'DELETE',
+            })
+            .then(() => {
+                    location.reload()
+            }).catch(e => {
+                console.log(e)
+                alert("se ha producido un error")
+            })
+    }
+}
+function createTable(table){
+    console.log("table:" ,table)
+   
+     fetch('/api/tables/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(table)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(res.status == 400){
+                    alert("mesa no encontrada")
+                }
+                
+                document.forms['add-table'].style.display = "none"
+                document.forms['add-schedule'].tableId.value = res.idTable
+                document.querySelector("#succesTable").style.display = "block"
+                document.forms['add-schedule'].style.display = "block"
+            }).catch(e => console.log(e))
+    
+}
+function addSchedule(schedule){
+    console.log("table:" ,schedule)
+   
+        fetch('/api/tables/schedule', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(schedule)
+            })
+            .then(res => {
+                location.reload()
+            }).catch(e => console.log(e))
+    
 }
 function deleteOffer(id) {
     allowDelete = window.confirm('¿Estás seguro que deseas eliminar esta oferta?')
@@ -221,6 +395,10 @@ function editOffer(id) {
 
 
 
+
+}
+function editTable(id) {
+    
 
 }
 
