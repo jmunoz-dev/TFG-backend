@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -195,9 +196,24 @@ public class AdminViewController {
             return mv2;
         }
         UserDTO user = userService.getUserByToken(cookie);
-        
+        BarDTO bar = barService.getBarById(user.getIdBar());
         ModelAndView mv = new ModelAndView("admin/add_offer");
-        mv.addObject("user",user);
+        mv.addObject("bar", bar);
+        return mv;
+    }
+    @GetMapping("/offer/{idOffer}/edit")
+    public ModelAndView editOfferPage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        ModelAndView mv = new ModelAndView("admin/edit_offer");
+        mv.addObject("offer", offer);
 
         return mv;
     }
@@ -268,6 +284,56 @@ public class AdminViewController {
 
         return new ModelAndView("redirect:/admin/home");
     }
-      
+    
+    
+
+    @GetMapping("/offer/{idOffer}/add/image")
+    public ModelAndView editNewOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer){
+        
+        ModelAndView mv2 = new ModelAndView("redirect:/admin");
+        if(cookie == null){
+            return mv2;
+        }
+        if(!isBarOwner(cookie)){
+            return mv2;
+        }
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        ModelAndView mv = new ModelAndView("admin/add_offer_image");
+        mv.addObject("offer", offer);
+
+        return mv;
+    }
+
+    @PostMapping("/image/offer/save/{idOffer}")
+    public ModelAndView saveOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, 
+            @RequestParam("image") MultipartFile multipartFile, @PathVariable("idOffer") Long idOffer) throws IOException {
+         
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+        OfferDTO offerToSaveImg = offerService.findbyOfferId(idOffer);
+        offerService.addOfferImage(offerToSaveImg, multipartFile);
+        
+        return new ModelAndView("redirect:/admin/offers");
+    }
+
+    @DeleteMapping("/image/offer/{idOffer}/delete")
+    public ModelAndView deleteOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer) throws IOException {
+         
+        if(cookie == null){
+            return new ModelAndView("redirect:/admin");
+        }
+        if(!isBarOwner(cookie)){
+            return new ModelAndView("redirect:/admin");
+        }
+        Long idBar = userService.getUserByToken(cookie).getIdBar();
+        OfferDTO offer = offerService.findbyOfferId(idOffer);
+        offerService.deleteOfferImage(offer);
+        
+        return new ModelAndView("redirect:/admin/offer/"+idOffer+"/edit");
+    }
 
 }

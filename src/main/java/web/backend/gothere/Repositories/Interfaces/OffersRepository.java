@@ -10,12 +10,9 @@ import org.springframework.data.repository.query.Param;
 import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Entities.OfferEntity;
 
-public interface OffersRepository 
-    extends JpaRepository<OfferEntity, Long>{
+public interface OffersRepository extends JpaRepository<OfferEntity, Long> {
 
-        @Query(value = "SELECT of FROM Offers of WHERE of.Bar =:idBar")
-        Collection<OfferEntity> findByBar(@Param("idBar")BarEntity idBar);
-
-
+    @Query(value = "SELECT of FROM Offers of WHERE of.Bar =:idBar")
+    Collection<OfferEntity> findByBar(@Param("idBar") BarEntity idBar);
 
 }

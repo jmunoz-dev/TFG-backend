@@ -15,7 +15,8 @@ import javax.persistence.Table;
 
 public class OfferEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idOffer;
     private String offerTitle;
     private String offerDescription;
@@ -26,13 +27,14 @@ public class OfferEntity {
     private LocalDate startDate;
     private LocalDate endDate;
     @ManyToOne
-    @JoinColumn(name="idBar")
+    @JoinColumn(name = "idBar")
     private BarEntity bar;
 
     public OfferEntity() {
     }
 
-    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice, int offerRewardsPoints, int offerMinimunPoints, LocalDate startDate, LocalDate endDate, BarEntity bar) {
+    public OfferEntity(String offerTitle, String offerDescription, String offerImage, double offerPrice,
+            int offerRewardsPoints, int offerMinimunPoints, LocalDate startDate, LocalDate endDate, BarEntity bar) {
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
         this.offerImage = offerImage;
@@ -43,7 +45,7 @@ public class OfferEntity {
         this.endDate = endDate;
         this.bar = bar;
     }
-    
+
     public Long getIdOffer() {
         return this.idOffer;
     }
@@ -100,7 +102,6 @@ public class OfferEntity {
         this.bar = bar;
     }
 
-
     public LocalDate getStartDate() {
         return this.startDate;
     }
@@ -125,7 +126,4 @@ public class OfferEntity {
         this.offerMinimunPoints = offerMinimunPoints;
     }
 
-
 }
-
-
