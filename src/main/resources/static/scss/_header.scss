@@ -7,19 +7,42 @@
     padding: 2%;
     display: flex;
     justify-content: flex-start;
-    >div {
-        width: 46%;
+    .brandTitle {
+        width: 33%;
         img {
             width: 82px;
             height: 58px;
         }
     }
     .brand-name {
-        display: inline;
-        width: 54%;
+        display: flex;
+        width: 33%;
         a {
+            margin: auto;
+            align-self: center;
             text-decoration: none;
             color: inherit;
+            font-family: 'Roboto', serif;
+        }
+    }
+    .header-btn {
+        width: 33%;
+        display: flex;
+        justify-content: flex-end;
+        button {
+            width: fit-content;
+            border-radius: $main-button-radius;
+            height: fit-content;
+            background-color: rgb(146, 55, 13);
+            color: white;
+            border: 1px black solid;
+            padding: 7px;
+            cursor: pointer;
+            font-weight: 400;
+            font-size: small;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            align-self: center;
         }
     }
 }
@@ -32,4 +55,24 @@
     background-attachment: fixed;
     background-position: top;
     background-size: cover;
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .main-header {
+        display: block;
+        .brandTitle {
+            width: fit-content;
+            margin: auto;
+        }
+        .brand-name {
+            width: fit-content;
+            margin: auto;
+            display: none;
+        }
+        .header-btn {
+            width: fit-content;
+            display: block;
+            margin: auto;
+        }
+    }
 }
