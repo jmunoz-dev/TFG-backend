@@ -7,8 +7,8 @@
     padding: 2%;
     display: flex;
     justify-content: flex-start;
-    >div {
-        width: 46%;
+    .brandTitle {
+        width: 33%;
         img {
             width: 82px;
             height: 58px;
@@ -16,10 +16,17 @@
     }
     .brand-name {
         display: inline;
-        width: 54%;
+        width: 33%;
         a {
             text-decoration: none;
             color: inherit;
+        }
+    }
+    .header-btn {
+        width: 33%;
+        padding: 5%;
+        button {
+            border-radius: $main-button-radius;
         }
     }
 }
