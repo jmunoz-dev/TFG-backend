@@ -154,6 +154,14 @@
                 margin: auto;
             }
         }
-        .sidebar-actions {}
+        .sidebar-actions {
+            width: 100%;
+            justify-content: center;
+            button,
+            a {
+                padding: 10px 0;
+                width: 80%;
+            }
+        }
     }
 }
