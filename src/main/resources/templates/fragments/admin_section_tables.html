@@ -11,7 +11,7 @@
     <div class="tables-wrapper">
         <h2 class="title">MESAS</h2>
         <p th:if="!*{#lists.size(tables)}">No hay mesas añadidas</p>
-        <div th:each="table : ${tables}" th:object="${table}">
+        <div th:each="table : ${tables}" th:object="${table}" class="table-info-wrapper">
             <div class="table-card">
                 <div class="table-info inpar">
                     <h2>Número mesa</h2>
@@ -30,17 +30,17 @@
                 </div>
                 <div class="buttons">
                     <div th:id="'detele-table-' + *{idTable}" class="delete-card-50">
-                        <img th:src="@{../images/svg/trash-solid.svg}"> 
+                        <img th:src="@{../images/svg/trash-solid.svg}">
                         <p>BORRAR</p>
                     </div>
                     <a th:href="'tables/edit/' + *{idTable}" th:id="'edit-table-' + *{idTable}" class="edit-card-50">
-                        <img th:src="@{../images/svg/pencil-alt-solid.svg}"> 
+                        <img th:src="@{../images/svg/pencil-alt-solid.svg}">
                         <p>EDITAR</p>
                     </a>
                 </div>
             </div>
         </div>
-        
+
     </div>
 </body>
 

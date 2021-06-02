@@ -58,6 +58,7 @@ window.onload = () => {
 
         if (buttonShowModal != null) {
             buttonShowModal.addEventListener('click', function(event) {
+                window.scrollTo(0, 0);
                 document.querySelector('#modal-one').classList.toggle('hidden')
                 document.querySelector('#modal-one').classList.toggle('shown')
                 if (document.querySelector("div.codeErrormsg") != null) {
@@ -67,6 +68,7 @@ window.onload = () => {
         }
 
         buttonActivate.addEventListener('click', function(event) {
+
             let codeValue = document.querySelector("input#code-activation")
             let codeErrorOffer = `<div class="codeErrormsg"><p>El código no es correcto</p></div>`
             let codeSuccessOffer = `<div class="codeSuccessmsg"><p>Activado correctamente</p></div>`

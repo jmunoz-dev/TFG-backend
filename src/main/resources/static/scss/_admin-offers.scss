@@ -130,3 +130,14 @@
         }
     }
 }
+
+@media (max-width: $breakpoint-mobile) {
+    .offers-wrapper {
+        width: 75%;
+        margin: auto;
+        justify-content: center;
+        .offer-card {
+            width: 100%;
+        }
+    }
+}

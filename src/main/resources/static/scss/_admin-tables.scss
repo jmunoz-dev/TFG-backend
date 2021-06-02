@@ -46,3 +46,20 @@
         }
     }
 }
+
+@media(max-width:$breakpoint-mobile) {
+    .reservations-wrapper {
+        .table-info-wrapper {
+            width: 85%;
+        }
+    }
+    .add-table-form {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #new-table {
+        padding: 5%;
+        height: auto;
+        margin: 30px auto;
+    }
+}
