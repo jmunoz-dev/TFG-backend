@@ -199,42 +199,6 @@ window.onload = () => {
             document.querySelector('#modal-one').classList.toggle('shown')
         })
 
-        if (document.querySelector('button#updateOffer') != null) {
-            document.querySelector('button#updateOffer').addEventListener('click', function() {
-                let offer = {
-                    bar: {
-                        idbar: document.querySelector('#idbar').value
-                    },
-                    idOffer: document.querySelector('#idOffer').value,
-                    offerImage: document.querySelector('input[name="offerImage"').value,
-                    offerTitle: document.querySelector('input[name="offerTitle"').value,
-                    offerDescription: document.querySelector('input[name="offerDescription"').value,
-                    offerPrice: document.querySelector('input[name="offerPrice"').value,
-                    offerMinimunPoints: parseInt(document.querySelector('input[name="offerMinimunPoints"').value),
-                    offerRewardsPoints: parseInt(document.querySelector('input[name="offerRewardsPoints"').value),
-                    startDate: document.querySelector('input[name="startDate"').value,
-                    endDate: document.querySelector('input[name="endDate"').value,
-                }
-
-                fetch('/api/offers/' + idOffer.value, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(offer),
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        console.log('Success:', data);
-                        location.href = '/admin/offers'
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
-            })
-        }
-
-
 
         let deleteImgButton = document.querySelector('button[id^="delete-offer-img-"]')
         if (deleteImgButton != null) {
@@ -260,6 +224,41 @@ window.onload = () => {
                     });
             })
         }
+    }
+
+    if (document.querySelector('button#updateOffer') != null) {
+        document.querySelector('button#updateOffer').addEventListener('click', function() {
+            let offer = {
+                bar: {
+                    idbar: document.querySelector('#idbar').value
+                },
+                idOffer: document.querySelector('#idOffer').value,
+                offerImage: document.querySelector('input[name="offerImage"').value,
+                offerTitle: document.querySelector('input[name="offerTitle"').value,
+                offerDescription: document.querySelector('input[name="offerDescription"').value,
+                offerPrice: document.querySelector('input[name="offerPrice"').value,
+                offerMinimunPoints: parseInt(document.querySelector('input[name="offerMinimunPoints"').value),
+                offerRewardsPoints: parseInt(document.querySelector('input[name="offerRewardsPoints"').value),
+                startDate: document.querySelector('input[name="startDate"').value,
+                endDate: document.querySelector('input[name="endDate"').value,
+            }
+
+            fetch('/api/offers/' + idOffer.value, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(offer),
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Success:', data);
+                    location.href = '/admin/offers'
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        })
     }
 
 
@@ -331,7 +330,7 @@ window.onload = () => {
 
     }
     if (/admin\/tables\/new/.test(window.location.href)) {
-        console.log("estoy en new mesa")
+
         let newButton = document.querySelector('#new-table')
         let newSchedule = document.querySelector('#new-schedule')
         newButton.addEventListener('click', function(event) {
@@ -584,8 +583,6 @@ function editTable(id) {
 
 
 }
-
-
 
 
 function closeSuccess() {
