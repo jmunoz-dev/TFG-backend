@@ -15,18 +15,34 @@
         }
     }
     .brand-name {
-        display: inline;
+        display: flex;
         width: 33%;
         a {
+            margin: auto;
+            align-self: center;
             text-decoration: none;
             color: inherit;
+            font-family: 'Roboto', serif;
         }
     }
     .header-btn {
         width: 33%;
-        padding: 5%;
+        display: flex;
+        justify-content: flex-end;
         button {
+            width: fit-content;
             border-radius: $main-button-radius;
+            height: fit-content;
+            background-color: rgb(146, 55, 13);
+            color: white;
+            border: 1px black solid;
+            padding: 7px;
+            cursor: pointer;
+            font-weight: 400;
+            font-size: small;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            align-self: center;
         }
     }
 }
