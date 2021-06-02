@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import web.backend.gothere.Repositories.Entities.BarEntity;
 import web.backend.gothere.Repositories.Interfaces.BarRepository;
 import web.backend.gothere.Services.Models.BarDTO;
+import web.backend.gothere.Services.Models.BarImgsDTO;
 
 public class BarService {
     @Autowired
@@ -18,7 +19,7 @@ public class BarService {
     private ModelMapper modelMapper;
 
     public List<BarDTO> getAll() {
-        return barRepository.findAll().stream().map(x -> modelMapper.map(x, BarDTO.class)).collect(Collectors.toList());
+        return deleteBarImage(barRepository.findAll().stream().map(x -> modelMapper.map(x, BarDTO.class)).collect(Collectors.toList()));
     }
 
     // delete
@@ -53,7 +54,11 @@ public class BarService {
     public BarDTO getBarById(Long id) {
         Optional<BarEntity> barById = barRepository.findById(id);
         if (barById.isPresent()) {
-            return modelMapper.map(barById.get(), BarDTO.class);
+            BarDTO result = modelMapper.map(barById.get(), BarDTO.class);
+            for(BarImgsDTO image : result.getBarImages()){
+                image.setBar(null);
+            }
+            return result;
         } else {
 
             return null;
@@ -66,7 +71,7 @@ public class BarService {
         .map(x -> modelMapper.map(x, BarDTO.class))
         .collect(Collectors.toList());
 
-        return barsList;
+        return deleteBarImage(barsList);
     }
     public List<BarDTO> getByNameOrAddress(String query){
         query = query.trim().toUpperCase();
@@ -74,9 +79,17 @@ public class BarService {
         .map(x -> modelMapper.map(x, BarDTO.class))
         .collect(Collectors.toList());
 
-        return barsList;
+        return deleteBarImage(barsList);
     }
 
+    private List<BarDTO> deleteBarImage(List<BarDTO> list){
+        for(BarDTO bar : list){
+            for(BarImgsDTO image : bar.getBarImages()){
+                image.setBar(null);
+            }
+        }
+        return list;
+    }
     
 
 }
