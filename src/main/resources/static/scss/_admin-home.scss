@@ -128,3 +128,32 @@
         background: #f7b741;
     }
 }
+
+@media (max-width: $breakpoint-mobile) {
+    .admin_section_home {
+        .bar-info {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: auto;
+            // padding: ;
+            h1 {
+                width: 100%;
+                text-align: center;
+            }
+            .info-wrapper {
+                margin: 10px 10% 10% 10%;
+            }
+        }
+        .submit-changes {
+            margin: 0;
+            width: 100%;
+            display: flex;
+            button {
+                width: 50%;
+                margin: auto;
+            }
+        }
+        .sidebar-actions {}
+    }
+}

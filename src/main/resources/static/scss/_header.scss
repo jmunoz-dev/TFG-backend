@@ -56,3 +56,23 @@
     background-position: top;
     background-size: cover;
 }
+
+@media (max-width: $breakpoint-mobile) {
+    .main-header {
+        display: block;
+        .brandTitle {
+            width: fit-content;
+            margin: auto;
+        }
+        .brand-name {
+            width: fit-content;
+            margin: auto;
+            display: none;
+        }
+        .header-btn {
+            width: fit-content;
+            display: block;
+            margin: auto;
+        }
+    }
+}
