@@ -128,8 +128,8 @@ public class InitDB {
             barTest.setCurrentCapacity(2);
             barTest.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget ultricies est. Nam porta mi ");
             barTest.setAddress("calle Lolo n 2,1 Zaragoza");
-            barTest.setLatitude(-0.8725120896989844);
-            barTest.setLength(41.65828155577524);
+            barTest.setLength(-0.8725120896989844);
+            barTest.setLatitude(41.65828155577524);
             barTest.setUser(userTest);
             userTest.setBar(barTest);
             userR.save(userTest);
