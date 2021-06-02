@@ -1,0 +1,181 @@
+.admin-menu-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 50px;
+    width: 10%;
+    margin-left: 5%;
+    height: min-content;
+    a {
+        color: inherit;
+        &:visited:not(.active) {
+            text-decoration: none;
+            color: $base-black-color;
+        }
+    }
+    .page-section-menu {
+        border: 1px black solid;
+        border-radius: $main-button-radius;
+        padding: 10px;
+        margin-top: 15px;
+        width: 100%;
+        text-decoration: none;
+        font-weight: 600;
+        font-family: 'Roboto', sans-serif;
+        &:hover:not(.active) {
+            background-color: $base-black-color;
+            color: $base-yellow-color;
+        }
+        outline: none;
+    }
+    .active {
+        background-color: $base-black-color;
+        color: $base-yellow-color;
+    }
+    a.subsection-menu {
+        margin: 15px 0 10px 25px;
+        padding: 7px;
+        width: 100%;
+        text-decoration: none;
+        border: 1px black solid;
+        border-radius: $main-button-radius;
+        outline: none;
+    }
+}
+
+.modal {
+    background-color: #ccce;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.shown {
+    display: block;
+}
+
+.modal-container {
+    margin: auto;
+    width: 50%;
+    border-radius: 25px;
+    position: relative;
+    background-color: white;
+    border: 1px solid black;
+    margin: auto;
+    top: 40%;
+    z-index: 2;
+    padding: 40px;
+    h1 {
+        text-align: center;
+    }
+    .offerData {
+        width: 100%;
+        text-align: center;
+        .offer-title {
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+        .offer-price {
+            margin-top: 20px;
+            font-size: xxx-large;
+        }
+    }
+}
+
+#modal-two {
+    .modal-container {
+        .edit-offer-actions {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            button {
+                width: 45%;
+            }
+        }
+    }
+}
+
+.modal-body {
+    margin: 5% 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .code-activation {
+        cursor: text;
+        outline: none;
+        margin-top: 5px;
+        border-radius: 10px;
+        font-size: inherit;
+        font-weight: 500;
+        font-size: 23pt;
+        height: 45px;
+        text-align: center;
+        width: 100%;
+        background-color: white;
+        border-color: black;
+        border-width: 1px;
+        padding-left: 15px;
+        padding-top: 5px;
+    }
+    .modal-submit {
+        cursor: pointer;
+        background-color: darkred;
+        color: white;
+        border: 1px black solid;
+        border-radius: $main-button-radius;
+        padding: 15px;
+        margin-top: 35px;
+        width: 100%;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: x-large;
+    }
+    .codeErrormsg {
+        display: block;
+        width: fit-content;
+        text-align: center;
+        margin: 5px auto 15px;
+        font-size: xx-large;
+        color: red;
+    }
+    .codeAlertOffer {
+        @extend .codeErrormsg;
+    }
+    .codeSuccessmsg {
+        display: block;
+        width: fit-content;
+        text-align: center;
+        margin: 5px auto 15px;
+        font-size: xx-large;
+        color: green;
+    }
+    .modal-correct-close {
+        @extend .modal-submit;
+        text-align: center;
+        background-color: green;
+        font-size: xx-large;
+    }
+}
+
+.modal-close {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    padding: 2%;
+    font-size: 28pt;
+    background: transparent;
+    font-weight: 600;
+    z-index: 3;
+    &:hover {
+        color: black;
+    }
+}

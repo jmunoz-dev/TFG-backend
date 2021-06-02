@@ -1,0 +1,130 @@
+.admin_section_home {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 5%;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 100px;
+    .bar-info {
+        margin-top: 16px;
+        margin-left: 8%;
+        width: 60%;
+        .info-wrapper {
+            margin-top: 30px;
+            .title-section {
+                padding-top: 35px;
+                font-weight: 600;
+                font-size: large;
+            }
+            textarea,
+            input {
+                outline: none;
+                margin-top: 5px;
+                border-radius: 10px;
+                font-size: inherit;
+                font-weight: 500;
+                height: 45px;
+                width: 90%;
+                background-color: white;
+                border-color: black;
+                border-width: 1px;
+                padding-left: 15px;
+                padding-top: 5px;
+                font-family: 'Roboto', sans-serif;
+            }
+        }
+    }
+    .submit-changes {
+        margin: 16px auto 0;
+        width: 10%;
+        height: fit-content;
+        position: sticky;
+        top: 50px;
+        button {
+            background-color: darkred;
+            color: white;
+            border: 1px black solid;
+            border-radius: $main-button-radius;
+            padding: 10px;
+            margin-top: 15px;
+            width: 100%;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: large;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+        }
+    }
+    .sidebar-actions {
+        display: flex;
+        flex-wrap: wrap;
+        width: 15%;
+        height: fit-content;
+        margin: 0 auto;
+        position: sticky;
+        top: 50px;
+        button,
+        a {
+            width: 100%;
+            cursor: pointer;
+            height: fit-content;
+            background-color: darkred;
+            color: white;
+            border: 1px black solid;
+            border-radius: $main-button-radius;
+            padding: 10px;
+            margin-top: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: large;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+        }
+    }
+}
+
+#bar-imgs-carrusel {
+    margin-bottom: 20px;
+    position: relative;
+    overflow-x: auto;
+    display: flex;
+    .delete-img-btn {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        height: 30px;
+        padding: 5px;
+        width: 30px;
+        background: rgb(247, 86, 86);
+        border: 1.8px solid rgb(32, 32, 32);
+        ;
+        font-weight: 900;
+        cursor: pointer;
+    }
+    .bar-img {
+        position: relative;
+        margin: 10px;
+    }
+    &::-webkit-scrollbar {
+        border-radius: 10px;
+        width: 5px;
+        height: 8px;
+    }
+    /* width */
+    &::-webkit-scrollbar {
+        width: 1px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+        border-radius: 10px;
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #fea701;
+        border-radius: 10px;
+    }
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #f7b741;
+    }
+}
