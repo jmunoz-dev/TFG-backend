@@ -1,0 +1,65 @@
+.tables-wrapper {
+    @extend .reservations-wrapper;
+    .buttons {
+        display: flex;
+    }
+    .delete-card-50 {
+        @extend .cancel-card;
+        width: 50%;
+        margin-right: 10px;
+        background-color: #d13737!important;
+        img {
+            pointer-events: none;
+            max-width: 20px;
+        }
+    }
+    .edit-card-50 {
+        @extend .cancel-card;
+        margin-left: 10px;
+        width: 50%;
+        background-color: #008CBA!important;
+        &:hover {
+            background-color: #019ed3;
+        }
+        img {
+            pointer-events: none;
+            max-width: 20px;
+        }
+    }
+    .table-info {
+        @extend .reservation-info;
+        h2 {
+            margin-bottom: 10px;
+        }
+        li {
+            list-style: none;
+            text-align: right;
+        }
+    }
+    .table-card {
+        @extend .reservation-card;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        .schedule {
+            flex-grow: 1;
+        }
+    }
+}
+
+@media(max-width:$breakpoint-mobile) {
+    .reservations-wrapper {
+        .table-info-wrapper {
+            width: 85%;
+        }
+    }
+    .add-table-form {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #new-table {
+        padding: 5%;
+        height: auto;
+        margin: 30px auto;
+    }
+}

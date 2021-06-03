@@ -38,8 +38,8 @@ public class TableController {
         return tableService.getAll();
     }
 
-    @GetMapping("/{idTable}")
-    public TableDTO GetTableById( @PathVariable("id") Long idtable) {
+    @GetMapping("/{idTable}/table")
+    public TableDTO GetTableById( @PathVariable("idTable") Long idtable) {
         return tableService.getById(idtable);
     }
 
@@ -79,8 +79,8 @@ public class TableController {
         return tableService.getTableByBarAndAvailabilityDate(idBar, date);
     }
     //por bar
-    @GetMapping("/{iBar}")
-    public List<TableDTO> GetTableByBar(@PathVariable("iBar") Long idBar) {
+    @GetMapping("/{idBar}/bar")
+    public List<TableDTO> GetTablesByidBar(@PathVariable("idBar") Long idBar) {
         return tableService.getByBarId(idBar);
     }
 

@@ -1,0 +1,143 @@
+.offers-wrapper {
+    .title {
+        width: 100%;
+        margin-bottom: 35px;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 16px;
+    margin-left: 5%;
+    width: 60%;
+    font-family: 'Roboto',
+    sans-serif;
+    .new-offer-card {
+        width: 90%;
+        margin: auto;
+        form {
+            h2 {
+                font-size: 15px;
+                margin-top: 20px;
+                padding-bottom: 5px;
+            }
+            input {
+                height: 25px;
+                border-radius: $main-button-radius;
+                border-width: 1px;
+                width: 100%;
+                padding-left: 10px;
+                &:focus-visible {
+                    outline: none;
+                    border: 2px solid #fea701;
+                }
+            }
+            .price-wrapper {
+                width: 100%;
+                position: relative;
+                span {
+                    position: absolute;
+                    top: 0;
+                    right: 0px;
+                    font-size: 20px;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+    .offer-card {
+        box-shadow: -5px 3px 11px 2px #888;
+        border-radius: $main-button-radius;
+        outline: none;
+        width: 30%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+        .wrapper-info {
+            width: 100%;
+            padding: 20px 20px 0;
+            .offer-info {
+                .price-info-wrapper {
+                    display: block;
+                    text-align: right;
+                    margin: 10px 0;
+                    h2,
+                    p {
+                        display: inline;
+                    }
+                }
+                h2 {
+                    font-size: 15px;
+                    width: 100%;
+                }
+                p {
+                    margin: 10px 0;
+                    width: 100%;
+                    text-align: right;
+                }
+                padding: 10px 10px;
+                &.odd {
+                    background-color: #fff2da;
+                }
+            }
+        }
+        .icons-actions {
+            cursor: pointer;
+            display: flex;
+            text-align: center;
+            width: 100%;
+            padding: 20px 20px;
+            align-self: flex-end;
+            color: white;
+            font-weight: 600;
+            .edit-card {
+                line-height: 40pt;
+                width: 50%;
+                margin-left: 5px;
+                background-color: #008CBA;
+                border-radius: $main-button-radius;
+                outline: none;
+                overflow: hidden;
+                &:hover {
+                    background-color: darken($color: #3294f0, $amount: 10);
+                    img {
+                        transform: scale(0.8, 0.8);
+                    }
+                }
+                img {
+                    margin-right: 8px;
+                    vertical-align: middle;
+                    width: 20%;
+                }
+            }
+            .remove-card {
+                line-height: 40pt;
+                margin-right: 5px;
+                width: 50%;
+                border-radius: $main-button-radius;
+                background-color: #c03636;
+                &:hover {
+                    background-color: darken($color: #c03636, $amount: 10);
+                    img {
+                        transform: scale(0.8, 0.8);
+                    }
+                }
+                img {
+                    margin-right: 8px;
+                    vertical-align: middle;
+                    width: 20%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .offers-wrapper {
+        width: 75%;
+        margin: auto;
+        justify-content: center;
+        .offer-card {
+            width: 100%;
+        }
+    }
+}
