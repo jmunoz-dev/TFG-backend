@@ -1,15 +1,14 @@
 <html xmlns="http://www.thymeleaf.org">
 
 <body>
-    
+
     <div class="admin-menu-wrapper">
         <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
         <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
         <a th:href="@{/admin/tables}" class="page-section-menu">Mesas</a>
         <a th:href="@{/admin/reservations}" class="page-section-menu active">Reservas</a>
-        <a th:href="@{/admin/reservations/new}" class="subsection-menu">Agregar nueva</a>
     </div>
-    
+
     <div class="reservations-wrapper">
         <h2 class="title">RESERVAS</h2>
         <h4 class="title">Filtrar:</h4>
@@ -21,37 +20,36 @@
             <button type="submit">Filtrar</button>
         </form>
         <p th:if="!*{#lists.size(reservations)}">No hay resultados</p>
-    <div th:each="res : ${reservations}" th:object="${res}">
-        <div th:if="*{canceled}" class="offer-canceled">CANCELADA</div>
-        <div th:class="'reservation-card ' + *{canceled ? 'caceled-card' : ''}">
-            
-            <!-- Buscador por num de telf y feche -->
-            <div class="reservation-info inpar">
-                <h2>Número mesa</h2>
-                <p th:text="*{scheduleTableReservation.table.num}"></p>
-            </div>
-            <div class="reservation-info">
-                <h2 class="user">Usuario: </h2>
-                <p th:text="'Nombre: ' + *{user.name}"></p> 
-                <p><a th:text="'Llamar: ' + *{user.phoneNumber}" th:href="'tel:+34' + *{user.phoneNumber}"></a></p>
-            </div>
-            <div class="reservation-info inpar">
-                <h2>Fecha reserva:</h2>
-                <p th:text="*{reservationDate}"></p>
-            </div>
-            <div class="reservation-info">
-                <h2>Hora de la reserva: </h2>
-                <p th:text="'de ' + *{scheduleTableReservation.schedule.checkInHour} + ' a ' + *{scheduleTableReservation.schedule.checkOutHour}">
-            </div>
-            <!--  -->
-            <div th:id="'cancel-reservation-' + *{idReservationBook}" class="cancel-card">
-                <img th:src="@{../images/svg/cancel.svg}"> 
-                <p>CANCELAR</p>
+        <div th:each="res : ${reservations}" th:object="${res}" class="reservation-card-wrapper">
+            <div th:if="*{canceled}" class="offer-canceled">CANCELADA</div>
+            <div th:class="'reservation-card ' + *{canceled ? 'caceled-card' : ''}">
+                <div class="reservation-info inpar">
+                    <h2>Número mesa</h2>
+                    <p th:text="*{scheduleTableReservation.table.num}"></p>
+                </div>
+                <div class="reservation-info">
+                    <h2 class="user">Usuario: </h2>
+                    <p th:text="'Nombre: ' + *{user.name}"></p>
+                    <p>
+                        <a th:text="'Llamar: ' + *{user.phoneNumber}" th:href="'tel:+34' + *{user.phoneNumber}"></a>
+                    </p>
+                </div>
+                <div class="reservation-info inpar">
+                    <h2>Fecha reserva:</h2>
+                    <p th:text="*{reservationDate}"></p>
+                </div>
+                <div class="reservation-info">
+                    <h2>Hora de la reserva: </h2>
+                    <p th:text="'de ' + *{scheduleTableReservation.schedule.checkInHour} + ' a ' + *{scheduleTableReservation.schedule.checkOutHour}">
+                </div>
+                <!--  -->
+                <div th:id="'cancel-reservation-' + *{idReservationBook}" class="cancel-card">
+                    <img th:src="@{../images/svg/cancel.svg}">
+                    <p>CANCELAR</p>
+                </div>
             </div>
         </div>
-        <!-- ----------------------------------------------------- -->
     </div>
-</div>
 </body>
 
 </html>
