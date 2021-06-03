@@ -20,11 +20,9 @@
             <button type="submit">Filtrar</button>
         </form>
         <p th:if="!*{#lists.size(reservations)}">No hay resultados</p>
-        <div th:each="res : ${reservations}" th:object="${res}">
+        <div th:each="res : ${reservations}" th:object="${res}" class="reservation-card-wrapper">
             <div th:if="*{canceled}" class="offer-canceled">CANCELADA</div>
             <div th:class="'reservation-card ' + *{canceled ? 'caceled-card' : ''}">
-
-                <!-- Buscador por num de telf y feche -->
                 <div class="reservation-info inpar">
                     <h2>Número mesa</h2>
                     <p th:text="*{scheduleTableReservation.table.num}"></p>
@@ -50,7 +48,6 @@
                     <p>CANCELAR</p>
                 </div>
             </div>
-            <!-- ----------------------------------------------------- -->
         </div>
     </div>
 </body>
