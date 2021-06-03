@@ -61,7 +61,7 @@
             background-color: rgb(253, 63, 63);
         }
         p {
-            margin-left: 20px;
+            margin-left: 10px;
             pointer-events: none;
         }
         img {
@@ -108,6 +108,35 @@
                 font-size: 15px;
                 width: 100%;
             }
+        }
+    }
+}
+
+@media (max-width:$breakpoint-mobile) {
+    .reservations-wrapper {
+        display: block;
+        form {
+            padding: 0;
+            label {
+                width: inherit;
+            }
+            label:last-of-type {
+                margin-top: 10px;
+            }
+            input {
+                width: 100%;
+                padding: 7px 0;
+            }
+            button {
+                width: 80%;
+                margin: 20px auto;
+                display: block;
+                padding: 10px;
+            }
+        }
+        .reservation-card-wrapper {
+            margin: 50px auto;
+            width: 80%;
         }
     }
 }

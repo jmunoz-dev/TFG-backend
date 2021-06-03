@@ -14,12 +14,12 @@
             <form>
                 <input type="hidden" th:value="*{idbar}" id="idbar"></input>
                 <h2>Título</h2>
-                <input type="text" th:name="offerTitle" class="even"></input>
+                <input type="text" th:name="offerTitle" class="even" required></input>
                 <h2>Descripción</h2>
-                <input type="text" th:name="offerDescription" class="odd"></input>
+                <input type="text" th:name="offerDescription" class="odd" required></input>
                 <h2>Precio</h2>
                 <div class="price-wrapper">
-                    <input type="number" th:name="offerPrice"></input>
+                    <input type="number" th:name="offerPrice" required></input>
                     <span> €</span>
                 </div>
                 <h2>Puntos minimos para activar</h2>
@@ -27,9 +27,9 @@
                 <h2>Puntos que otorga la oferta</h2>
                 <input type="number" th:name="offerRewardsPoints" class="odd"></input>
                 <h2>Fecha inicio</h2>
-                <input id="date" type="date" th:name="startDate"></input>
+                <input id="date" type="date" th:name="startDate" required></input>
                 <h2>Fecha final</h2>
-                <input type="date" class="odd" th:name="endDate"></input>
+                <input type="date" class="odd" th:name="endDate" required></input>
             </form>
 
         </div>
