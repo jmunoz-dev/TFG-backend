@@ -11,11 +11,11 @@
     <div class="offers-wrapper">
         <h2 class="title">Editar oferta</h2>
         <div th:object="${offer}" class="new-offer-card">
-            <div th:if="*{offerImage} != 'null'" class="offer-img-wrapper">
+            <div th:if="*{offerImage}" class="offer-img-wrapper">
                 <img th:src="'https://gotherestorage.blob.core.windows.net' + *{offerImage}" alt="">
                 <button class="delete-img-btn" th:id="*{'delete-offer-img-' + idOffer}">X</button>
             </div>
-            <form th:if="*{offerImage} == 'null'" th:action="@{'/image/offer/'+*{idOffer}}" method="post" enctype="multipart/form-data">
+            <form th:if="!*{offerImage}" th:action="@{'/admin/image/offer/save/'+*{idOffer}}" method="post" enctype="multipart/form-data">
                 <input class="page-section-menu active" id="image" required type="file" name="image" accept="image/png, image/jpeg" />
                 <button id="upload" type="submit">Subir imagen selecionada</button>
             </form>
