@@ -56,6 +56,13 @@
             width: 100%;
             padding: 20px 20px 0;
             .offer-info {
+                img{
+                    max-height: 125px;
+                    padding: 10px 0;
+                    display: block;
+                    margin: auto;
+                    max-width: 90%;
+                }
                 .price-info-wrapper {
                     display: block;
                     text-align: right;
@@ -131,8 +138,27 @@
     }
 }
 
+
+@media (max-width: $breakpoint-desktop) and (min-width: $breakpoint-tablet){
+    .offers-wrapper{
+        .offer-card{
+            width: 45%;
+        }
+    }
+    
+}
+@media (max-width: $breakpoint-tablet) and (min-width: $breakpoint-mobile){
+    .offers-wrapper{
+
+        .offer-card{
+            width: 70%;
+            margin: 20px auto;
+        }
+    }
+}
 @media (max-width: $breakpoint-mobile) {
     .offers-wrapper {
+        margin-bottom: 20px !important;
         width: 75%;
         margin: auto;
         justify-content: center;

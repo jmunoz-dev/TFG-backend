@@ -97,7 +97,6 @@
         width: 30px;
         background: rgb(247, 86, 86);
         border: 1.8px solid rgb(32, 32, 32);
-        ;
         font-weight: 900;
         cursor: pointer;
     }
@@ -128,9 +127,33 @@
         background: #f7b741;
     }
 }
-
+.offer-img-wrapper{
+    .delete-img-btn{
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        height: 30px;
+        padding: 5px;
+        width: 30px;
+        background: rgb(247, 86, 86);
+        border: 1.8px solid rgb(32, 32, 32);
+        font-weight: 900;
+        cursor: pointer;
+    }
+    position: relative;
+}
 @media (max-width: $breakpoint-mobile) {
+    #bar-imgs-carrusel{
+        width: 80vw;
+    }
+    .offer-img-wrapper{
+        img{
+            max-width: 100%;
+        }
+    }
+   
     .admin_section_home {
+        margin-bottom: 0;
         .bar-info {
             display: flex;
             flex-wrap: wrap;
@@ -155,12 +178,25 @@
             }
         }
         .sidebar-actions {
+            
+            bottom: 0;
+            background-color: #ffffff;
+            border-radius: 29px 25px 0 0;
+            box-shadow: 1px 1px 9px #888888;
             width: 100%;
             justify-content: center;
+
             button,
             a {
                 padding: 10px 0;
                 width: 80%;
+                
+            }
+            #creationOffer{
+                margin-bottom: 20px;
+            }
+            a{
+                margin-bottom: 20px;
             }
         }
     }
