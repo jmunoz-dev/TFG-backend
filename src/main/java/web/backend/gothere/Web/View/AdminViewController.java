@@ -286,7 +286,7 @@ public class AdminViewController {
     }
     
     
-
+    //paso dos creación oferta
     @GetMapping("/offer/{idOffer}/add/image")
     public ModelAndView editNewOfferImage(@CookieValue( required = false, value="adminlogin") String cookie, @PathVariable("idOffer") Long idOffer){
         
