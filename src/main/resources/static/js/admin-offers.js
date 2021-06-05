@@ -141,7 +141,7 @@ window.onload = () => {
             document.querySelector('#modal-one').classList.toggle('shown')
         })
 
-
+    }
         let deleteImgButton = document.querySelector('button[id^="delete-offer-img-"]')
         if (deleteImgButton != null) {
             deleteImgButton.addEventListener('click', function(event) {
@@ -166,7 +166,7 @@ window.onload = () => {
                     });
             })
         }
-    }
+    
     if (document.querySelector('button#updateOffer') != null) {
         document.querySelector('button#updateOffer').addEventListener('click', function() {
             let offer = {
