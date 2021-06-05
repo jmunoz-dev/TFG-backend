@@ -1,21 +1,17 @@
 package web.backend.gothere.Services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobContainerClientBuilder;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-
 import web.backend.gothere.Constants;
 import web.backend.gothere.FileUploadUtil;
 import web.backend.gothere.Exceptions.ElementNotFoundException;
@@ -73,7 +69,6 @@ public class BarImgsService {
             blob.upload(multipartFile.getInputStream(),multipartFile.getSize(),true);
 
             BarImgsEntity entityToInsert = modelMapper.map(barImage, BarImgsEntity.class);
-            //TODO esto está mal, lo hice así por que me cogia el id del bar como null
             entityToInsert.getBar().setIdBar(bar.get().getIdBar());
             barImgsRepository.save(entityToInsert);
             return barImage;

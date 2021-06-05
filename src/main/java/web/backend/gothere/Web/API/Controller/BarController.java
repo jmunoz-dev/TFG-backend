@@ -25,31 +25,31 @@ public class BarController {
         this.barService = barService;
     }
 
-    // get all
+    
     @GetMapping()
     public List<BarDTO> GetBar() {
         return barService.getAll();
     }
 
-    // get by id
+    
     @GetMapping("/{id}")
     public BarDTO GetBarById(@PathVariable("id") Long idbar) {
         return barService.getBarById(idbar);
     }
 
-    // añadir
+    
     @PostMapping
     public BarDTO AddBar(@RequestBody BarDTO bar) {
         return barService.add(bar);
     }
 
-    // update
+   
     @PutMapping("/{id}")
     public BarDTO UpdateBar(@RequestBody BarDTO bar, @PathVariable("id") Long idbar) {
         return barService.update(idbar, bar);
     }
 
-    // DELETEAR
+
     @DeleteMapping("/{id}")
     public void DeleteBar(@PathVariable("id") Long idbar) {
         barService.delete(idbar);

@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,7 +23,6 @@ import web.backend.gothere.Repositories.Interfaces.TableRepository;
 import web.backend.gothere.Repositories.Interfaces.ReservationBookRepository;
 import web.backend.gothere.Repositories.Interfaces.ScheduleTableReservationRepository;
 import web.backend.gothere.Repositories.Interfaces.UserRepository;
-import web.backend.gothere.Services.Models.BarDTO;
 import web.backend.gothere.Services.Models.TableDTO;
 import web.backend.gothere.Services.Models.NoScheduleTableDTO;
 import web.backend.gothere.Services.Models.ReservationBookDTO;
@@ -114,7 +112,7 @@ public class ReservationBookService {
         }
         throw new ElementNotFoundException();
     }
-    //TODO: Mejorar el control de errores siempre mando un 404 :)
+    
     //datos necearios user: con id usuario, horario con id horario
     public Long add(ReservationBookDTO reservation){
         //buscamos el usuario y lo seteamos

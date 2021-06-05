@@ -19,8 +19,6 @@ public class ScheduleTableReservationEntity {
         tiene:  id 
                 Horario
                 Mesa
-    TODO:       (No se si también tendría que tener Reserva, lo dejo comentado) nop
-
     */
 
     @Id

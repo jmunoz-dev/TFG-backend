@@ -1,15 +1,12 @@
 package web.backend.gothere.Repositories.Entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name="ReservationBooks")
@@ -18,15 +15,12 @@ public class ReservationBookEntity {
 
 
     /*  
-    
     ESTA ES LA TABLA RESERVAS
         tiene:  id 
                 Usuario (tabla user)
                 Fecha (LocalDateTime)
                 Cancelado (booleano)
                 Horario-Mesa (tabla de ScheduleTableReservation)
-
-    TODO:       comprobar que la referencia a scheduleTableReservationEntity está bien hecha (hecho)
     */
 
     @Id
