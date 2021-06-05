@@ -75,6 +75,7 @@ public class ReservationBookService {
         .collect(Collectors.toList());
         for(ReservationBookDTO reservation : reservationList){
             reservation.setUser(null);
+            reservation.getScheduleTableReservation().getTable().getBar().setBarImages(null);
             NoScheduleTableDTO table = modelMapper.map(reservation.getScheduleTableReservation().getTable(), NoScheduleTableDTO.class);
             reservation.getScheduleTableReservation().setTable(modelMapper.map(table, TableDTO.class));
         }
@@ -82,6 +83,7 @@ public class ReservationBookService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding data");
         }
         if(!currentReservation){
+            Collections.sort(reservationList);
             return reservationList;
         }
         //listado de solo las que aún no han pasado
