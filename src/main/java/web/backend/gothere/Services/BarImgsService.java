@@ -47,15 +47,10 @@ public class BarImgsService {
         if(!bar.isPresent()){
             return null;
         } 
-        int imgNumber;
-        try{
-            imgNumber = findImgsByBarId(idBar).size();
-        }catch(Exception ex){
-            imgNumber = 0;
-        }
+       
         String originalName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        String fileName = FileUploadUtil.getFileName(originalName, bar.get().getName() + " " +imgNumber);
-        
+        String fileName = FileUploadUtil.getFileName(originalName, bar.get().getName() + " " + (barImgsRepository.hashCode()));
+
         BarImgsDTO barImage = new BarImgsDTO("/images/bars/" + bar.get().getIdBar() + "/" + fileName, modelMapper.map( bar.get(), BarDTO.class));
         try {
 
