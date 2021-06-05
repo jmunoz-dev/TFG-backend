@@ -83,6 +83,7 @@ public class ReservationBookService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding data");
         }
         if(!currentReservation){
+            Collections.sort(reservationList);
             return reservationList;
         }
         //listado de solo las que aún no han pasado
