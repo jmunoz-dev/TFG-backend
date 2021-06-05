@@ -118,6 +118,7 @@ public class UserOffersService {
             }
             temp.setUsed(true);
             UserOfferRepository.save(modelMapper.map(temp, UserOfferEntity.class));
+            temp.getOffer().getBar().setBarImages(null);
             return temp.getOffer();
         }
         throw new ElementNotFoundException();
