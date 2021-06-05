@@ -46,6 +46,127 @@
         }
     }
 }
+#schedule-table{
+    display: flex;
+    width: 200px;
+    text-align: center;
+    height: 50%;
+    padding: 5px;
+    font-size: 20px;
+}
+#new-schedule{
+    margin-top: 30px;
+    margin-left: 0;
+    padding: 5px;
+    background-color: darkred;
+    color: #fff;
+    border: 1px #000 solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    width: 100%;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: large;
+    font-family: "Roboto",sans-serif;
+    cursor: pointer;
+}
+#add-schedule-new{
+    display: flex;
+    flex-direction: column;
+}
+.back{
+    margin-left: 10px;
+    background-color: #000;
+    color: #fea701;
+    height: 90%;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    width: 200px;
+    letter-spacing: 5px;
+    font-weight: bold;
+    transition: .2s background-color;
+    padding: 10px;
+    text-decoration: none;
+}
+#table-atributes-form{
+    display: flex;
+    flex-direction: column;
+    label{
+        margin: 5px 0;
+    }
+    #edit-table-save{
+        margin-top: 20px;
+        margin-left: 0;
+        padding: 15px;
+        margin-top: 30px;
+        margin-left: 0;
+        padding: 5px;
+        background-color: darkred;
+        color: #fff;
+        border: 1px #000 solid;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 15px;
+        width: 100%;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: large;
+        font-family: "Roboto",sans-serif;
+        cursor: pointer;
+    }
+}
+input[type=number]{
+    width: 50px;
+}
+.schedules-list-edit{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    form{
+        display: flex;
+    }
+    .delete-btn{
+        height: 30px;
+        padding: 5px;
+        width: 30px;
+        color: black;
+        padding: 0;
+        border-radius: 0;
+        background: rgb(247, 86, 86);
+        border: 1.8px solid rgb(32, 32, 32);
+        font-weight: 900;
+        cursor: pointer;
+    }
+}
+.add-table-form{
+    display: flex;
+    flex-direction: column;
+    label{
+        margin: 5px 0;
+    }
+    
+    #new-table{
+        background-color: darkred;
+        color: #fff;
+        border: 1px #000 solid;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 15px;
+        width: 100%;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: large;
+        font-family: "Roboto",sans-serif;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 50px;
+        margin: 50px 0 0 0;
+        padding: 20px;
+    }
+}
 
 @media(max-width:$breakpoint-mobile) {
     .reservations-wrapper {

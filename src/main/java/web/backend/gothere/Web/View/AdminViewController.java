@@ -2,26 +2,19 @@ package web.backend.gothere.Web.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-
-import web.backend.gothere.FileUploadUtil;
 import web.backend.gothere.Repositories.Entities.UserRole;
 import web.backend.gothere.Services.BarImgsService;
 import web.backend.gothere.Services.BarService;
@@ -179,9 +172,13 @@ public class AdminViewController {
     }
 
     private boolean isBarOwner(String cookie){
-        
-        UserDTO user = userService.getUserByToken(cookie);
-        return user.getUserRole().equals(UserRole.BAR.toString());
+        try{
+            UserDTO user = userService.getUserByToken(cookie);
+            boolean isBarOwner = user.getUserRole().equals(UserRole.BAR.toString());
+            return isBarOwner;
+        }catch(Exception ex){
+            return false;
+        }
         
     }
 
@@ -329,7 +326,6 @@ public class AdminViewController {
         if(!isBarOwner(cookie)){
             return new ModelAndView("redirect:/admin");
         }
-        Long idBar = userService.getUserByToken(cookie).getIdBar();
         OfferDTO offer = offerService.findbyOfferId(idOffer);
         offerService.deleteOfferImage(offer);
         

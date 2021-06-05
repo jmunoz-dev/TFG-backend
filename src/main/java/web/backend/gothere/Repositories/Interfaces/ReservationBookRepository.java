@@ -1,12 +1,9 @@
 package web.backend.gothere.Repositories.Interfaces;
 
-
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import web.backend.gothere.Repositories.Entities.TableEntity;
 import web.backend.gothere.Repositories.Entities.ReservationBookEntity;
 import web.backend.gothere.Repositories.Entities.ScheduleTableReservationEntity;

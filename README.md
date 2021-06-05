@@ -13,11 +13,11 @@ También permite realizar reservas de mesas en diferentes establecimientos, seg�
 
 Desde esta sección se puede administrar el negocio con presencia en la web de GOTHERE
 
-### [GOTHERE - ADMIN](http://gotheretfg.azurewebsites.net/) ###
+### [GOTHERE - ADMIN](http://gotheretfg.azurewebsites.net/admin) ###
 
 Usuario de pruebas:
 
-*-email: aa*
+*-email: vinademartin@hotmail.com*
 
 *-password: 1234*
 

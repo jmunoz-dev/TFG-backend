@@ -55,6 +55,7 @@ public class TableService {
         entityToUpdate.setBar(bar.get());
        
         TableEntity result = tableRepository.save(entityToUpdate);
+        result.setBar(null);
         return modelMapper.map(result, TableDTO.class);
     }
 

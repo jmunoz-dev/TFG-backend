@@ -9,8 +9,6 @@ public class NoScheduleTableDTO {
     public NoScheduleTableDTO() {
     }
 
-  
-
     public NoScheduleTableDTO( int capacity, boolean reservated, BarDTO bar) {
         this.capacity = capacity;
         this.reservated = reservated;

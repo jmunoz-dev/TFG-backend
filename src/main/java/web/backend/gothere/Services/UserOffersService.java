@@ -108,9 +108,9 @@ public class UserOffersService {
         }
     }
 
-    public OfferDTO setOfferUsed(String code, String userToken) {
+    public OfferDTO setOfferUsed(String code) {
         Optional<UserOfferEntity> entityToUpdate = UserOfferRepository.findByCode(code.toUpperCase());
-        //TODO comprobar con "userToken" que el usuario que lo ha mandado es el dueño del bar
+       
         if (entityToUpdate.isPresent()) {
             UserOfferDTO temp = modelMapper.map(entityToUpdate.get(), UserOfferDTO.class);
             if (temp.isUsed() || LocalDate.now().isAfter(temp.getOffer().getEndDate())) {
@@ -118,6 +118,7 @@ public class UserOffersService {
             }
             temp.setUsed(true);
             UserOfferRepository.save(modelMapper.map(temp, UserOfferEntity.class));
+            temp.getOffer().getBar().setBarImages(null);
             return temp.getOffer();
         }
         throw new ElementNotFoundException();

@@ -1,8 +1,6 @@
 package web.backend.gothere.Repositories.Entities;
 
-import java.util.List;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +23,6 @@ public class TableEntity {
     @JoinColumn(name="idBar")
     private BarEntity bar;
     
-    // TODO - Asociar con la tabla de reservas central
     
     @OneToMany(mappedBy="table")
     private Set<ScheduleTableReservationEntity> ScheduleTableReservations;

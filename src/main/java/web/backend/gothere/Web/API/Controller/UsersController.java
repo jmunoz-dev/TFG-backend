@@ -38,14 +38,15 @@ public class UsersController {
     }
 
     @PostMapping(value = "/sign-up")
-    public boolean createUser(@RequestBody UserDTO user, HttpServletResponse response) {
+    public Cookie createUser(@RequestBody UserDTO user, HttpServletResponse response) {
         UserDTO newUser = userService.signUpUser(user);
         if (newUser != null) {
             Cookie ck = new Cookie("Login", confirmationTokenService.findConfirmationTokenByUser(newUser));
             ck.setMaxAge(60 * 60 * 24 * 365 * 10);
             response.addCookie(ck);
+            return ck;
         }
-        return true;
+        return null;
 
     }
 

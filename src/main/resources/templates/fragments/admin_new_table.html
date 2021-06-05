@@ -5,23 +5,23 @@
         <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
         <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
         <a th:href="@{/admin/tables}" class="page-section-menu">Mesas</a>
-        <a th:href="@{/admin/tables/new}" class="subsection-menu active">Agregar nueva</a>
+        <a th:href="@{/admin/tables/new}" class="subsection-menu active">Crear nueva</a>
         <a th:href="@{/admin/reservations}" class="page-section-menu">Reservas</a>
     </div>
     <div class="tables-wrapper">
         <h2 class="title">AÑADIR NUEVA MESA</h2>
         <p id="succesTable" style="display: none;">Mesa creada, añadele horarios:</p>
         <form action="" name="add-table" class="add-table-form">
-            <label for="num">Numero de mesa</label>
+            <label for="num">Número de mesa</label>
             <input type="number" name="num" id="num">
             <label for="capacity">Capacidad</label>
             <input type="number" name="capacity" id="capacity">
             <input type="hidden" name="barId" th:value="${barId}">
             <button id="new-table">Crear mesa</button>
         </form>
-        <form style="display: none;" action="" name="add-schedule">
+        <form style="display: none;" id="add-schedule-new" action="" name="add-schedule">
             <input type="hidden" name="tableId">
-            <select id="schedule" name="schedule">
+            <select id="schedule-table" name="schedule">
                 <option th:each="schedule : ${scheduleList}" th:object="${schedule}"
                         th:text="*{checkInHour} + ' - ' + *{checkOutHour}" 
                         th:value="*{idSchedule}" ></option>

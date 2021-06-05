@@ -1,16 +1,10 @@
 package web.backend.gothere.Repositories.Entities;
 
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +14,6 @@ import javax.persistence.GenerationType;
 public class ScheduleEntity {
     
     /*  
-    
     ESTA ES LA TABLA HORARIOS
         tiene:  id 
                 horario de entrada
