@@ -12,6 +12,7 @@
     <div class="reservations-wrapper">
         <h2 class="title">RESERVAS</h2>
         <h4 class="title">Filtrar:</h4>
+        <section class="filters">
         <form action="">
             <label for="date">Fecha</label>
             <input type="date" name="date">
@@ -19,6 +20,7 @@
             <input type="tlf" name="phone">
             <button type="submit">Filtrar</button>
         </form>
+        </section>
         <p th:if="!*{#lists.size(reservations)}">No hay resultados</p>
         <div th:each="res : ${reservations}" th:object="${res}" class="reservation-card-wrapper">
             <div th:if="*{canceled}" class="offer-canceled">CANCELADA</div>

@@ -1,10 +1,8 @@
 package web.backend.gothere.Services;
 
 import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import web.backend.gothere.Exceptions.ElementNotFoundException;
 import web.backend.gothere.Repositories.Entities.ConfirmationTokenEntity;
 import web.backend.gothere.Repositories.Entities.UserEntity;

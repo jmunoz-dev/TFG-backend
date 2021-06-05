@@ -5,29 +5,33 @@
         <a th:href="@{/admin/home}" class="page-section-menu">Inicio</a>
         <a th:href="@{/admin/offers}" class="page-section-menu ">Ofertas</a>
         <a th:href="@{/admin/tables}" class="page-section-menu active">Mesas</a>
-        <a th:href="@{/admin/tables/new}" class="subsection-menu">Agregar nueva</a>
+
         <a th:href="@{/admin/reservations}" class="page-section-menu ">Reservas</a>
     </div>
-    <div class="tables-wrapper" > 
+    <div class="tables-wrapper" style="display:block" > 
         <h2 class="title" th:text="'EDITAR MESA NÚMERO ' + ${table.num}" ></h2>
         <h3> Atributos</h3>
-        <form name="table-attr" th:object="${table}">
+        <form name="table-attr" id="table-atributes-form" th:object="${table}">
             <label for="num">Número mesa</label>
             <input name="num" th:value="*{num}" type="number"class="table-info inpar">
 
-            <label for="capacity"> mesa</label>
+            <label for="capacity"> Capacidad</label>
             <input name="capacity" th:value="*{capacity}" type="number" class="table-info inpar" > 
             <button id="edit-table-save">Guardar atributos</button>
         </form>
+        <hr style="margin: 20px 0;" />
+        <section>
         <h3>Horarios</h3>
-        <form th:each="schedule : ${table.scheduleTableReservations}" th:object="${schedule}">
-            <div th:text="*{schedule.checkInHour} + ' - ' +*{schedule.checkOutHour}"></div>
-            <button th:id="'delete-schedule-'+ *{idScheduleTableReservation}">Borrar este horario</button>
-        </form>
+        <section class="schedules-list-edit">
+                <form th:each="schedule : ${table.scheduleTableReservations}" th:object="${schedule}">
+                    <div th:text="*{schedule.checkInHour} + ' - ' +*{schedule.checkOutHour}"></div>
+                    <button th:id="'delete-schedule-'+ *{idScheduleTableReservation}" class="delete-btn">X</button>
+                </form>
+            </section>
         <h4>Añadir horario</h4>
-        <form  action="" name="add-schedule">
+        <form  action="" style="height: fit-content;" name="add-schedule">
             <input type="hidden" id="tableId" name="tableId" th:value="${table.idTable}">
-            <select id="schedule" name="schedule">
+            <select id="schedule-table" name="schedule">
                 <option th:each="schedule : ${scheduleList}" th:object="${schedule}"
                         th:text="*{checkInHour} + ' - ' + *{checkOutHour}" 
                         th:value="*{idSchedule}" ></option>
@@ -35,6 +39,7 @@
               </select>
               <button id="new-schedule">Añadir este horario</button>
         </form>
-        <a href="/admin/tables">Volver</a>
+    </section>
+        <a class="back" href="/admin/tables">Volver</a>
     </div>
 </body>

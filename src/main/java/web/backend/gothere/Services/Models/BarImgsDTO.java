@@ -1,7 +1,5 @@
 package web.backend.gothere.Services.Models;
 
-import web.backend.gothere.Repositories.Entities.BarEntity;
-
 public class BarImgsDTO {
     
       

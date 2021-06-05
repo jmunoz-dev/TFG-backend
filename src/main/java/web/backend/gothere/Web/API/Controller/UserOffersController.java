@@ -41,7 +41,7 @@ public class UserOffersController {
     }
     @PutMapping("/{code}")
     public OfferDTO SetOfferUsed(@PathVariable("code") String code){
-       return userOffersService.setOfferUsed(code, "userToken");
+       return userOffersService.setOfferUsed(code);
     }
     @GetMapping("/bar")
     public List<SimpleUserOfferDTO> getByUserAndBar(@RequestParam Long idBar,@RequestParam Long idUser){

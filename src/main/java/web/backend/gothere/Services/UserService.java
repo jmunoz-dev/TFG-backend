@@ -137,9 +137,6 @@ public class UserService implements UserDetailsService {
         user.setEnabled(true);
 
         UserRepository.save(user);
-
-        // confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
-
     }
 
     public boolean updatePassword(Long idUser, String newPassword) {

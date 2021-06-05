@@ -12,7 +12,7 @@
         <h2 class="title">Editar oferta</h2>
         <div th:object="${offer}" class="new-offer-card">
             <div th:if="*{offerImage}" class="offer-img-wrapper">
-                <img th:src="'https://gotherestorage.blob.core.windows.net' + *{offerImage}" alt="">
+                <img  style="max-width: 300px;" th:src="'https://gotherestorage.blob.core.windows.net' + *{offerImage}" alt="">
                 <button class="delete-img-btn" th:id="*{'delete-offer-img-' + idOffer}">X</button>
             </div>
             <form th:if="!*{offerImage}" th:action="@{'/admin/image/offer/save/'+*{idOffer}}" method="post" enctype="multipart/form-data">

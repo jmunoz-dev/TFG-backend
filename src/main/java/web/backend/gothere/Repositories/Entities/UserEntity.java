@@ -49,6 +49,7 @@ public class UserEntity implements UserDetails{
         this.locked = false;
         this.enabled = false;
     }
+    
     public UserEntity (String email, String name, String lastName, String password, String phoneNumber, BarEntity bar){
         this.email = email;
         this.name = name;
