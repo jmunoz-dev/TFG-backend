@@ -172,9 +172,13 @@ public class AdminViewController {
     }
 
     private boolean isBarOwner(String cookie){
-        
-        UserDTO user = userService.getUserByToken(cookie);
-        return user.getUserRole().equals(UserRole.BAR.toString());
+        try{
+            UserDTO user = userService.getUserByToken(cookie);
+            boolean isBarOwner = user.getUserRole().equals(UserRole.BAR.toString());
+            return isBarOwner;
+        }catch(Exception ex){
+            return false;
+        }
         
     }
 
