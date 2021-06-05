@@ -27,8 +27,8 @@ window.onload = () => {
                 currentCapacity: parseInt(document.querySelector('#currentCapacity').value),
                 totalCapacity: parseInt(document.querySelector('#totalCapacity').value),
                 allowedCapacity: parseInt(document.querySelector('#allowedCapacity').value),
-                length: parseInt(document.querySelector('#length').value),
-                latitude: parseInt(document.querySelector('#latitude').value),
+                length: parseFloat(document.querySelector('#length').value),
+                latitude: parseFloat(document.querySelector('#latitude').value),
             }
             fetch('/api/bars/' + idBar, {
                     method: 'PUT',
