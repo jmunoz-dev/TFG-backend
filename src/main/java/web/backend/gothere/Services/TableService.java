@@ -41,7 +41,9 @@ public class TableService {
     public TableDTO getById(Long id) {
         Optional<TableEntity> result = tableRepository.findById(id);
         if (result.isPresent()) {
-            return modelMapper.map(result.get(), TableDTO.class);
+            TableDTO table = modelMapper.map(result.get(), TableDTO.class);
+            table.getBar().setBarImages(null);
+            return table;
         }
         return null;
     }
@@ -156,6 +158,7 @@ public class TableService {
             for(ScheduleTableReservationDTO schedule : schedules){
                  schedule.setTable(null);
             }
+            table.getBar().setBarImages(null);
          }
          return tables;
     }
