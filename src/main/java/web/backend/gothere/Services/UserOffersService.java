@@ -154,7 +154,9 @@ public class UserOffersService {
                     offers.add(new SimpleUserOfferDTO(barOffer, false, null));
                }
             }     
-               
+            for(SimpleUserOfferDTO offer : offers){
+                offer.getOffer().getBar().setBarImages(null);
+            }
            return offers;
         }
         return null;
