@@ -166,6 +166,9 @@ public class OffersService {
         List<OfferDTO> offersList = offersRepository.findByBar(bar.get()).stream()
                 .map(x -> modelMapper.map(x, OfferDTO.class)).collect(Collectors.toList());
 
+        for(OfferDTO offer : offersList){
+            offer.getBar().setBarImages(null);
+        }
         if (!offersList.isEmpty()) {
             return offersList;
         } else {
