@@ -134,7 +134,9 @@ public class TableService {
                 actualTable.setReservated(true);
             }
         }
-
+        for(TableDTO table : tables) {
+            table.getBar().setBarImages(null);
+        }
         return tables;
     }
     public List<TableDTO> getByBarId(Long idBar){
