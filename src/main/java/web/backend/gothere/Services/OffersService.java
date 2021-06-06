@@ -36,10 +36,13 @@ public class OffersService {
 
     public List<OfferDTO> getAll(Double latitude, Double length, Double distance) throws ResponseStatusException {
         List<OfferDTO> offersList = new ArrayList<OfferDTO>();
-        if (latitude == null || length == null || distance == null) {
+        if (latitude == null || length == null || distance == null || length == 0 || latitude == 0) {
             offersList = offersRepository.findAll().stream().map(x -> modelMapper.map(x, OfferDTO.class))
                     .collect(Collectors.toList());
             if (!offersList.isEmpty()) {
+                for(OfferDTO offer : offersList){
+                    offer.getBar().setBarImages(null);
+                }
                 return offersList;
             } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
@@ -60,6 +63,9 @@ public class OffersService {
         }
 
         if (!offersList.isEmpty()) {
+            for(OfferDTO offer : offersList){
+                offer.getBar().setBarImages(null);
+            }
             return offersList;
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
