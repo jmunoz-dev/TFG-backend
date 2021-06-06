@@ -151,7 +151,9 @@ public class OffersService {
     public OfferDTO findbyOfferId(Long id) throws ResponseStatusException {
         Optional<OfferEntity> entity = offersRepository.findById(id);
         if (entity.isPresent()) {
-            return modelMapper.map(entity.get(), OfferDTO.class);
+            OfferDTO offer = modelMapper.map(entity.get(), OfferDTO.class);
+            offer.getBar().setBarImages(null);
+            return offer;
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
